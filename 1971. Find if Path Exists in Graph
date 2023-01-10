@@ -1,0 +1,135 @@
+# LeetCode-Soluion-in-C-Java
+
+10 Jan 2023
+
+Easy
+
+C++ :
+
+2 approaches
+
+dfs:
+
+Find if path exits in a graph in c++ using  dfs   // time complexity O(N+E) and space complexity O(N+E)
+
+class Solution {
+public:
+    bool dfs(int node, vector<vector<int>>& adj, vector<bool>& vis, int end){     // node is the current node, adj is the adjacency list of the graph, vis is the vector which stores the visited nodes of the graph and end is the ending node
+        if(node==end) return true;      // if the node is equal to the end then return true
+        vis[node] = true;       // mark the node as visited
+        for(auto child:adj[node]){      // for each child of the node
+            if(!vis[child]){        // if the child is not visited
+                if(dfs(child,adj,vis,end)) return true;     // if the dfs returns true then return true
+            }
+        }
+        return false;       // return false
+    }
+    bool validPath(int n, vector<vector<int>>& edges, int start, int end) {     // n is the number of nodes in the graph, edges is the vector which stores the edges of the graph, start is the starting node and end is the ending node
+        vector<vector<int>> adj(n);     // adj is the adjacency list of the graph
+        for(auto edge:edges){       // for each edge in the edges
+            adj[edge[0]].push_back(edge[1]);        // add the edge[1] into the adj[edge[0]]
+            adj[edge[1]].push_back(edge[0]);        // add the edge[0] into the adj[edge[1]]
+        }
+        vector<bool> vis(n,false);      // vis is the vector which stores the visited nodes of the graph
+        return dfs(start,adj,vis,end);      // return the dfs
+    }
+};
+
+
+
+bfs:
+
+
+Find if path exits in a graph in c++  using bfs  // time complexity O(N+E) and space complexity O(N+E)
+
+class Solution {
+public:
+     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {     // n is the number of nodes in the graph, edges is the vector which stores the edges of the graph, source is the starting node and destination is the ending node
+        vector<vector<int>> adj(n);     // adj is the adjacency list of the graph
+        for(auto edge:edges){       // for each edge in the edges
+            adj[edge[0]].push_back(edge[1]);        // add the edge[1] into the adj[edge[0]]
+            adj[edge[1]].push_back(edge[0]);        // add the edge[0] into the adj[edge[1]]
+        }
+        vector<bool> vis(n,false);      // vis c the vector which stores the visited nodes of the graph
+        queue<int> q;       // q is the queue which stores the nodes of the graph
+        q.push(source);     // push the source into the queue
+        vis[source] = true;     // mark the source as visited
+        while(!q.empty()){      // while the queue is not empty
+            int node = q.front();       // node is the frontmost node of the queue
+            q.pop();        // pop the frontmost node of the queue
+            if(node==destination) return true;      // if the node is equal to the destination then return true
+            for(auto child:adj[node]){      // for each child of the node
+                if(!vis[child]){        // if the child is not visited
+                    q.push(child);      // push the child into the queue
+                    vis[child] = true;      // mark the child as visited
+                }
+            }
+        }
+        return false;       // return false
+    }
+};
+
+
+Java
+
+2 approaches
+
+dfs:
+
+Find if path exits in a graph in java using dfs   // time complexity O(N+E) and space complexity O(N+E)
+
+class Solution {
+    public boolean dfs(int node, List<List<Integer>> adj, boolean[] vis, int end){     // node is the current node, adj is the adjacency list of the graph, vis is the vector which stores the visited nodes of the graph and end is the ending node
+        if(node==end) return true;      // if the node is equal to the end then return true
+        vis[node] = true;       // mark the node as visited
+        for(int child:adj.get(node)){       // for each child of the node
+            if(!vis[child]){        // if the child is not visited
+                if(dfs(child,adj,vis,end)) return true;     // if the dfs returns true then return true
+            }
+        }
+        return false;       // return false
+    }
+    public boolean validPath(int n, int[][] edges, int start, int end) {     // n is the number of nodes in the graph, edges is the vector which stores the edges of the graph, start is the starting node and end is the ending node
+        List<List<Integer>> adj = new ArrayList<>();      // adj is the adjacency list of the graph
+        for(int i=0;i<n;i++) adj.add(new ArrayList<>());      // add the empty list into the adj
+        for(int[] edge:edges){      // for each edge in the edges
+            adj.get(edge[0]).add(edge[1]);      // add the edge[1] into the adj[edge[0]]
+            adj.get(edge[1]).add(edge[0]);      // add the edge[0] into the adj[edge[1]]
+        }
+        boolean[] vis = new boolean[n];     // vis is the vector which stores the visited nodes of the graph
+        return dfs(start,adj,vis,end);      // return the dfs
+    }
+};
+
+
+
+bfs:
+
+
+Find if path exits in a graph in java using bfs   // time complexity O(N+E) and space complexity O(N+E)
+
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {     // n is the number of nodes in the graph, edges is the vector which stores the edges of the graph, source is the starting node and destination is the ending node
+        List<List<Integer>> adj = new ArrayList<>();      // adj is the adjacency list of the graph
+        for(int i=0;i<n;i++) adj.add(new ArrayList<>());      // add the empty list into the adj
+        for(int[] edge:edges){      // for each edge in the edges
+            adj.get(edge[0]).add(edge[1]);      // add the edge[1] into the adj[edge[0]]
+            adj.get(edge[1]).add(edge[0]);      // add the edge[0] into the adj[edge[1]]
+        }
+        boolean[] vis = new boolean[n];     // vis is the vector which stores the visited nodes of the graph
+        Queue<Integer> q = new LinkedList<>();      // q is the queue which stores the nodes of the graph
+        q.add(source);      // add the source into the queue
+        vis[source] = true;     // mark the source as visited
+        while(!q.isEmpty()){        // while the queue is not empty
+            int node = q.poll();        // node is the frontmost node of the queue
+            if(node==destination) return true;      // if the node is equal to the destination then return true
+            for(int child:adj.get(node)){       // for each child of the node
+                if(!vis[child]){        // if the child is not visited
+                    q.add(child);       // add the child into the queue
+                    vis[child] = true;      // mark the child as visited
+                }
+            }
+        }
+        return false;       // return false
+    }
+};
