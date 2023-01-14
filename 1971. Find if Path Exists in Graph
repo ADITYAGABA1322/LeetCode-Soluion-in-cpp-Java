@@ -10,6 +10,8 @@ C++ :
 
 dfs:
 
+// time complexity O(N+E) and space complexity O(N+E)
+
 Find if path exits in a graph in c++ using  dfs   // time complexity O(N+E) and space complexity O(N+E)
 
 class Solution {
