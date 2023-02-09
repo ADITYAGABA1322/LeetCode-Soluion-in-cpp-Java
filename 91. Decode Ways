@@ -1,0 +1,106 @@
+# LeetCode-Soluion-in-C-Java
+
+91. Decode Ways
+
+9 Feb 2023
+
+Medium
+
+C++:
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n = s.length();  // get the length of the string
+        vector<int> dp(n + 1, 0);  // vector to store the number of ways to decode the string
+        dp[0] = 1;  // initialize the first element of the vector to 1
+        dp[1] = s[0] == '0' ? 0 : 1;  // initialize the second element of the vector to 1 if the first character is not 0
+        for(int i = 2; i <= n; i++){  // iterate over the vector
+            int first = stoi(s.substr(i - 1, 1));  // get the first character
+            int second = stoi(s.substr(i - 2, 2));  // get the second character
+            if(first >= 1){  // if the first character is greater than or equal to 1
+                dp[i] += dp[i - 1];  // add the number of ways to decode the string till the previous character
+            }
+            if(second >= 10 && second <= 26){  // if the second character is greater than or equal to 10 and less than or equal to 26
+                dp[i] += dp[i - 2];  // add the number of ways to decode the string till the previous character
+            }
+        }
+        return dp[n];  // return the number of ways to decode the string
+    }
+};
+
+2nd Method 
+
+class Solution {
+    public:
+    int numDecodings(string s) { // decode ways
+        int n=s.size();     // size of string
+        vector<int> dp(n+1,0);      // vector
+        dp[0]=1;        // dp[0]=1
+        dp[1]=s[0]=='0'?0:1;        // dp[1]=s[0]=='0'?0:1
+        for(int i=2;i<=n;i++){      // loop for i
+            int first=s[i-1]-'0';       // first=s[i-1]-'0'
+            int second=(s[i-2]-'0')*10+(s[i-1]-'0');     // second=(s[i-2]-'0')*10+(s[i-1]-'0')
+            if(first>=1 && first<=9){       // if condition is true
+                dp[i]+=dp[i-1];     // dp[i]+=dp[i-1]
+            }
+            if(second>=10 && second<=26){       // if condition is true
+                dp[i]+=dp[i-2];     // dp[i]+=dp[i-2]
+            }
+        }
+        return dp[n];       // return dp[n]
+    }
+};
+
+
+
+Java:
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+class Solution {
+    public int numDecodings(String s) {
+        int n = s.length();  // get the length of the string
+        int[] dp = new int[n + 1];  // array to store the number of ways to decode the string
+        dp[0] = 1;  // initialize the first element of the array to 1
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;  // initialize the second element of the array to 1 if the first character is not 0
+        for(int i = 2; i <= n; i++){  // iterate over the array
+            int first = Integer.parseInt(s.substring(i - 1, i));  // get the first character
+            int second = Integer.parseInt(s.substring(i - 2, i));  // get the second character
+            if(first >= 1){  // if the first character is greater than or equal to 1
+                dp[i] += dp[i - 1];  // add the number of ways to decode the string till the previous character
+            }
+            if(second >= 10 && second <= 26){  // if the second character is greater than or equal to 10 and less than or equal to 26
+                dp[i] += dp[i - 2];  // add the number of ways to decode the string till the previous character
+            }
+        }
+        return dp[n];  // return the number of ways to decode the string
+    }
+};
+        
+2nd Method
+
+
+class Solution {
+    public int numDecodings(String s) { // decode ways
+        int n=s.length();       // length of string
+        int[] dp=new int[n+1];      // dp array
+        dp[0]=1;        // dp[0]=1
+        dp[1]=s.charAt(0)=='0'?0:1;     // dp[1]=s.charAt(0)=='0'?0:1
+        for(int i=2;i<=n;i++){      // loop for i
+            int first=s.charAt(i-1)-'0';        // first=s.charAt(i-1)-'0'
+            int second=(s.charAt(i-2)-'0')*10+(s.charAt(i-1)-'0');      // second=(s.charAt(i-2)-'0')*10+(s.charAt(i-1)-'0')
+            if(first>=1 && first<=9){       // if condition is true
+                dp[i]+=dp[i-1];     // dp[i]+=dp[i-1]
+            }
+            if(second>=10 && second<=26){       // if condition is true
+                dp[i]+=dp[i-2];     // dp[i]+=dp[i-2]
+            }
+        }
+        return dp[n];       // return dp[n]
+    }
+}
+
+
