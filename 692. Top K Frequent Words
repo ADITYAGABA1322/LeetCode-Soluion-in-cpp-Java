@@ -1,0 +1,83 @@
+# LeetCode-Soluion-in-C-Java
+
+692. Top K Frequent Words
+
+9 Feb 2023
+
+
+Medium
+
+
+C++:
+
+// Time Complexity : O(nlogk) where n is the number of words and k is the number of words to be returned and space complexity is O(n)
+
+class Solution {
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string, int> count;  // map to store the count of the words
+        for(int i = 0; i < words.size(); i++){  // iterate over the words
+            count[words[i]]++;  // increment the count of the current word
+        }
+            priority_queue<pair<int, string>, vector<pair<int, string>>, MyComp> pq; // min heap to store the count and the word
+        for(auto it = count.begin(); it != count.end(); it++){  // iterate over the map
+            pq.push({it->second, it->first});  // push the count and the word into the min heap
+            if(pq.size() > k){  // if the size of the min heap is greater than k
+                pq.pop();  // pop the top element
+            }
+        }
+        vector<string> result;  // vector to store the result
+        while(!pq.empty()){  // while the min heap is not empty
+            result.push_back(pq.top().second);  // push the word into the result
+            pq.pop();  // pop the top element
+        }
+        reverse(result.begin(), result.end());  // reverse the result
+        return result;  // return the result
+    }
+private:
+    struct MyComp{  // comparator class
+        bool operator()(pair<int, string> a, pair<int, string> b){  // operator overloading
+            if(a.first != b.first){
+                return a.first > b.first;  // if the count of the first word is greater than the count of the second word
+
+            }
+            else{
+                return a.second < b.second;  // if the count of the first word is less than the count of the second word
+            }
+
+        }
+    };
+};
+
+
+
+
+Java:
+
+
+
+// Time Complexity : O(nlogk) where n is the number of words and k is the number of words to be returned and space complexity is O(n)
+
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        HashMap<String, Integer> count = new HashMap<>();  // map to store the count of the words
+        for(int i = 0; i < words.length; i++){  // iterate over the words
+            count.put(words[i], count.getOrDefault(words[i], 0) + 1);  // increment the count of the current word
+        }
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>((a, b) -> a.getValue() == b.getValue() ? b.getKey().compareTo(a.getKey()) : a.getValue() - b.getValue());  // min heap to store the count and the word
+        for(Map.Entry<String, Integer> entry : count.entrySet()){  // iterate over the map
+            pq.add(entry);  // add the entry into the min heap
+            if(pq.size() > k){  // if the size of the min heap is greater than k
+                pq.poll();  // poll the top element
+            }
+        }
+        List<String> result = new ArrayList<>();  // list to store the result
+        while(!pq.isEmpty()){  // while the min heap is not empty
+            result.add(pq.poll().getKey());  // add the word into the result
+        }
+        Collections.reverse(result);  // reverse the result
+        return result;  // return the result
+    }
+}
+
+
