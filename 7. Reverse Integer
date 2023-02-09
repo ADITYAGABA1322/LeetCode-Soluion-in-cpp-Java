@@ -8,4 +8,40 @@ Medium
 
 C++:
 
+// Time Complexity : O(log(x)) where x is the input and space complexity is O(1)
+
+class Solution {
+public:
+    int reverse(int x) {
+        long long int rev = 0;  // variable to store the reverse of the input
+        while(x != 0){  // while the input is not equal to 0
+            rev = rev * 10 + x % 10;  // update the reverse of the input
+            x /= 10;  // update the input
+        }
+        if(rev > INT_MAX || rev < INT_MIN){  // if the reverse of the input is greater than INT_MAX or less than INT_MIN
+            return 0;  // return 0
+        }
+        return rev;  // return the reverse of the input
+    }
+};
+
+
+
 Java:
+
+// Time Complexity : O(log(x)) where x is the input and space complexity is O(1)
+
+class Solution {
+    public int reverse(int x) {
+        long rev = 0;  // variable to store the reverse of the input
+        while(x != 0){  // while the input is not equal to 0
+            rev = rev * 10 + x % 10;  // update the reverse of the input
+            x /= 10;  // update the input
+        }
+        if(rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE){  // if the reverse of the input is greater than Integer.MAX_VALUE or less than Integer.MIN_VALUE
+            return 0;  // return 0
+        }
+        return (int)rev;  // return the reverse of the input
+    }
+};
+
