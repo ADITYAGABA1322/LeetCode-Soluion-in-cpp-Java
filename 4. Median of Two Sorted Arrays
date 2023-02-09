@@ -48,6 +48,44 @@ public:
     }
 };
 
+
+2nd Method 
+
+class Solution {
+    public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> v;  // vector
+        int i=0,j=0;    // initialize i and j with zero
+        while(i<nums1.size() && j<nums2.size()){    // loop for i and j
+            if(nums1[i]<nums2[j]){  // if condition is true
+                v.push_back(nums1[i]);  // push nums1[i] in vector  
+                i++;
+            }
+            else{
+                v.push_back(nums2[j]);      // push nums2[j] in vector
+                j++;
+            }
+        }
+        while(i<nums1.size()){  // loop for i
+            v.push_back(nums1[i]);  // push nums1[i] in vector
+            i++;
+        }
+        while(j<nums2.size()){  // loop for j
+            v.push_back(nums2[j]);  // push nums2[j] in vector
+            j++;
+        }
+        int n=v.size(); // size of vector
+        if(n%2==0){ // if condition is true
+            return (v[n/2]+v[n/2-1])/2.0;   // return median
+        }   
+        else{
+            return v[n/2];      // return median
+        }
+    }
+};
+
+
+
 Java:
 
 // Time Complexity : O(log(min(m,n))) where m and n are the lengths of the two arrays and space complexity is O(1)
