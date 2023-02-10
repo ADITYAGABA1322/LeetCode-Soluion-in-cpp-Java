@@ -1,0 +1,48 @@
+# LeetCode-Soluion-in-C-Java
+
+
+219. Contains Duplicate II
+
+
+10 Feb 2023
+
+
+C++:
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(n)
+
+class Solution {
+
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int, int> m;  // unordered map to store the number and the index of the number
+        for(int i=0; i<nums.size(); i++){  // for each element in the vector nums
+            if(m.find(nums[i]) != m.end() && i - m[nums[i]] <= k){  // if the number is present in the unordered map and the difference between the current index and the index of the number is less than or equal to k
+                return true;  // return true
+            }
+            m[nums[i]] = i;  // update the index of the current element
+        }
+        return false;  // return false
+    }
+};
+
+
+Java:
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(n)
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, Integer> m = new HashMap<>();  // unordered map to store the number and the index of the number
+        for(int i=0; i<nums.length; i++){  // for each element in the vector nums
+            if(m.containsKey(nums[i]) && i - m.get(nums[i]) <= k){  // if the number is present in the unordered map and the difference between the current index and the index of the number is less than or equal to k
+                return true;  // return true
+            }
+            m.put(nums[i], i);  // update the index of the current element
+        }
+        return false;  // return false
+    }
+}
+
+
