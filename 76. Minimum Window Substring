@@ -10,6 +10,124 @@ Hard
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the string s and space complexity is O(n)
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char, int> m;  // unordered map to store the character and the count of the character
+        for(auto& c : t){  // for each character in the string t
+            m[c]++;  // increment the count of the character
+        }
+        int i = 0;  // variable to store the start index of the window
+        int j = 0;  // variable to store the end index of the window
+        int minLen = INT_MAX;  // variable to store the minimum length of the window
+        int minStart = 0;  // variable to store the start index of the minimum window
+        int count = t.size();  // variable to store the count of the characters in the string t
+        while(j < s.size()){  // while the end index of the window is less than the length of the string s
+            if(m.find(s[j]) != m.end()){  // if the character is present in the unordered map
+                if(m[s[j]] > 0){  // if the count of the character is greater than 0
+                    count--;  // decrement the count
+                }
+                m[s[j]]--;  // decrement the count of the character
+            }
+            while(count == 0){  // while the count is 0
+                if(j - i + 1 < minLen){  // if the length of the window is less than the minimum length
+                    minLen = j - i + 1;  // update the minimum length
+                    minStart = i;  // update the start index of the minimum window
+                }
+                if(m.find(s[i]) != m.end()){  // if the character is present in the unordered map
+                    m[s[i]]++;  // increment the count of the character
+                    if(m[s[i]] > 0){  // if the count of the character is greater than 0
+                        count++;  // increment the count
+                    }
+                }
+                i++;  // increment the start index of the window
+            }
+            j++;  // increment the end index of the window
+        }
+        return minLen == INT_MAX ? "" : s.substr(minStart, minLen);  // return the minimum window
+    }
+};
+
+2nd Method 
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        vector<int> v(128,0);
+        for(auto& c : t) v[c]++;
+        int counter = t.size() ,  start = 0 , end = 0 , l = INT_MAX , head = 0;
+        while(end<s.size()){
+            if(v[s[end++]] --> 0) counter--;
+            while(counter == 0){
+                if(end-start < l) l = end -(head = start);
+                if(v[s[start++]]++ == 0 ) counter++; 
+            }
+        }   
+        return l == INT_MAX ? "" : s.substr(head , l);
+
+    }
+};
+
 
 
 Java:
+
+// Time Complexity : O(n) where n is the length of the string s and space complexity is O(n)
+
+class Solution {
+    public String minWindow(String s, String t) {
+        Map<Character, Integer> m = new HashMap<>();  // unordered map to store the character and the count of the character
+        for(char c : t.toCharArray()){  // for each character in the string t
+            m.put(c, m.getOrDefault(c, 0) + 1);  // increment the count of the character
+        }
+        int i = 0;  // variable to store the start index of the window
+        int j = 0;  // variable to store the end index of the window
+        int minLen = Integer.MAX_VALUE;  // variable to store the minimum length of the window
+        int minStart = 0;  // variable to store the start index of the minimum window
+        int count = t.length();  // variable to store the count of the characters in the string t
+        while(j < s.length()){  // while the end index of the window is less than the length of the string s
+            if(m.containsKey(s.charAt(j))){  // if the character is present in the unordered map
+                if(m.get(s.charAt(j)) > 0){  // if the count of the character is greater than 0
+                    count--;  // decrement the count
+                }
+                m.put(s.charAt(j), m.get(s.charAt(j)) - 1);  // decrement the count of the character
+            }
+            while(count == 0){  // while the count is 0
+                if(j - i + 1 < minLen){  // if the length of the window is less than the minimum length
+                    minLen = j - i + 1;  // update the minimum length
+                    minStart = i;  // update the start index of the minimum window
+                }
+                if(m.containsKey(s.charAt(i))){  // if the character is present in the unordered map
+                    m.put(s.charAt(i), m.get(s.charAt(i)) + 1);  // increment the count of the character
+                    if(m.get(s.charAt(i)) > 0){  // if the count of the character is greater than 0
+                        count++;  // increment the count
+                    }
+                }
+                i++;  // increment the start index of the window
+            }
+            j++;  // increment the end index of the window
+        }
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);  // return the minimum window
+    }
+}
+
+2nd Method 
+
+class Solution {
+    public String minWindow(String s, String t) {
+        int[] v = new int[128];
+        for(char c : t.toCharArray()) v[c]++;
+        int counter = t.length() ,  start = 0 , end = 0 , l = Integer.MAX_VALUE , head = 0;
+        while(end<s.length()){
+            if(v[s.charAt(end++)]-- > 0) counter--;
+            while(counter == 0){
+                if(end-start < l) l = end -(head = start);
+                if(v[s.charAt(start++)]++ == 0 ) counter++; 
+            }
+        }   
+        return l == Integer.MAX_VALUE ? "" : s.substring(head , head+l);
+
+    }
+}
