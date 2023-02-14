@@ -8,5 +8,59 @@ Hard
 
 C++:
 
+// Time Complexity : O(n^2) where n is the length of the string and space complexity is O(n^2)
+
+class Solution {
+public:
+    int dp[101][101];      // dp array
+    int dfs(string &s, int left, int K) {   // dfs function
+        int k = K;    // k=K
+        if(s.size() - left <= k) return 0;    // if condition is true
+        if(dp[left][k] >= 0) return dp[left][k];    // if condition is true
+        int res = k ? dfs(s, left + 1, k - 1) : 10000, c = 1;   // initialize res
+        for(int i = left + 1; i <= s.size(); ++i) {   // loop for i                             
+            res = min(res, dfs(s, i, k) + 1 + (c >= 100 ? 3 : (c >= 10 ? 2 : (c > 1 ? 1 :0))));  // res=min(res,dfs(s,i,k)+1+(c>=100?3:(c>=10?2:(c>1?1:0))))
+            if(i == s.size()) break;    // if condition is true
+            if(s[i] == s[left]) ++c;    // if condition is trued
+            else if(--k < 0) break;    // else if condition is true
+            
+        }
+        return dp[left][K] = res;   // return dp[left][K]=res
+    }
+    
+    int getLengthOfOptimalCompression(string s, int k) {    // get length of optimal compression
+        memset(dp, -1, sizeof(dp));   // memset
+        return dfs(s, 0, k);    // return dfs(s,0,k)
+    }
+};
+
+
 
 Java:
+
+
+// Time Complexity : O(n^2) where n is the length of the string and space complexity is O(n^2)
+
+class Solution {
+    int[][] dp;   // dp array
+    int dfs(String s, int left, int K) {   // dfs fon
+        int k = K;   // k=K
+        if(s.length() - left <= k) return 0;   // if condition is true
+        if(dp[left][k] >= 0) return dp[left][k];   // if condition is true
+        int res = k > 0 ? dfs(s, left + 1, k - 1) : 10000, c = 1;   // initialize res
+        for(int i = left + 1; i <= s.length(); ++i) {   // loop for i
+            res = Math.min(res, dfs(s, i, k) + 1 + (c >= 100 ? 3 : (c >= 10 ? 2 : (c > 1 ? 1 :0))));   // res=Math.min(res,dfs(s,i,k)+1+(c>=100?3:(c>=10?2:(c>1?1:0))))
+            if(i == s.length()) break;   // if condition is true
+            if(s.charAt(i) == s.charAt(left)) ++c;   // if condition is true
+            else if(--k < 0) break;   // else if condition is true
+        }
+        return dp[left][K] = res;   // return dp[left][K]=res
+    }
+    
+    public int getLengthOfOptimalCompression(String s, int k) {   // get length of optimal compression
+        dp = new int[s.length()][k + 1];   // dp array
+        for(int[] row : dp) Arrays.fill(row, -1);   // fill the dp array
+        return dfs(s, 0, k);   // return dfs(s,0,k)
+    }
+}
+
