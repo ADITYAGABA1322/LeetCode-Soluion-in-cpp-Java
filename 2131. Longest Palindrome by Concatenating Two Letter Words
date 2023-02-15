@@ -1,0 +1,70 @@
+# LeetCode-Soluion-in-C-Java
+
+2131. Longest Palindrome by Concatenating Two Letter Words
+
+15 Feb 2023
+
+
+Medium
+
+
+C++:
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+class Solution {
+public:
+    int longestPalindrome(vector<string>& words) {
+        
+       int count[26][26] = {}; 
+       int ans =0;
+        
+			for(auto w : words){
+				int a = w[0] - 'a';
+				int b = w[1] - 'a'; 
+
+				if(count[b][a]){
+					ans+= 4;          
+					count[b][a]--;   // decrement the count as we found mirror word
+				}else
+					count[a][b]++;  //increment the current word count if we not find any mirror word
+			}
+        
+			for(int i=0;i<26;i++){
+				if(count[i][i]){
+					ans+=2;
+					break;
+				}
+			 }
+      
+	return ans;
+
+    }
+};
+
+
+
+Java:
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+class Solution {
+    public int longestPalindrome(String[] words) {
+        int[][] count = new int[26][26];   // count array
+        int ans = 0;   // initialize ans
+        for(String w : words) {   // loop for w
+            int a = w.charAt(0) - 'a';   // a=w.charAt(0)-'a'
+            int b = w.charAt(1) - 'a';   // b=w.charAt(1)-'a'
+            if(count[b][a] > 0) {   // if condition is true
+                ans += 4;   // ans+=4
+                count[b][a]--;   // decrement the count as we found mirror word
+            } else count[a][b]++;   // increment the current word count if we not find any mirror word
+        }
+        for(int i = 0; i < 26; ++i) if(count[i][i] > 0) {   // loop for i
+            ans += 2;   // ans+=2
+            break;
+        }
+        return ans;   // return ans
+    }
+}
+
