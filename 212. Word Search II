@@ -11,7 +11,145 @@ Hard
 
 C++:
 
+// Time Complexity : O(n*m) where n is the number of rows and m is the number of columns and space complexity is O(n*m)
+
+class Solution {
+public:
+    bool dfs(int ind , int indi , int indj , vector<vector<char>>& board , string &search , int &row , int &col){
+        if(ind == search.size()){
+            return true;
+        }
+        if(indi >= 0 && indi < row && indj>=0 && indj<col){
+            if(board[indi][indj] != search[ind]){
+                return false;
+            }
+            char originalchar = board[indi][indj];
+            board[indi][indj] = '$';
+            bool ans = dfs(ind+1 , indi+1  , indj , board , search , row , col) ||
+            dfs(ind+1 , indi-1  , indj , board , search , row , col) ||
+            dfs(ind+1 , indi  , indj+1 , board , search , row , col) ||
+            dfs(ind+1 , indi  , indj-1 , board , search , row , col);
+
+            board[indi][indj] = originalchar;
+            return ans;
+        }
+        else
+            return false;
+    }
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        int row = board.size();
+        int col = board[0].size();
+        vector<string> ans;
+        vector<vector<pair<int , int>>> v(26);
+        for(int i=0 ; i<row ; i++){
+            for(int j=0; j<col ; j++){
+                v[board[i][j] - 'a'].push_back({i , j});
+            }
+        }
+        int start = 0 , end = 0;
+        
+            for(auto word : words){
+                if(word[0] == 'a')
+                    start++;
+                if(word[word.size()-1] == 'a')
+                    end++;     
+            }
+            bool reversehaikya = false;
+            if(start > end){
+                for(int i=0 ; i<words.size(); i++){
+                    reversehaikya = true;
+                    reverse(words[i].begin() , words[i].end());
+                }
+            }
+        for(auto search : words){
+            bool flag = false;
+            for(auto ele : v[search[0] - 'a']){
+                flag = dfs(0 , ele.first , ele.second , board , search , row , col);
+                if(flag){
+                    if(reversehaikya)
+                        reverse(search.begin() , search.end());
+                        ans.push_back(search);
+                       break;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+
 
 
 Java:
+
+
+// Time Complexity : O(n*m) where n is the number of rows and m is the number of columns and space complexity is O(n*m)
+
+class Solution {
+    public boolean dfs(int ind , int indi , int indj , char[][] board , String search , int row , int col){
+        if(ind == search.length()){
+            return true;
+        }
+        if(indi >= 0 && indi < row && indj>=0 && indj<col){
+            if(board[indi][indj] != search.charAt(ind)){
+                return false;
+            }
+            char originalchar = board[indi][indj];
+            board[indi][indj] = '$';
+            boolean ans = dfs(ind+1 , indi+1  , indj , board , search , row , col) ||
+            dfs(ind+1 , indi-1  , indj , board , search , row , col) ||
+            dfs(ind+1 , indi  , indj+1 , board , search , row , col) ||
+            dfs(ind+1 , indi  , indj-1 , board , search , row , col);
+
+            board[indi][indj] = originalchar;
+            return ans;
+        }
+        else
+            return false;
+    }
+    public List<String> findWords(char[][] board, String[] words) {
+        int row = board.length;
+        int col = board[0].length;
+        List<String> ans = new ArrayList<>();
+        List<List<Pair<Integer , Integer>>> v = new ArrayList<>();
+        for(int i=0 ; i<26 ; i++){
+            v.add(new ArrayList<>());
+        }
+        for(int i=0 ; i<row ; i++){
+            for(int j=0; j<col ; j++){
+                v.get(board[i][j] - 'a').add(new Pair<>(i , j));
+            }
+        }
+        int start = 0 , end = 0;
+        
+            for(String word : words){
+                if(word.charAt(0) == 'a')
+                    start++;
+                if(word.charAt(word.length()-1) == 'a')
+                    end++;     
+            }
+            boolean reversehaikya = false;
+            if(start > end){
+                for(int i=0 ; i<words.length; i++){
+                    reversehaikya = true;
+                    words[i] = new StringBuilder(words[i]).reverse().toString();
+                }
+            }
+        for(String search : words){
+            boolean flag = false;
+            for(Pair<Integer , Integer> ele : v.get(search.charAt(0) - 'a')){
+                flag = dfs(0 , ele.getKey() , ele.getValue() , board , search , row , col);
+                if(flag){
+                    if(reversehaikya)
+                        search = new StringBuilder(search).reverse().toString();
+                        ans.add(search);
+                       break;
+                }
+            }
+        }
+        return ans;
+    }
+}
+       
+
 
