@@ -9,6 +9,47 @@ Hard
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+public:
+    string orderlyQueue(string s, int k) {
+        if(k > 1){   // if condition is true
+            sort(s.begin(), s.end());   // sort(s.begin(),s.end())
+            return s;   // return s
+        }
+        string ans = s;   // string ans=s
+        for(int i = 0; i < s.size(); ++i){   // loop for i
+            string temp = s.substr(i) + s.substr(0, i);   // string temp=s.substr(i)+s.substr(0,i)
+            ans = min(ans, temp);   // ans=min(ans,temp)
+        }
+        return ans;   // return ans
+    }
+};
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+    public String orderlyQueue(String s, int k) {
+        if(k > 1){   // if condition is true
+            char[] arr = s.toCharArray();   // char[] arr=s.toCharArray()
+            Arrays.sort(arr);   // Arrays.sort(arr)
+            return new String(arr);   // return new String(arr)
+        }
+        String ans = s;   // String ans=s
+        for(int i = 0; i < s.length(); ++i){   // loop for i
+            String temp = s.substring(i) + s.substring(0, i);   // String temp=s.substring(i)+s.substring(0,i)
+            if(ans.compareTo(temp) > 0) ans = temp;   // if condition is true
+        }
+        return ans;   // return ans
+    }
+};
+
+
 
