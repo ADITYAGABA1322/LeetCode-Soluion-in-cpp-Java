@@ -11,5 +11,52 @@ C++:
 
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class StockSpanner {
+public:
+    stack<pair<int, int>> st;   // stack<pair<int,int>> st
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+        int ans = 1;   // int ans=1
+        while(!st.empty() && st.top().first <= price){   // loop for st
+            ans += st.top().second;   // ans+=st.top().second
+            st.pop();   // st.pop()
+        }
+        st.push({price, ans});   // st.push({price,ans})
+        return ans;   // return ans
+    }
+};
+
+
+
 Java:
+
+
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class StockSpanner {
+    Stack<int[]> st;   // Stack<int[]> st
+    public StockSpanner() {
+        st = new Stack<>();   // st=new Stack<>()
+    }
+    
+    public int next(int price) {
+        int ans = 1;   // int ans=1
+        while(!st.isEmpty() && st.peek()[0] <= price){   // loop for st
+            ans += st.peek()[1];   // ans+=st.peek()[1]
+            st.pop();   // st.pop()
+        }
+        st.push(new int[]{price, ans});   // st.push(new int[]{price,ans})
+        return ans;   // return ans
+    }
+};
+
 
