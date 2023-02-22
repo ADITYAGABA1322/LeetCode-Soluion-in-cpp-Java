@@ -62,4 +62,49 @@ public:
 Java:
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+    public String makeGood(String s) {
+        Stack<Character> st = new Stack<>();   // Stack<Character> st=new Stack<>()
+        for(char c : s.toCharArray()){   // loop for c
+            if(!st.isEmpty() && Math.abs(st.peek() - c) == 32) st.pop();   // if condition is true
+            else st.push(c);   // else condition is true
+        }
+        StringBuilder ans = new StringBuilder();   // StringBuilder ans=new StringBuilder()
+        while(!st.isEmpty()){   // loop for st
+            ans.append(st.pop());   // ans.append(st.pop())
+        }
+        return ans.reverse().toString();   // return ans.reverse().toString()
+    }
+};
+
+
+2nd Method:
+
+
+
+class Solution {
+    public String makeGood(String s) {
+        
+        String ans = "";
+        
+        for(int i = 0 ; i < s.length() ; i++)
+        {
+            ans += s.charAt(i);
+
+            while(ans.length() > 0 && i+1 < s.length() && (ans.charAt(ans.length()-1)==s.charAt(i+1)+32 || ans.charAt(ans.length()-1)==s.charAt(i+1)-32))
+            {
+                ans = ans.substring(0,ans.length()-1);
+                i++;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+
+
 
