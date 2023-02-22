@@ -6,9 +6,91 @@
 
 Medium
 
+2 Methods
+
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        stack<char> st;   // stack<char> st
+        for(char c : s){   // loop for c
+            if(!st.empty() && st.top() == c) st.pop();   // if condition is true
+            else st.push(c);   // else condition is true
+        }
+        string ans = "";   // string ans=""
+        while(!st.empty()){   // loop for st
+            ans = st.top() + ans;   // ans=st.top()+ans
+            st.pop();   // st.pop()
+        }
+        return ans;   // return ans
+    }
+};
+
+2nd Method :
+
+
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        string ans;
+        for(int i=0 ; i<s.size(); i++){
+            if(ans.back() == s[i]){
+                ans.pop_back();
+            }
+            else{
+                ans += s[i];
+            }
+        }
+        return ans;
+
+    }
+};
+
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> st = new Stack<>();   // Stack<Character> st=new Stack<>()
+        for(char c : s.toCharArray()){   // loop for c
+            if(!st.isEmpty() && st.peek() == c) st.pop();   // if condition is true
+            else st.push(c);   // else condition is true
+        }
+        StringBuilder ans = new StringBuilder();   // StringBuilder ans=new StringBuilder()
+        while(!st.isEmpty()){   // loop for st
+            ans.append(st.pop());   // ans.append(st.pop())
+        }
+        return ans.reverse().toString();   // return ans.reverse().toString()
+    }
+};
+
+
+2nd Method:
+
+class Solution {
+    public String removeDuplicates(String s) {
+        StringBuilder ans = new StringBuilder();
+        for(int i=0 ; i<s.length(); i++){
+            if(ans.length() > 0 && ans.charAt(ans.length()-1) == s.charAt(i)){
+                ans.deleteCharAt(ans.length()-1);
+            }
+            else{
+                ans.append(s.charAt(i));
+            }
+        }
+        return ans.toString();
+
+    }
+};
+
 
