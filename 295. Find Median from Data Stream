@@ -53,3 +53,42 @@ public:
 
 Java:
 
+
+// Time Complexity : O(logn) where n is the number of elements in the stream and space complexity is O(n)
+
+
+class MedianFinder {
+    PriorityQueue<Integer> maxHeap;  // max heap to store the first half of the stream
+    PriorityQueue<Integer> minHeap;  // min heap to store the second half of the stream
+    /** initialize your data structure here. */
+    public MedianFinder() {
+        maxHeap = new PriorityQueue<>((a, b) -> b - a);  // max heap to store the first half of the stream
+        minHeap = new PriorityQueue<>();  // min heap to store the second half of the stream
+    }
+    
+    public void addNum(int num) {
+        if(maxHeap.isEmpty() || num < maxHeap.peek()){  // if the max heap is empty or the number is less than the top of the max heap
+            maxHeap.add(num);  // add the number to the max heap
+        } else {  // else
+            minHeap.add(num);  // add the number to the min heap
+        }
+        if(maxHeap.size() > minHeap.size() + 1){  // if the size of the max heap is greater than the size of the min heap by 1
+            minHeap.add(maxHeap.poll());  // add the top of the max heap to the min heap
+        } else if(minHeap.size() > maxHeap.size() + 1){  // else if the size of the min heap is greater than the size of the max heap by 1
+            maxHeap.add(minHeap.poll());  // add the top of the min heap to the max heap
+        }
+    }
+    
+    public double findMedian() {
+        if(maxHeap.size() == minHeap.size()){  // if the size of the max heap is equal to the size of the min heap
+            return (maxHeap.peek() + minHeap.peek()) / 2.0;  // return the average of the top of the max heap and the top of the min heap
+        } else if(maxHeap.size() > minHeap.size()){  // else if the size of the max heap is greater than the size of the min heap
+            return maxHeap.peek();  // return the top of the max heap
+        } else {  // else
+            return minHeap.peek();  // return the top of the min heap
+        }
+    }
+}
+
+
+
