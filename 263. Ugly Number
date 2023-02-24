@@ -1,0 +1,58 @@
+263. Ugly Number
+
+
+Easy
+
+
+24 Feb 2023
+
+
+C++:
+
+// Time Complexity : O(logn) where n is the number and space complexity is O(1)
+
+
+class Solution {
+public:
+    bool isUgly(int n){
+        if(n == 0){  // if the number is 0
+            return false;  // return false
+        }
+        while(n % 2 == 0){  // iterate until the number is not divisible by 2
+            n = n / 2;  // divide the number by 2
+        }
+        while(n % 3 == 0){  // iterate until the number is not divisible by 3
+            n = n / 3;  // divide the number by 3
+        }
+        while(n % 5 == 0){  // iterate until the number is not divisible by 5
+            n = n / 5;  // divide the number by 5
+        }
+        return n == 1;  // return true if the number is 1 else return false
+    }
+};
+
+
+
+Java:
+
+
+// Time Complexity : O(logn) where n is the number and space complexity is O(1)
+
+
+class Solution {
+    public boolean isUgly(int n) {
+        if(n == 0){  // if the number is 0
+            return false;  // return false
+        }
+        while(n % 2 == 0){  // iterate until the number is not divisible by 2
+            n = n / 2;  // divide the number by 2
+        }
+        while(n % 3 == 0){  // iterate until the number is not divisible by 3
+            n = n / 3;  // divide the number by 3
+        }
+        while(n % 5 == 0){  // iterate until the number is not divisible by 5
+            n = n / 5;  // divide the number by 5
+        }
+        return n == 1;  // return true if the number is 1 else return false
+    }
+}
