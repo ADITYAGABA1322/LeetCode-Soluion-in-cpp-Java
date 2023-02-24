@@ -11,6 +11,36 @@ Medium
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        string result = "";  // variable to store the result
+        int i = s.length() - 1;  // variable to store the index
+        while(i >= 0){  // iterate until the index is greater than or equal to 0
+            while(i >= 0 && s[i] == ' '){  // iterate until the index is greater than or equal to 0 and the character at the index is a space
+                i--;  // decrement the index
+            }
+            if(i < 0){  // if the index is less than 0
+                break;  // break
+          }
+            if(result.length() != 0){  // if the length of the result is not equal to 0
+                result += " ";  // add a space to the result
+            }
+            string word = "";  // variable to store the word
+            while(i >= 0 && s[i] != ' '){  // iterate until the index is greater than or equal to 0 and the character at the index is not a space
+                word = s[i] + word;  // add the character at the index to the word
+                i--;  // decrement the index
+            }
+            result += word;  // add the word to the result
+        }
+        return result;  // return the result
+    }
+};
+
+
 
 
 
