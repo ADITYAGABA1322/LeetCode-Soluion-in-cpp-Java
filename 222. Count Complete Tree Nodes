@@ -10,4 +10,65 @@ Medium
 C++:
 
 
+// Time Complexity : O(logn * logn) where n is the number of nodes in the tree and space complexity is O(1)
+
+
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(root == NULL){  // if the root is null
+            return 0;  // return 0
+        }
+        int leftHeight = 0;  // variable to store the height of the left subtree
+        int rightHeight = 0;  // variable to store the height of the right subtree
+        TreeNode* left = root;  // variable to store the left subtree
+        TreeNode* right = root;  // variable to store the right subtree
+        while(left != NULL){  // iterate until the left subtree is null
+            leftHeight++;  // increment the height of the left subtree
+            left = left->left;  // move to the left subtree
+        }
+        while(right != NULL){  // iterate until the right subtree is null
+            rightHeight++;  // increment the height of the right subtree
+            right = right->right;  // move to the right subtree
+        }
+        if(leftHeight == rightHeight){  // if the height of the left subtree is equal to the height of the right subtree
+            return pow(2, leftHeight) - 1;  // return 2 to the power of the height of the left subtree minus 1
+        }
+        return 1 + countNodes(root->left) + countNodes(root->right);  // return 1 plus the number of nodes in the left subtree plus the number of nodes in the right subtree
+    }
+};
+
+
+
+
 Java:
+
+
+// Time Complexity : O(logn * logn) where n is the number of nodes in the tree and space complexity is O(1)
+
+
+class Solution {
+    public int countNodes(TreeNode root) {
+        if(root == null){  // if the root is null
+            return 0;  // return 0
+        }
+        int leftHeight = 0;  // variable to store the height of the left subtree
+        int rightHeight = 0;  // variable to store the height of the right subtree
+        TreeNode left = root;  // variable to store the left subtree
+        TreeNode right = root;  // variable to store the right subtree
+        while(left != null){  // iterate until the left subtree is null
+            leftHeight++;  // increment the height of the left subtree
+            left = left.left;  // move to the left subtree
+        }
+        while(right != null){  // iterate until the right subtree is null
+            rightHeight++;  // increment the height of the right subtree
+            right = right.right;  // move to the right subtree
+        }
+        if(leftHeight == rightHeight){  // if the height of the left subtree is equal to the height of the right subtree
+            return (int)Math.pow(2, leftHeight) - 1;  // return 2 to the power of the height of the left subtree minus 1
+        }
+        return 1 + countNodes(root.left) + countNodes(root.right);  // return 1 plus the number of nodes in the left subtree plus the number of nodes in the right subtree
+    }
+}
+
+
