@@ -39,3 +39,28 @@ public:
 Java:
 
 
+// Time Complexity : O(logn) where n is the number of guesses and space complexity is O(1)
+
+
+class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        int low = 1;  // variable to store the low
+        int high = n;  // variable to store the high
+        while(low <= high){  // iterate until the low is less than or equal to the high
+            int mid = low + (high - low) / 2;  // variable to store the mid
+            int res = guess(mid);  // variable to store the guess
+            if(res == 0){  // if the guess is 0
+                return mid;  // return the mid
+            }
+            else if(res == -1){  // if the guess is -1
+                high = mid - 1;  // set the high to the mid minus 1
+            }
+            else{  // if the guess is 1
+                low = mid + 1;  // set the low to the mid plus 1
+            }
+        }
+        return -1;  // return -1
+    }
+}
+
+
