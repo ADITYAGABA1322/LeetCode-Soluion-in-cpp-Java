@@ -6,9 +6,221 @@
 
 Hard
 
+2 Methods
+
 
 C++:
+
+// Time Complexity : O(nlogn) where n is the number of elements in the array and space complexity is O(n)
+
+
+class Solution {
+    public int minimumDeviation(int[] nums) {
+        int n = nums.length;  // variable to store the size of the array
+        TreeSet<Integer> s = new TreeSet<>();  // set to store the elements in the array
+        for(int i = 0; i < n; i++){  // iterate through the array
+            if(nums[i] % 2 == 1){  // if the element is odd
+                nums[i] *= 2;  // multiply the element by 2
+            }
+            s.add(nums[i]);  // insert the element into the set
+        }
+        int res = s.last() - s.first();  // variable to store the result
+        while(s.last() % 2 == 0){  // iterate until the last element in the set is even
+            int temp = s.last();  // variable to store the last element in the set
+            s.remove(temp);  // erase the last element in the set
+            s.add(temp / 2);  // insert the last element in the set divided by 2
+            res = Math.min(res, s.last() - s.first());  // update the result
+        }
+        return res;  // return the result
+    }
+};
+
+
+
+587. Erect the Fence in c++
+
+// Time Complexity : O(nlogn) where n is the number of points and space complexity is O(n)
+
+
+class Solution {
+public:
+    
+    int findEquationValue(pair<int, int>& P1, pair<int, int>& P2, pair<int, int> P3) {
+        
+        int x1 = P1.first;
+        int x2 = P2.first;
+        int x3 = P3.first;
+        
+        int y1 = P1.second;
+        int y2 = P2.second;
+        int y3 = P3.second;
+        
+        return (y3-y2)*(x2-x1)-(y2-y1)*(x3-x2);
+        
+    }
+    
+    vector<vector<int>> outerTrees(vector<vector<int>>& trees) {
+        sort(begin(trees), end(trees));
+        
+        vector<vector<int>> result;
+        
+        deque<pair<int, int>> upper, lower;
+        
+        
+        for(auto &point : trees) {
+            
+            int l = lower.size();
+            int u = upper.size();
+            
+            //sabse pehle lower ka dekhte hain
+            while(l >= 2 && findEquationValue(lower[l-2], lower[l-1], {point[0], point[1]}) < 0) {
+                l--;
+                lower.pop_back();
+            }
+            
+            while(u >= 2 && findEquationValue(upper[u-2],upper[u-1],{point[0],point[1]}) > 0) {
+                u--;
+                upper.pop_back();
+            }
+            
+            upper.push_back({point[0], point[1]});
+            lower.push_back({point[0], point[1]}); 
+        }
+        
+        set<pair<int, int>> st;
+        
+        for(auto &point : upper) {
+            st.insert(point);
+        }
+        
+        for(auto &point : lower) {
+            st.insert(point);
+        }
+        
+        for(auto &point : st) {
+            result.push_back({point.first, point.second});
+        }
+        
+        return result;
+        
+    }
+};
+
+2nd Method 
+
+
+class Solution {
+public:
+    vector<vector<int>> outerTrees(vector<vector<int>>& points) {
+        int n = points.size();  // variable to store the size of the array
+        if(n <= 3){  // if the size is less than or equal to 3
+            return points;  // return the points
+        }
+         bool aligned = true;
+        for (int i = 1; i < n; i++) {
+            if (points[i][1] != points[0][1]) {
+                aligned = false;
+                break;
+            }
+        }
+        if (aligned) {
+            return points;
+        }
+        sort(points.begin(), points.end(), [](vector<int> a, vector<int> b){  // sort the points based on the x coordinate
+            return a[0] < b[0] || (a[0] == b[0] && a[1] < b[1]);
+        });
+        vector<vector<int>> hull;  // vector to store the hull
+        for(int i = 0; i < n; i++){  // iterate through the points
+            while(hull.size() >= 2 && orientation(hull[hull.size() - 2], hull[hull.size() - 1], points[i]) > 0){  // iterate until the orientation is greater than 0
+                hull.pop_back();  // pop the last element in the hull
+            }
+            hull.push_back(points[i]);  // push the point into the hull
+        }
+        for(int i = n - 2; i >= 0; i--){  // iterate through the points
+            while(hull.size() >= 2 && orientation(hull[hull.size() - 2], hull[hull.size() - 1], points[i]) > 0){  // iterate until the orientation is greater than 0
+                hull.pop_back();  // pop the last element in the hull
+            }
+            hull.push_back(points[i]);  // push the point into the hull
+        }
+        hull.pop_back();  // pop the last element in the hull
+        return hull;  // return the hull
+    }
+    int orientation(vector<int> a, vector<int> b, vector<int> c){  // function to calculate the orientation
+        return (b[1] - a[1]) * (c[0] - b[0]) - (b[0] - a[0]) * (c[1] - b[1]);
+    }
+};
 
 
 
 Java:
+
+
+// Time Complexity : O(nlogn) where n is the number of points and space complexity is O(n)
+
+class Solution {
+    public int[][] outerTrees(int[][] trees) {
+        if(trees.length <= 3) return trees;
+        
+        Arrays.sort(trees, (a, b) -> {
+            if(a[0] == b[0]) {
+                return a[1] - b[1];
+            } else {
+                return a[0] - b[0];
+            }
+        });
+        
+        List<int[]> lower = new ArrayList<>();
+        List<int[]> upper = new ArrayList<>();
+        
+        for(int[] tree: trees) {
+            while(lower.size() >= 2 && compare(lower.get(lower.size() - 2), lower.get(lower.size() - 1), tree) > 0) {
+                lower.remove(lower.size() - 1);
+            }
+            
+            while(upper.size() >= 2 && compare(upper.get(upper.size() - 2), upper.get(upper.size() - 1), tree) < 0) {
+                upper.remove(upper.size() - 1);
+            }
+            
+            lower.add(tree);
+            upper.add(tree);
+        }
+        
+        Set<int[]> set = new HashSet<>();
+        for(int[] l : lower) {
+            set.add(l);
+        }
+        
+        for(int[] u : upper) {
+            set.add(u);
+        }
+        
+        int[][] result = new int[set.size()][2];
+        
+        int index = 0;
+        for(int[] s: set) {
+            result[index++] = s;
+        }
+        
+        return result;
+    }
+    
+    // < 0: clockwise
+    // > 0: counterclockwise
+    // == 0 : collinear
+    private int compare(int[] p1, int[] p2, int[] p3) {
+        int x1 = p1[0];
+        int y1 = p1[1];
+        int x2 = p2[0];
+        int y2 = p2[1];
+        int x3 = p3[0];
+        int y3 = p3[1];
+        
+        return (y3 - y2) * (x2 - x1) - (y2 - y1) * (x3 - x2);
+    }
+}
+
+
+
+
+
+
