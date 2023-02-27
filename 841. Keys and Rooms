@@ -16,6 +16,130 @@ BFS || DFS
 C++:
 
 
+// Time Complexity : O(n) where n is the number of rooms and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size();  // variable to store the number of rooms
+        vector<bool> visited(n, false);  // vector to store the visited rooms
+        queue<int> q;  // queue to store the rooms
+        q.push(0);  // push the first room into the queue
+        visited[0] = true;  // mark the first room as visited
+        while(!q.empty()){  // iterate through the queue
+            int room = q.front();  // variable to store the current room
+            q.pop();  // pop the current room from the queue
+            for(int i = 0; i < rooms[room].size(); i++){  // iterate through the keys of the current room
+                if(!visited[rooms[room][i]]){  // if the room is not visited
+                    q.push(rooms[room][i]);  // push the room into the queue
+                    visited[rooms[room][i]] = true;  // mark the room as visited
+                }
+            }
+        }
+        for(int i = 0; i < n; i++){  // iterate through the rooms
+            if(!visited[i]){  // if the room is not visited
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+};
+
+2nd Method using dfs 
+
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        int n = rooms.size();  // variable to store the number of rooms
+        vector<bool> visited(n, false);  // vector to store the visited rooms
+        dfs(rooms, visited, 0);  // call the dfs function
+        for(int i = 0; i < n; i++){  // iterate through the rooms
+            if(!visited[i]){  // if the room is not visited
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+    
+    void dfs(vector<vector<int>>& rooms, vector<bool>& visited, int room){  // function to perform dfs
+        visited[room] = true;  // mark the current room as visited
+        for(int i = 0; i < rooms[room].size(); i++){  // iterate through the keys of the current room
+            if(!visited[rooms[room][i]]){  // if the room is not visited
+                dfs(rooms, visited, rooms[room][i]);  // call the dfs function
+            }
+        }
+    }
+};
+
+
+
+
+
+
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the number of rooms and space complexity is O(n)
+
+
+
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n = rooms.size();  // variable to store the number of rooms
+        boolean[] visited = new boolean[n];  // array to store the visited rooms
+        Queue<Integer> q = new LinkedList<>();  // queue to store the rooms
+        q.add(0);  // push the first room into the queue
+        visited[0] = true;  // mark the first room as visited
+        while(!q.isEmpty()){  // iterate through the queue
+            int room = q.poll();  // variable to store the current room
+            for(int i = 0; i < rooms.get(room).size(); i++){  // iterate through the keys of the current room
+                if(!visited[rooms.get(room).get(i)]){  // if the room is not visited
+                    q.add(rooms.get(room).get(i));  // push the room into the queue
+                    visited[rooms.get(room).get(i)] = true;  // mark the room as visited
+                }
+            }
+        }
+        for(int i = 0; i < n; i++){  // iterate through the rooms
+            if(!visited[i]){  // if the room is not visited
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+};
+
+
+
+2nd Method using dfs
+
+
+
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n = rooms.size();  // variable to store the number of rooms
+        boolean[] visited = new boolean[n];  // array to store the visited rooms
+        dfs(rooms, visited, 0);  // call the dfs function
+        for(int i = 0; i < n; i++){  // iterate through the rooms
+            if(!visited[i]){  // if the room is not visited
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+    
+    public void dfs(List<List<Integer>> rooms, boolean[] visited, int room){  // function to perform dfs
+        visited[room] = true;  // mark the current room as visited
+        for(int i = 0; i < rooms.get(room).size(); i++){  // iterate through the keys of the current room
+            if(!visited[rooms.get(room).get(i)]){  // if the room is not visited
+                dfs(rooms, visited, rooms.get(room).get(i));  // call the dfs function
+            }
+        }
+    }
+}
+
+
 
