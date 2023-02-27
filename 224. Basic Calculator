@@ -10,6 +10,96 @@ Hard
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+
+public:
+    int calculate(string s) {
+        stack<int> st;  // stack to store the numbers
+        int result = 0;  // variable to store the result
+        int sign = 1;  // variable to store the sign
+        int n = s.length();  // variable to store the length of the string
+        for(int i = 0; i < n; i++){  // iterate through the string
+            if(s[i] >= '0' && s[i] <= '9'){  // if the current character is a digit
+                int num = 0;  // variable to store the number
+                while(i < n && s[i] >= '0' && s[i] <= '9'){  // iterate through the string until the current character is not a digit
+                    num = num * 10 + (s[i] - '0');  // update the number
+                    i++;  // increment the index
+                }
+                result += sign * num;  // update the result
+                i--;  // decrement the index
+            }
+            else if(s[i] == '+'){  // if the current character is a plus sign
+                sign = 1;  // update the sign
+            }
+            else if(s[i] == '-'){  // if the current character is a minus sign
+                sign = -1;  // update the sign
+            }
+            else if(s[i] == '('){  // if the current character is an opening bracket
+                st.push(result);  // push the result into the stack
+                st.push(sign);  // push the sign into the stack
+                result = 0;  // update the result
+                sign = 1;  // update the sign
+            }
+            else if(s[i] == ')'){  // if the current character is a closing bracket
+                result = result * st.top();  // update the result
+                st.pop();  // pop the sign from the stack
+                result += st.top();  // update the result
+                st.pop();  // pop the result from the stack
+            }
+        }
+        return result;  // return the result
+    }
+};
+
+
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+    public int calculate(String s) {
+        Stack<Integer> st = new Stack<>();  // stack to store the numbers
+        int result = 0;  // variable to store the result
+        int sign = 1;  // variable to store the sign
+        int n = s.length();  // variable to store the length of the string
+        for(int i = 0; i < n; i++){  // iterate through the string
+            if(s.charAt(i) >= '0' && s.charAt(i) <= '9'){  // if the current character is a digit
+                int num = 0;  // variable to store the number
+                while(i < n && s.charAt(i) >= '0' && s.charAt(i) <= '9'){  // iterate through the string until the current character is not a digit
+                    num = num * 10 + (s.charAt(i) - '0');  // update the number
+                    i++;  // increment the index
+                }
+                result += sign * num;  // update the result
+                i--;  // decrement the index
+            }
+            else if(s.charAt(i) == '+'){  // if the current character is a plus sign
+                sign = 1;  // update the sign
+            }
+            else if(s.charAt(i) == '-'){  // if the current character is a minus sign
+                sign = -1;  // update the sign
+            }
+            else if(s.charAt(i) == '('){  // if the current character is an opening bracket
+                st.push(result);  // push the result into the stack
+                st.push(sign);  // push the sign into the stack
+                result = 0;  // update the result
+                sign = 1;  // update the sign
+            }
+            else if(s.charAt(i) == ')'){  // if the current character is a closing bracket
+                result = result * st.pop();  // update the result
+                result += st.pop();  // update the result
+            }
+        }
+        return result;  // return the result
+    }
+}
+
 
