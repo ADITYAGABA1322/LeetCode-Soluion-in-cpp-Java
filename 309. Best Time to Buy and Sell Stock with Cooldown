@@ -12,4 +12,42 @@ Medium
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy = INT_MIN, sell = 0, prev_sell = 0, prev_buy;  // variables to store the buy, sell, previous sell and previous buy
+        for(int price: prices){  // iterate through the prices
+            prev_buy = buy;  // update the previous buy
+            buy = max(prev_sell - price, buy);  // update the buy
+            prev_sell = sell;  // update the previous sell
+            sell = max(prev_buy + price, sell);  // update the sell
+        }
+        return sell;  // return the sell
+    }
+};
+
+
+
+
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int buy = Integer.MIN_VALUE, sell = 0, prev_sell = 0, prev_buy;  // variables to store the buy, sell, previous sell and previous buy
+        for(int price: prices){  // iterate through the prices
+            prev_buy = buy;  // update the previous buy
+            buy = Math.max(prev_sell - price, buy);  // update the buy
+            prev_sell = sell;  // update the previous sell
+            sell = Math.max(prev_buy + price, sell);  // update the sell
+        }
+        return sell;  // return the sell
+    }
+}
+
