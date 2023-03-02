@@ -9,6 +9,95 @@ Hard
 
 C++:
 
+// Time Complexity : O(n) where n is the number of nodes in the tree and space complexity is O(n)
+
+
+
+
+
+class Solution {
+public:
+    vector<int> sumOfDistancesInTree(int N, vector<vector<int>>& edges) {
+        vector<vector<int>> graph(N);  // graph to store the tree
+        for(auto edge: edges){  // iterate through the edges
+            graph[edge[0]].push_back(edge[1]);  // add the edge to the graph
+            graph[edge[1]].push_back(edge[0]);  // add the edge to the graph
+        }
+        vector<int> count(N, 1);  // vector to store the count of the nodes
+        vector<int> res(N, 0);  // vector to store the sum of distances
+        dfs(graph, 0, -1, count, res);  // call the dfs function
+        dfs2(graph, 0, -1, count, res);  // call the dfs2 function
+        return res;  // return the sum of distances
+    }
+    
+    void dfs(vector<vector<int>>& graph, int root, int parent, vector<int>& count, vector<int>& res){  // function to calculate the sum of distances
+        for(auto child: graph[root]){  // iterate through the children of the root
+            if(child != parent){  // if the child is not the parent
+                dfs(graph, child, root, count, res);  // call the dfs function
+                count[root] += count[child];  // update the count of the root
+                res[root] += res[child] + count[child];  // update the sum of distances of the root
+            }
+        }
+    }
+    
+    void dfs2(vector<vector<int>>& graph, int root, int parent, vector<int>& count, vector<int>& res){  // function to calculate the sum of distances
+        for(auto child: graph[root]){  // iterate through the children of the root
+            if(child != parent){  // if the child is not the parent
+                res[child] = res[root] - count[child] + count.size() - count[child];  // update the sum of distances of the child
+                dfs2(graph, child, root, count, res);  // call the dfs2 function
+            }
+        }
+    }
+};
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the number of nodes in the tree and space complexity is O(n)
+
+
+
+
+
+class Solution {
+    public int[] sumOfDistancesInTree(int N, int[][] edges) {
+        List<List<Integer>> graph = new ArrayList<>();  // graph to store the tree
+        for(int i = 0; i < N; i++){  // iterate through the nodes
+            graph.add(new ArrayList<>());  // add the node to the graph
+        }
+        for(int[] edge: edges){  // iterate through the edges
+            graph.get(edge[0]).add(edge[1]);  // add the edge to the graph
+            graph.get(edge[1]).add(edge[0]);  // add the edge to the graph
+        }
+        int[] count = new int[N];  // array to store the count of the nodes
+        int[] res = new int[N];  // array to store the sum of distances
+        Arrays.fill(count, 1);  // fill the count array with 1
+        dfs(graph, 0, -1, count, res);  // call the dfs function
+        dfs2(graph, 0, -1, count, res);  // call the dfs2 function
+        return res;  // return the sum of distances
+    }
+    
+    public void dfs(List<List<Integer>> graph, int root, int parent, int[] count, int[] res){  // function to calculate the sum of distances
+        for(int child: graph.get(root)){  // iterate through the children of the root
+            if(child != parent){  // if the child is not the parent
+                dfs(graph, child, root, count, res);  // call the dfs function
+                count[root] += count[child];  // update the count of the root
+                res[root] += res[child] + count[child];  // update the sum of distances of the root
+            }
+        }
+    }
+    
+    public void dfs2(List<List<Integer>> graph, int root, int parent, int[] count, int[] res){  // function to calculate the sum of distances
+        for(int child: graph.get(root)){  // iterate through the children of the root
+            if(child != parent){  // if the child is not the parent
+                res[child] = res[root] - count[child] + count.length - count[child];  // update the sum of distances of the child
+                dfs2(graph, child, root, count, res);  // call the dfs2 function
+            }
+        }
+    }
+}
+
+
+
 
