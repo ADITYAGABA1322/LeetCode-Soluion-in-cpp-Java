@@ -12,9 +12,6 @@ C++:
 // Time Complexity : O(n) where n is the number of nodes in the tree and space complexity is O(n)
 
 
-
-
-
 class Solution {
 public:
     vector<int> sumOfDistancesInTree(int N, vector<vector<int>>& edges) {
@@ -55,9 +52,6 @@ Java:
 
 
 // Time Complexity : O(n) where n is the number of nodes in the tree and space complexity is O(n)
-
-
-
 
 
 class Solution {
