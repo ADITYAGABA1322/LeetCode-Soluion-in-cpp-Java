@@ -9,6 +9,11 @@ Easy
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
 
 
 Java:
