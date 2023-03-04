@@ -1,0 +1,101 @@
+2563. Count the Number of Fair Pairs
+
+
+4 March 2023
+
+
+Medium
+
+
+
+C++:
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+class Solution {
+public:
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        sort(nums.begin(), nums.end()); 
+        long long ans = 0; 
+        for (int i = 0, n = nums.size(), lo = n-1, hi = n-1; i < n; ++i) {
+            while (0 <= hi && nums[i] + nums[hi] > upper) --hi; 
+            while (0 <= lo && nums[i] + nums[lo] >= lower) --lo; 
+            ans += hi - lo; 
+            if (lo < i && i <= hi) --ans; 
+        }
+        return ans/2; 
+    }
+};
+
+2nd Method 
+
+class Solution {
+public:
+    long long countFairPairs(vector<int>& nums, int lower, int upper) {
+        sort(nums.begin() , nums.end());
+        long long res = 0;
+        int n = nums.size();
+        int low = n-1 , high = n-1;
+        for(int i=0; i<n; i++){
+            while(high>=0 && nums[i] + nums[high] > upper) high--;
+            while(low>=0 && nums[i] + nums[low] >= lower) low--;
+             res += high - low;
+            if(low<i && i<=high){
+                res--;
+            }
+            
+        }
+        return res/2;
+    }
+};
+
+
+
+Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+    public long countFairPairs(int[] nums, int lower, int upper) {
+        Arrays.sort(nums); 
+        long ans = 0; 
+        for (int i = 0, n = nums.length, lo = n-1, hi = n-1; i < n; ++i) {
+            while (0 <= hi && nums[i] + nums[hi] > upper) --hi; 
+            while (0 <= lo && nums[i] + nums[lo] >= lower) --lo; 
+            ans += hi - lo; 
+            if (lo < i && i <= hi) --ans; 
+        }
+        return ans/2; 
+    }
+}
+
+
+2nd Method 
+
+
+
+class Solution {
+    public long countFairPairs(int[] nums, int lower, int upper) {
+        Arrays.sort(nums);
+        long res = 0;
+        int n = nums.length;
+        int low = n-1 , high = n-1;
+        for(int i=0; i<n; i++){
+            while(high>=0 && nums[i] + nums[high] > upper) high--;
+            while(low>=0 && nums[i] + nums[low] >= lower) low--;
+             res += high - low;
+            if(low<i && i<=high){
+                res--;
+            }
+            
+        }
+        return res/2;
+    }
+}
+
+
