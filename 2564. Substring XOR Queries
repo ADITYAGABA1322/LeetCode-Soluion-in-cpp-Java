@@ -84,3 +84,88 @@ public:
 Java:
 
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+    public int[][] substringXorQueries(String s, int[][] qu) {
+        int n=s.length(),q=qu.length;
+        int[][]ans=new int[q][2];  
+        HashMap<Integer,int[]>map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='0'){
+                if(!map.containsKey(0)) map.put(0,new int[]{i,i});
+                continue;
+            }
+            int num=0;
+            for(int j=i;j<n && j<i+32;j++){
+                num = (num << 1) + (s.charAt(j) - '0');
+                if(!map.containsKey(num)) map.put(num,new int[]{i,j});                
+            }
+        }
+        for(int i=0;i<q;i++){
+            int num=qu[i][0] ^ qu[i][1];
+            if(map.containsKey(num)) ans[i]=map.get(num);
+            else   ans[i]=new int[]{-1,-1};
+        }
+        return ans;
+    }
+}
+
+2nd Method 
+
+class Solution {
+    public int[][] substringXorQueries(String s, int[][] queries) {
+        Map<Integer, int[]> substrings = new HashMap<>();
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '0') {
+                substrings.putIfAbsent(0, new int[]{i, i});                        
+                continue;
+            }
+            int num = 0;
+            for(int j = i; j < s.length() && j < i + 32; j++) {
+                num = (num << 1) + (s.charAt(j) - '0');     
+                substrings.putIfAbsent(num, new int[]{i, j});                             
+            }
+        }
+        
+        for(int i = 0; i < queries.length; i++) {
+            int num = queries[i][0] ^ queries[i][1];            
+            queries[i] = substrings.getOrDefault(num, new int[] {-1, -1});
+        }         
+        return queries;
+    }
+}
+
+                             OR
+
+class Solution {
+    public int[][] substringXorQueries(String s, int[][] queries) {
+        int n = s.length() , m = queries.length;
+        //int[][] ans = new int[m][2];
+        HashMap<Integer ,  int[]> map = new HashMap<>();
+        for(int i=0 ; i<n; i++){
+            if(s.charAt(i) == '0'){
+               map.putIfAbsent(0 , new int[]{i,i});
+                continue;
+            }
+            int num = 0;
+            for(int j=i; j<n && j<i+32; j++){
+                num = (num << 1) + (s.charAt(j) - '0');
+                 map.putIfAbsent(num , new int[]{i,j});
+
+            }
+        }  
+      for(int i=0;i<m;i++){
+            int num=queries[i][0] ^ queries[i][1];
+            queries[i] = map.getOrDefault(num , new int[]{-1 , -1});
+            // if(map.containsKey(num)) ans[i]=map.get(num);
+            // else   ans[i]=new int[]{-1,-1};
+        }
+        //return ans;
+        return queries;
+    }
+}
+
+
