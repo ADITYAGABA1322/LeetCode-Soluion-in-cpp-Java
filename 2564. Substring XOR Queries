@@ -14,6 +14,71 @@ Medium
 
 C++:
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+#define ll long long 
+#define pii pair<int,int>
+#define f first
+#define s second
+
+class Solution {
+public:
+    vector<vector<int>> substringXorQueries(string s, vector<vector<int>>& qu) 
+    {
+        int n=s.size(),q=qu.size();
+        vector<vector<int>>ans;  
+        unordered_map<ll,pii>map;
+        for(int i=0;i<n;i++){
+            if(s[i]=='0'){
+                if(!map.count(0)) map[0]=make_pair(i,i);
+                continue;
+            }
+            long long num=0;
+            for(int j=i;j<=min(i+32,n-1);j++){
+                num = (num << 1) + (s[j] - '0');
+                if(!map.count(num)) map[num] = make_pair(i,j);                
+            }
+        }
+        for(int i=0;i<q;i++){
+            int num=qu[i][0] ^ qu[i][1];
+            if(map.count(num)) ans.push_back({map[num].f,map[num].s});
+            else   ans.push_back({-1,-1});
+        }
+        return ans;
+    }
+};
+
+2nd Method 
+
+class Solution {
+public:
+    vector<vector<int>> substringXorQueries(string s, vector<vector<int>>& queries) {
+        int n = s.size() , m = queries.size();
+        vector<vector<int>> ans;
+        unordered_map<int , pair<int, int>> map;
+        for(int i=0; i<n; i++){
+            if(s[i] == '0'){
+                if(!map.count(0)) map[0] = make_pair(i , i);
+                continue;
+            }
+            long long num = 0;
+            for(int j=i; j<n && j<i+32; j++){
+                num = (num << 1) + (s[j] - '0');
+                if(!map.count(num)) map[num] = make_pair(i , j);
+                
+            }
+        }
+        for(int i=0; i<m; i++){
+            int num = queries[i][0] ^ queries[i][1];
+            if(map.count(num)) ans.push_back({map[num].first , map[num].second});
+            else ans.push_back({-1, - 1});
+        }
+        return ans;
+    }
+};
+
+       
 
 
 Java:
