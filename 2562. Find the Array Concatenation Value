@@ -1,0 +1,51 @@
+2562. Find the Array Concatenation Value
+
+
+4 March 2023
+
+
+Easy
+
+
+C++:
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+class Solution {
+public:
+    long long findTheArrayConcVal(vector<int>& nums) {
+    long long res = 0, sz = nums.size();
+    for (int i = 0, j = sz - 1; i <= j; ++i, --j)
+        if (i < j)
+            res += nums[i] * pow(10, (int)log10(nums[j]) + 1) + nums[j];
+        else
+            res += nums[i];
+    return res;
+}
+};
+
+
+
+Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+        long res = 0;
+        int sz = nums.length;
+        for (int i = 0, j = sz - 1; i <= j; ++i, --j)
+            if (i < j)
+                res += nums[i] * (long)Math.pow(10, (int)Math.log10(nums[j]) + 1) + nums[j];
+            else
+                res += nums[i];
+        return res;
+    }
+}
