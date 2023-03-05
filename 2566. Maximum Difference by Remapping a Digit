@@ -11,4 +11,64 @@ Easy
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+class Solution {
+public:
+    int minMaxDifference(int num) {
+        string s =to_string(num), large = to_string(num), small = to_string(num);
+        char dl = -1, ds = -1;
+        for(int i = 0; i < s.size(); ++i){
+            if(dl == -1 && s[i] != '9'){
+                dl = s[i];
+                large[i] = '9';
+            }else {
+                large[i] = (s[i] == dl)?'9': s[i];
+            }
+            
+            if(ds == -1 && s[i] != '0'){
+                ds = s[i];
+                small[i] = '0';
+            }else{
+                small[i] = (s[i] == ds)?'0':s[i];
+            }
+        }
+        return stoi(large) - stoi(small);
+    }
+};
+
+
+
 Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+    public int minMaxDifference(int num) {
+        String s = String.valueOf(num), large = String.valueOf(num), small = String.valueOf(num);
+        int dl = -1, ds = -1;
+        for(int i = 0; i < s.length(); ++i){
+            if(dl == -1 && s.charAt(i) != '9'){
+                dl = s.charAt(i);
+                large = large.substring(0,i) + '9' + large.substring(i+1);
+            }else {
+                large = large.substring(0,i) + ((s.charAt(i) == dl)?'9': s.charAt(i)) + large.substring(i+1);
+            }
+            
+            if(ds == -1 && s.charAt(i) != '0'){
+                ds = s.charAt(i);
+                small = small.substring(0,i) + '0' + small.substring(i+1);
+            }else{
+                small = small.substring(0,i) + ((s.charAt(i) == ds)?'0':s.charAt(i)) + small.substring(i+1);
+            }
+        }
+        return Integer.parseInt(large) - Integer.parseInt(small);
+    }
+}
