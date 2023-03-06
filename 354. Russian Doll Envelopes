@@ -15,8 +15,115 @@ C++:
 
 
 
+// Time Complexity : O(nlogn) where n is the number of envelopes and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        if(envelopes.size() == 0){  // if the envelopes are empty
+            return 0;  // return 0
+        }
+         sort(envelopes.begin(), envelopes.end(), [](const auto& a, const auto& b) {  // sort the envelopes based on the widt
+            return a[0] < b[0] || (a[0] == b[0] && a[1] > b[1]);
+        });
+        vector<int> dp;  // vector to store the dp values
+        for(int i = 0; i < envelopes.size(); i++){  // iterate through the envelopes
+            int index = lower_bound(dp.begin(), dp.end(), envelopes[i][1]) - dp.begin();  // find the index of the current envelope height in the dp vector
+            if(index == dp.size()){  // if the index is equal to the size of the dp vector
+                dp.push_back(envelopes[i][1]);  // push the current envelope height to the dp vector
+            }
+            else{  // if the index is not equal to the size of the dp vector
+                dp[index] = envelopes[i][1];  // update the dp value at the index with the current envelope height
+            }
+        }
+        return dp.size();  // return the size of the dp vector
+    }
+};
+
+
+2nd Method  :
+
+
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        if (envelopes.empty()) {
+            return 0;
+        }
+        sort(envelopes.begin(), envelopes.end(), [](const auto& a, const auto& b) {
+            return a[0] < b[0] || (a[0] == b[0] && a[1] > b[1]);
+        });
+        vector<int> dp;
+        for (const auto& env : envelopes) {
+            auto it = lower_bound(dp.begin(), dp.end(), env[1]);
+            if (it == dp.end()) {
+                dp.push_back(env[1]);
+            } else {
+                *it = env[1];
+            }
+        }
+        return dp.size();
+    }
+};
+
 
 
 
 
 Java:
+
+
+
+// Time Complexity : O(nlogn) where n is the number of envelopes and space complexity is O(n)
+
+
+
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        if(envelopes.length == 0){  // if the envelopes are empty
+            return 0;  // return 0
+        }
+         Arrays.sort(envelopes, (a, b) -> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]); // sort the envelopes based on the width
+        int[] dp = new int[envelopes.length];  // array to store the dp values
+        int size = 0;  // variable to store the size of the dp array
+        for(int[] envelope : envelopes){  // iterate through the envelopes
+            int index = Arrays.binarySearch(dp, 0, size, envelope[1]);  // find the index of the current envelope height in the dp array
+            if(index < 0){  // if the index is less than 0
+                index = -(index + 1);  // update the index
+            }
+            dp[index] = envelope[1];  // update the dp value at the index with the current envelope height
+            if(index == size){  // if the index is equal to the size of the dp array
+                size++;  // increment the size of the dp array
+            }
+        }
+        return size;  // return the size of the dp array
+    }
+}
+
+
+2nd Method :
+
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) {
+        if (envelopes.length == 0) {
+            return 0;
+        }
+        Arrays.sort(envelopes, (a, b) -> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
+        int n = envelopes.length;
+        int[] dp = new int[n];
+        int maxEnvelopes = 0;
+        for (int[] env : envelopes) {
+            int i = Arrays.binarySearch(dp, 0, maxEnvelopes, env[1]);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = env[1];
+            if (i == maxEnvelopes) {
+                maxEnvelopes++;
+            }
+        }
+        return maxEnvelopes;
+    }
+}
