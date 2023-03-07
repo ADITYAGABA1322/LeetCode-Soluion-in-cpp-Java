@@ -12,6 +12,35 @@ C++:
 
 
 
+
+// Time Complexity : O(2^n) where n is the number of pairs of parentheses and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> result;  // vector to store the result
+        string s = "";  // string to store the current string
+        helper(result, s, 0, 0, n);  // call the helper functio
+        return result;  // return the result
+    }
+    void helper(vector<string>& result, string s, int open, int close, int n){  // helper function
+        if(s.size() == 2 * n){  // if the size of the current string is equal to 2 * n
+            result.push_back(s);  // push the current string to the result
+            return;
+        }
+        if(open < n){  // if the number of open parentheses is less than n
+            helper(result, s + "(", open + 1, close, n);  // call the helper function with the current string + (, open + 1, close and n
+        }
+        if(close < open){  // if the number of close parentheses is less than open
+            helper(result, s + ")", open, close + 1, n);  // call the helper function with the current string + ), open, close + 1 and n
+        }
+    }
+};
+
+
+
 Java:
 
 
