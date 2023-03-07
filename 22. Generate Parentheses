@@ -45,3 +45,28 @@ Java:
 
 
 
+// Time Complexity : O(2^n) where n is the number of pairs of parentheses and space complexity is O(n)
+
+
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();  // list to store the result
+        helper(result, "", 0, 0, n);  // call the helper function
+        return result;  // return the result
+    }
+    public void helper(List<String> result, String s, int open, int close, int n){  // helper function
+        if(s.length() == 2 * n){  // if the length of the current string is equal to 2 * n
+            result.add(s);  // add the current string to the result
+            return;
+        }
+        if(open < n){  // if the number of open parentheses is less than n
+            helper(result, s + "(", open + 1, close, n);  // call the helper function with the current string + (, open + 1, close and n
+        }
+        if(close < open){  // if the number of close parentheses is less than open
+            helper(result, s + ")", open, close + 1, n);  // call the helper function with the current string + ), open, close + 1 and n
+        }
+    }
+}
+
+
