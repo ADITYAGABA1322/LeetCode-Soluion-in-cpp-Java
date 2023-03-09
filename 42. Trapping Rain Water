@@ -1,0 +1,326 @@
+42. Trapping Rain Water
+
+
+9 March 2023
+
+
+
+Hard
+
+
+4 Methods
+
+Using Brute Force || DP || TWO POINTERS ||  STACK
+
+C++:
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+
+public:
+
+    int trap(vector<int>& height) {
+
+        int n = height.size();  // variable to store the length of the array
+
+        int result = 0;  // variable to store the result
+
+        for(int i = 1; i < n - 1; i++){  // iterate through the arra
+
+            int leftMax = 0;  // variable to store the left max value
+
+            int rightMax = 0;  // variable to store the right max value
+
+            for(int j = i; j >= 0; j--){  // iterate through the array from the current index to the left
+
+                leftMax = max(leftMax, height[j]);  // calculate the left max value
+
+            }
+
+            for(int j = i; j < n; j++){  // iterate through the array from the current index to the right
+
+                rightMax = max(rightMax, height[j]);  // calculate the right max value
+
+            }
+
+            result += min(leftMax, rightMax) - height[i];  // calculate the result
+
+        }
+
+        return result;  // return the result
+
+    }
+
+};
+
+
+2nd Method using Dp
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();  // variable to store the length of the array
+        vector<int> leftMax(n, 0);  // vector to store the left max values
+        vector<int> rightMax(n, 0);  // vector to store the right max values
+        int result = 0;  // variable to store the result
+        leftMax[0] = height[0];  // update the left max value
+        for(int i = 1; i < n; i++){  // iterate through the array
+            leftMax[i] = max(leftMax[i - 1], height[i]);  // calculate the left max value
+        }
+        rightMax[n - 1] = height[n - 1];  // update the right max value
+        for(int i = n - 2; i >= 0; i--){  // iterate through the array
+            rightMax[i] = max(rightMax[i + 1], height[i]);  // calculate the right max value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the array
+            result += min(leftMax[i], rightMax[i]) - height[i];  // calculate the result
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+3rd Method using two pointers
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();  // variable to store the length of the array
+        int left = 0, right = n - 1;  // variables to store the left and right pointers
+        int leftMax = 0, rightMax = 0;  // variables to store the left and right max values
+        int result = 0;  // variable to store the result
+        while(left <= right){  // iterate through the array
+            if(height[left] <= height[right]){  // if the left value is less than or equal to the right value
+                if(height[left] >= leftMax){  // if the left value is greater than or equal to the left max value
+                    leftMax = height[left];  // update the left max value
+                }
+                else{  // if the left value is less than the left max value
+                    result += leftMax - height[left];  // calculate the result
+                }
+                left++;  // increment the left pointer
+            }
+            else{  // if the right value is less than the left value
+                if(height[right] >= rightMax){  // if the right value is greater than or equal to the right max value
+                    rightMax = height[right];  // update the right max value
+                }
+                else{  // if the right value is less than the right max value
+                    result += rightMax - height[right];  // calculate the result
+                }
+                right--;  // decrement the right pointer
+            }
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+4th Method using stack
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();  // variable to store the length of the array
+        stack<int> st;  // stack to store the indices
+        int result = 0;  // variable to store the result
+        for(int i = 0; i < n; i++){  // iterate through the array
+            while(!st.empty() && height[i] > height[st.top()]){  // if the stack is not empty and the current value is greater than the top value of the stack
+                int top = st.top();  // variable to store the top value of the stack
+                st.pop();  // pop the top value of the stack
+                if(st.empty()){  // if the stack is empty
+                    break;  // break
+                }
+                int distance = i - st.top() - 1;  // variable to store the distance
+                int boundedHeight = min(height[i], height[st.top()]) - height[top];  // variable to store the bounded height
+                result += distance * boundedHeight;  // calculate the result
+            }
+            st.push(i);  // push the current index to the stack
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+
+
+Java:
+
+
+
+
+42. Trapping Rain Water in java using brute force 
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+
+    public int trap(int[] height) {
+
+        int n = height.length;  // variable to store the length of the array
+
+        int result = 0;  // variable to store the result
+
+        for(int i = 1; i < n - 1; i++){  // iterate through the array
+
+            int leftMax = 0;  // variable to store the left max value
+
+            int rightMax = 0;  // variable to store the right max value
+
+            for(int j = i; j >= 0; j--){  // iterate through the array from the current index to the left
+
+                leftMax = Math.max(leftMax, height[j]);  // calculate the left max value
+
+            }
+
+            for(int j = i; j < n; j++){  // iterate through the array from the current index to the right
+
+                rightMax = Math.max(rightMax, height[j]);  // calculate the right max value
+
+            }
+
+            result += Math.min(leftMax, rightMax) - height[i];  // calculate the result
+
+        }
+
+        return result;  // return the result
+
+    }
+
+}
+
+
+
+42. Trapping Rain Water in java using Dp
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;  // variable to store the length of the array
+        int[] leftMax = new int[n];  // array to store the left max values
+        int[] rightMax = new int[n];  // array to store the right max values
+        int result = 0;  // variable to store the result
+        leftMax[0] = height[0];  // update the left max value
+        for(int i = 1; i < n; i++){  // iterate through the array
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);  // calculate the left max value
+        }
+        rightMax[n - 1] = height[n - 1];  // update the right max value
+        for(int i = n - 2; i >= 0; i--){  // iterate through the array
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);  // calculate the right max value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the array
+            result += Math.min(leftMax[i], rightMax[i]) - height[i];  // calculate the result
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+42. Trapping Rain Water in java using two pointers
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;  // variable to store the length of the array
+        int left = 0, right = n - 1;  // variables to store the left and right pointers
+        int leftMax = 0, rightMax = 0;  // variables to store the left and right max values
+        int result = 0;  // variable to store the result
+        while(left <= right){  // iterate through the array
+            if(height[left] <= height[right]){  // if the left value is less than or equal to the right value
+                if(height[left] >= leftMax){  // if the left value is greater than or equal to the left max value
+                    leftMax = height[left];  // update the left max value
+                }
+                else{  // if the left value is less than the left max value
+                    result += leftMax - height[left];  // calculate the result
+                }
+                left++;  // increment the left pointer
+            }
+            else{  // if the right value is less than the left value
+                if(height[right] >= rightMax){  // if the right value is greater than or equal to the right max value
+                    rightMax = height[right];  // update the right max value
+                }
+                else{  // if the right value is less than the right max value
+                    result += rightMax - height[right];  // calculate the result
+                }
+                right--;  // decrement the right pointer
+            }
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+42. Trapping Rain Water in java using stack
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;  // variable to store the length of the array
+        Stack<Integer> st = new Stack<>();  // stack to store the indices
+        int result = 0;  // variable to store the result
+        for(int i = 0; i < n; i++){  // iterate through the array
+            while(!st.isEmpty() && height[i] > height[st.peek()]){  // if the stack is not empty and the current value is greater than the top value of the stack
+                int top = st.pop();  // variable to store the top value of the stack
+                if(st.isEmpty()){  // if the stack is empty
+                    break;  // break
+                }
+                int distance = i - st.peek() - 1;  // variable to store the distance
+                int boundedHeight = Math.min(height[i], height[st.peek()]) - height[top];  // variable to store the bounded height
+                result += distance * boundedHeight;  // calculate the result
+            }
+            st.push(i);  // push the current index to the stack
+        }
+        return result;  // return the result
+    }
+}
+
+
