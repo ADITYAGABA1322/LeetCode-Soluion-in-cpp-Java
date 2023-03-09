@@ -1,0 +1,94 @@
+62. Unique Paths
+
+
+9 March 2023
+
+
+
+Medium
+
+
+
+
+C++:
+
+
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(m * n)
+
+
+
+
+
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        vector<vector<int>> dp(m, vector<int>(n));  // 2d vector to store the dp values
+        for(int i = 0; i < m; i++){  // iterate through the rows
+            dp[i][0] = 1;  // update the dp value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the columns
+            dp[0][i] = 1;  // update the dp value
+        }
+        for(int i = 1; i < m; i++){  // iterate through the rows
+            for(int j = 1; j < n; j++){  // iterate through the columns
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];  // update the dp value
+            }
+        }
+        return dp[m - 1][n - 1];  // return the dp value
+    }
+};
+
+
+2nd Method 
+
+
+class Solution {
+public:
+    int dp[101][101]{};
+    int uniquePaths(int m, int n, int i = 0, int j = 0) {
+        if(i >= m || j >= n) return 0;
+        if(i == m-1 && j == n-1) return 1;
+        if(dp[i][j]) return dp[i][j];
+        return dp[i][j] = uniquePaths(m, n, i+1, j) + uniquePaths(m, n, i, j+1);
+    }
+};
+
+
+
+
+Java:
+
+
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(m * n)
+
+
+
+
+
+class Solution {
+    public int uniquePaths(int m, int n
+        int[][] dp = new int[m][n];  // 2d array to store the dp values
+        for(int i = 0; i < m; i++){  // iterate through the rows
+            dp[i][0] = 1;  // update the dp value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the columns
+            dp[0][i] = 1;  // update the dp value
+        }
+        for(int i = 1; i < m; i++){  // iterate through the rows
+            for(int j = 1; j < n; j++){  // iterate through the columns
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];  // update the dp value
+            }
+        }
+        return dp[m - 1][n - 1];  // return the dp value
+    }
+}
+
+
+
+
+
+
+
+
+
+
