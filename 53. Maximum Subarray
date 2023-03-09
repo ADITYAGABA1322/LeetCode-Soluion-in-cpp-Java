@@ -1,0 +1,105 @@
+53. Maximum Subarray
+
+
+9 March 2023
+
+
+Medium
+
+
+C++:
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();  // variable to store the length of the array
+        int result = nums[0];  // variable to store the result
+        int sum = nums[0];  // variable to store the sum
+        for(int i = 1; i < n; i++){  // iterate through the array
+            sum = max(nums[i], sum + nums[i]);  // update the sum
+            result = max(result, sum);  // update the result
+        }
+        return result;  // return the result
+    }
+};
+
+
+2nd Method using dp
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();  // variable to store the length of the array
+        vector<int> dp(n);  // vector to store the dp values
+        dp[0] = nums[0];  // update the dp value
+        int result = dp[0];  // variable to store the result
+        for(int i = 1; i < n; i++){  // iterate through the array
+            dp[i] = max(nums[i], dp[i - 1] + nums[i]);  // update the dp value
+            result = max(result, dp[i]);  // update the result
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;  // variable to store the length of the array
+        int result = nums[0];  // variable to store the result
+        int sum = nums[0];  // variable to store the sum
+        for(int i = 1; i < n; i++){  // iterate through the array
+            sum = Math.max(nums[i], sum + nums[i]);  // update the sum
+            result = Math.max(result, sum);  // update the result
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+2nd Method using dp
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;  // variable to store the length of the array
+        int[] dp = new int[n];  // array to store the dp values
+        dp[0] = nums[0];  // update the dp value
+        int result = dp[0];  // variable to store the result
+        for(int i = 1; i < n; i++){  // iterate through the array
+            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);  // update the dp value
+            result = Math.max(result, dp[i]);  // update the result
+        }
+        return result;  // return the result
+    }
+
+}
