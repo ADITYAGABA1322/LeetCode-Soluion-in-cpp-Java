@@ -16,7 +16,126 @@ Using Stack || Using DP
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int n = s.length();  // variable to store the length of the string
+        stack<int> st;  // stack to store the indices of the string
+        st.push(-1);  // push -1 to the stack
+        int maxLen = 0;  // variable to store the maximum length
+        for(int i = 0; i < n; i++){  // iterate through the string
+            if(s[i] == '('){  // if the current character is '('
+                st.push(i);  // push the index to the stack
+            }
+            else{  // if the current character is ')'
+                st.pop();  // pop the top element from the stack
+                if(st.empty()){  // if the stack is empty
+                    st.push(i);  // push the index to the stack
+                }
+                else{  // if the stack is not empty
+                    maxLen = max(maxLen, i - st.top());  // calculate the maximum length
+                }
+            }
+        }
+        return maxLen;  // return the maximum length
+    }
+};
+
+
+2nd Method using dp
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int n = s.length();  // variable to store the length of the string
+        vector<int> dp(n, 0);  // vector to store the dp values
+        int maxLen = 0;  // variable to store the maximum length
+        for(int i = 1; i < n; i++){  // iterate through the string
+            if(s[i] == ')'){  // if the current character is ')'
+                if(s[i - 1] == '('){  // if the previous character is '('
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;  // calculate the dp value
+                }
+                else if(i - dp[i - 1] > 0 && s[i - dp[i - 1] - 1] == '('){  // if the previous character is ')' and the previous dp value is greater than 0 and the previous character of the previous dp value is '('
+                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;  // calculate the dp value
+                }
+                maxLen = max(maxLen, dp[i]);  // calculate the maximum length
+            }
+        }
+        return maxLen;  // return the maximum length
+    }
+};
+
+
+
 
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+    public int longestValidParentheses(String s) {
+        int n = s.length();  // variable to store the length of the string
+        Stack<Integer> st = new Stack<>();  // stack to store the indices of the string
+        st.push(-1);  // push -1 to the stack
+        int maxLen = 0;  // variable to store the maximum length
+        for(int i = 0; i < n; i++){  // iterate through the string
+            if(s.charAt(i) == '('){  // if the current character is '('
+                st.push(i);  // push the index to the stack
+            }
+            else{  // if the current character is ')'
+                st.pop();  // pop the top element from the stack
+                if(st.empty()){  // if the stack is empty
+                    st.push(i);  // push the index to the stack
+                }
+                else{  // if the stack is not empty
+                    maxLen = Math.max(maxLen, i - st.peek());  // calculate the maximum length
+                }
+            }
+        }
+        return maxLen;  // return the maximum length
+    }
+}
+
+
+
+2nd Method using dp
+
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+class Solution {
+    public int longestValidParentheses(String s) {
+        int n = s.length();  // variable to store the length of the string
+        int[] dp = new int[n];  // array to store the dp values
+        int maxLen = 0;  // variable to store the maximum length
+        for(int i = 1; i < n; i++){  // iterate through the string
+            if(s.charAt(i) == ')'){  // if the current character is ')'
+                if(s.charAt(i - 1) == '('){  // if the previous character is '('
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;  // calculate the dp value
+                }
+                else if(i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '('){  // if the previous character is ')' and the previous dp value is greater than 0 and the previous character of the previous dp value is '('
+                    dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;  // calculate the dp value
+                }
+                maxLen = Math.max(maxLen, dp[i]);  // calculate the maximum length
+            }
+        }
+        return maxLen;  // return the maximum length
+    }
+}
 
 
