@@ -11,6 +11,45 @@ Easy
 C++:
 
 
+// Time Complexity : O(n) where n is the number of stairs and space complexity is O(n)
+
+
+
+
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int> dp(n + 1);  // vector to store the dp values
+        dp[0] = 1;  // update the dp value
+        dp[1] = 1;  // update the dp value
+        for(int i = 2; i <= n; i++){  // iterate through the stairs
+            dp[i] = dp[i - 1] + dp[i - 2];  // update the dp value
+        }
+        return dp[n];  // return the dp value
+    }
+};
+
+
 
 Java:
 
+
+
+// Time Complexity : O(n) where n is the number of stairs and space complexity is O(n)
+
+
+
+
+
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp = new int[n + 1];  // array to store the dp values
+        dp[0] = 1;  // update the dp value
+        dp[1] = 1;  // update the dp value
+        for(int i = 2; i <= n; i++){  // iterate through the stairs
+            dp[i] = dp[i - 1] + dp[i - 2];  // update the dp value
+        }
+        return dp[n];  // return the dp value
+    }
+}
