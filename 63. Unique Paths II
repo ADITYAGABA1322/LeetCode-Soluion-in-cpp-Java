@@ -1,0 +1,64 @@
+63. Unique Paths II
+
+
+
+10 March 2023
+
+
+
+Medium
+
+
+
+C++:
+
+
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(m * n)
+
+
+
+
+
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        int m = obstacleGrid.size();  // variable to store the number of rows
+        int n = obstacleGrid[0].size();  // variable to store the number of columns
+        vector<vector<int>> dp(m, vector<int>(n));  // 2d vector to store the dp values
+        for(int i = 0; i < m; i++){  // iterate through the rows
+            if(obstacleGrid[i][0] == 1) break;  // break if the obstacle is found
+            dp[i][0] = 1;  // update the dp value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the columns
+            if(obstacleGrid[0][i] == 1) break;  // break if the obstacle is found
+            dp[0][i] = 1;  // update the dp value
+        }
+        for(int i = 1; i < m; i++){  // iterate through the rows
+            for(int j = 1; j < n; j++){  // iterate through the columns
+                if(obstacleGrid[i][j] == 1) continue;  // continue if the obstacle is found
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];  // update the dp value
+            }
+        }
+        return dp[m - 1][n - 1];  // return the dp value
+    }
+};
+
+2nd Method 
+
+
+class Solution {
+public:
+    int dp[101][101]{};
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid, int i = 0, int j = 0) {
+        if(i >= obstacleGrid.size() || j >= obstacleGrid[0].size()) return 0;
+        if(obstacleGrid[i][j]) return 0;
+        if(i == obstacleGrid.size()-1 && j == obstacleGrid[0].size()-1) return 1;
+        if(dp[i][j]) return dp[i][j];
+        return dp[i][j] = uniquePathsWithObstacles(obstacleGrid, i+1, j) + uniquePathsWithObstacles(obstacleGrid, i, j+1);
+    }
+};
+
+
+
+Java:
+
