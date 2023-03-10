@@ -11,5 +11,117 @@ Hard
 C++:
 
 
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(n)
+
+
+
+
+
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if(matrix.size() == 0){  // if the matrix is empty
+            return 0;  // return 0
+        }
+        int m = matrix.size();  // variable to store the number of rows
+        int n = matrix[0].size();  // variable to store the number of columns
+        vector<int> left(n);  // vector to store the left values
+        vector<int> right(n, n);  // vector to store the right values
+        vector<int> height(n);  // vector to store the height values
+        int maxArea = 0;  // variable to store the maximum area
+        for(int i = 0; i < m; i++){  // iterate through the rows
+            int curLeft = 0;  // variable to store the current left value
+            int curRight = n;  // variable to store the current right value
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    height[j]++;  // update the height value
+                }
+                else{  // if the current value is 0
+                    height[j] = 0;  // update the height value
+                }
+            }
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    left[j] = max(left[j], curLeft);  // update the left value
+                }
+                else{  // if the current value is 0
+                    left[j] = 0;  // update the left value
+                    curLeft = j + 1;  // update the current left value
+                }
+            }
+            for(int j = n - 1; j >= 0; j--){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    right[j] = min(right[j], curRight);  // update the right value
+                }
+                else{  // if the current value is 0
+                    right[j] = n;  // update the right value
+                    curRight = j;  // update the current right value
+                }
+            }
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                maxArea = max(maxArea, (right[j] - left[j]) * height[j]);  // update the maximum area
+            }
+        }
+        return maxArea;  // return the maximum area
+    }
+};
+
+
 
 Java:
+
+
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(n)
+
+
+
+
+
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        if(matrix.length == 0){  // if the matrix is empty
+            return 0;  // return 0
+        }
+        int m = matrix.length;  // variable to store the number of rows
+        int n = matrix[0].length;  // variable to store the number of columns
+        int[] left = new int[n];  // array to store the left values
+        int[] right = new int[n];  // array to store the right values
+        int[] height = new int[n];  // array to store the height values
+        Arrays.fill(right, n);  // fill the right array with n
+        int maxArea = 0;  // variable to store the maximum area
+        for(int i = 0; i < m; i++){  // iterate through the rows
+            int curLeft = 0;  // variable to store the current left value
+            int curRight = n;  // variable to store the current right value
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    height[j]++;  // update the height value
+                }
+                else{  // if the current value is 0
+                    height[j] = 0;  // update the height value
+                }
+            }
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    left[j] = Math.max(left[j], curLeft);  // update the left value
+                }
+                else{  // if the current value is 0
+                    left[j] = 0;  // update the left value
+                    curLeft = j + 1;  // update the current left value
+                }
+            }
+            for(int j = n - 1; j >= 0; j--){  // iterate through the columns
+                if(matrix[i][j] == '1'){  // if the current value is 1
+                    right[j] = Math.min(right[j], curRight);  // update the right value
+                }
+                else{  // if the current value is 0
+                    right[j] = n;  // update the right value
+                    curRight = j;  // update the current right value
+                }
+            }
+            for(int j = 0; j < n; j++){  // iterate through the columns
+                maxArea = Math.max(maxArea, (right[j] - left[j]) * height[j]);  // update the maximum area
+            }
+        }
+        return maxArea;  // return the maximum area
+    }
+}
