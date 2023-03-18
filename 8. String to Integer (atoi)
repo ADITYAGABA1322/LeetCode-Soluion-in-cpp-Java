@@ -15,6 +15,39 @@ Medium
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(1)
+
+
+
+
+
+class Solution {
+public:
+    int myAtoi(string str) {
+        int i = 0;  // variable to store the index
+        int sign = 1;  // variable to store the s
+        long result = 0;  // variable to store the result
+        while(str[i] == ' '){  // iterate through the string
+            i++;  // increment the index
+        }
+        if(str[i] == '-' || str[i] == '+'){  // if the character is - or +
+            sign = (str[i++] == '-') ? -1 : 1;  // update the sign
+        }
+        while(str[i] >= '0' && str[i] <= '9'){  // iterate through the string
+            result = result * 10 + (str[i++] - '0');  // update the result
+            if(result * sign >= INT_MAX){  // if the result is greater than the max value
+                return INT_MAX;  // return the max value
+            }
+            if(result * sign <= INT_MIN){  // if the result is less than the min value
+                return INT_MIN;  // return the min value
+            }
+        }
+        return result * sign;  // return the result
+    }
+};
+
+
+
 
 
 Java:
