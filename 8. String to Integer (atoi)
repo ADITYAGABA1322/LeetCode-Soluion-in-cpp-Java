@@ -51,3 +51,47 @@ public:
 
 
 Java:
+
+
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(1)
+
+
+
+
+class Solution {
+    public int myAtoi(String str) {
+        int i = 0;  // variable to store the index
+        int sign = 1;  // variable to store the sign
+        long result = 0;  // variable to store the result
+        
+        // skip leading spaces
+        while (i < str.length() && str.charAt(i) == ' ') {
+            i++;
+        }
+        
+        // check for sign
+        if (i < str.length() && (str.charAt(i) == '-' || str.charAt(i) == '+')) {
+            sign = (str.charAt(i++) == '-') ? -1 : 1;
+        }
+        
+        // iterate through the string and compute the result
+        while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            result = result * 10 + (str.charAt(i++) - '0');
+            if (result * sign >= Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+            if (result * sign <= Integer.MIN_VALUE) {
+                return Integer.MIN_VALUE;
+            }
+        }
+        
+        // check if result is 0 or non-numeric characters only
+        if (result == 0) {
+            return 0;
+        }
+        
+        return (int)result * sign;
+    }
+}
