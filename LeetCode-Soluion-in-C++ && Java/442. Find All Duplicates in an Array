@@ -15,5 +15,57 @@ C++:
 
 
 
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1) as we are not using any extra space
+
+
+
+
+
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> result;  // create a result array
+        for(int i = 0; i < nums.size(); i++){  // iterate through the array
+            int index = abs(nums[i]) - 1;  // get the index
+            if(nums[index] < 0){  // if the value is less than 0
+                result.push_back(index + 1);  // add the value to the result array
+            }
+            nums[index] = -nums[index];  // update the value
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+
+
+
+
 Java:
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1) as we are not using any extra space
+
+
+
+
+
+
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> result = new ArrayList<>();  // create a result array
+        for(int i = 0; i < nums.length; i++){  // iterate through the array
+            int index = Math.abs(nums[i]) - 1;  // get the index
+            if(nums[index] < 0){  // if the value is less than 0
+                result.add(index + 1);  // add the value to the result array
+            }
+            nums[index] = -nums[index];  // update the value
+        }
+        return result;  // return the result
+    }
+}
+
+
 
