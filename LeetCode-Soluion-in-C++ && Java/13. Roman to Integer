@@ -14,5 +14,13 @@ Easy
 C++:
 
 
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(1) as we are not using any extra space
+
+
 Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(1) as we are not using any extra space
 
