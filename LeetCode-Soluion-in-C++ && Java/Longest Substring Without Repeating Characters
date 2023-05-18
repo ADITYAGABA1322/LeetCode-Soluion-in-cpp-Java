@@ -12,4 +12,71 @@ Medium
 C++:
 
 
+// Time Complexity : O(n)  and space complexity is O(n)
+
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        int ans = 0;
+        vector<int> dp(256,-1);
+        int i=0;
+        for(int j=0; j<n; j++){
+            i = max(i,dp[s[j]]+1);
+            ans = max(ans,j-i+1);
+            dp[s[j]] = j;
+        }
+        return ans;
+    }
+};
+
+
+
+
+
 Java:
+
+
+
+
+// Time Complexity : O(n)  and space complexity is O(n)
+
+
+
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int ans = 0;
+        int[] dp = new int[256];
+        Arrays.fill(dp,-1);
+        int i=0;
+        for(int j=0; j<n; j++){
+            i = Math.max(i,dp[s.charAt(j)]+1);
+            ans = Math.max(ans,j-i+1);
+            dp[s.charAt(j)] = j;
+        }
+        return ans;
+    }
+}
+
+2nd Method 
+
+
+class Solution{
+    public int lengthOfLongestSubstring(String s){
+        int n = s.length();
+        int ans =0;
+        Map<Character , Integer> m = new HashMap<>();
+        for(int i=0 , j = 0; j<n; j++){
+            if(m.containsKey(s.charAt(j))){
+                i = Math.max(m.get(s.charAt(j)) , i);
+            }
+            ans = Math.max(ans , j - i +1);
+            m.put(s.charAt(j) , j+1);
+        }
+        return ans;
+    }
+}
