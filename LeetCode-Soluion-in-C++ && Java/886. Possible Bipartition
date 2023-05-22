@@ -13,4 +13,100 @@ Medium
 C++:
 
 
+// Time Complexity : O(n) where n is the number of nodes and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool dfs(vector<vector<int>>& graph, vector<int>& color, int node){
+        for(auto it: graph[node]){  // for each adjacent node
+            if(color[it] == -1){  // if the color is not assigned
+                color[it] = 1 - color[node];  // assign the color to the node
+                if(!dfs(graph, color, it)){  // if the adjacent node is not bipartite
+                    return false;  // return false
+                }
+            }
+            else if(color[it] == color[node]){  // if the color is same as the adjacent node
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+    bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
+        vector<vector<int>> graph(n+1);  // graph is the adjacency list
+        for(auto it: dislikes){  // for each edge
+            graph[it[0]].push_back(it[1]);  // push the edge into the adjacency list
+            graph[it[1]].push_back(it[0]);  // push the edge into the adjacency list
+        }
+        vector<int> color(n+1, -1);  // color is the vector to store the color of each node
+        for(int i=1; i<=n; i++){  // for each node
+            if(color[i] == -1){  // if the color is not assigned
+                color[i] = 0;  // assign the color to the node
+                if(!dfs(graph, color, i)){  // if the node is not bipartite
+                    return false;  // return false
+                }
+            }
+        }
+        return true;  // return true
+    }
+};
+
+
+
+2nd Method BFS 
+
+
+
+
+// Time Complexity : O(n) where n is the number of nodes and space complexity is O(n)
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
+        vector<vector<int>> graph(n+1);  // graph is the adjacency list
+        for(auto it: dislikes){  // for each edge
+            graph[it[0]].push_back(it[1]);  // push the edge into the adjacency list
+            graph[it[1]].push_back(it[0]);  // push the edge into the adjacency list
+        }
+        vector<int> color(n+1, -1);  // color is the vector to store the color of each node
+        for(int i=1; i<=n; i++){  // for each node
+            if(color[i] == -1){  // if the color is not assigned
+                queue<int> q;  // q is the queue to store the nodes
+                q.push(i);  // push the node into the queue
+                color[i] = 0;  // assign the color to the node
+                while(!q.empty()){  // while the queue is not empty
+                    int curr = q.front();  // curr is the front element of the queue
+                    q.pop();  // pop the front element of the queue
+                    for(auto it: graph[curr]){  // for each adjacent node
+                        if(color[it] == -1){  // if the color is not assigned
+                            color[it] = 1 - color[curr];  // assign the color to the node
+                            q.push(it);  // push the node into the queue
+                        }
+                        else if(color[it] == color[curr]){  // if the color is same as the adjacent node
+                            return false;  // return false
+                        }
+                    }
+                }
+            }
+        }
+        return true;  // return true
+    }
+};
+
+
+
+
+
 JAVA:
