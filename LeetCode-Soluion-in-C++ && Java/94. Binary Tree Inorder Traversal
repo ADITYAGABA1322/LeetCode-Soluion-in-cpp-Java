@@ -63,3 +63,53 @@ public:
 
 Java:
 
+
+
+// Time Complexity : O(n) where n is the number of nodes and space complexity is O(n)
+
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();  // ans is the vector to store the inorder traversal
+        Stack<TreeNode> s = new Stack<>();  // s is the stack to store the nodes
+        TreeNode curr = root;  // curr is the current node
+        while(curr != null || !s.isEmpty()){  // while the curr is not null or the stack is not empty
+            while(curr != null){  // while the curr is not null
+                s.push(curr);  // push the curr into the stack
+                curr = curr.left;  // move the curr to the left
+            }
+            curr = s.pop();  // curr is the top element of the stack
+            ans.add(curr.val);  // push the curr value into the ans vector
+            curr = curr.right;  // move the curr to the right
+        }
+        return ans;  // return the ans vector
+    }
+}
+
+
+
+
+2nd Method using recursion
+
+
+
+// Time Complexity : O(n) where n is the number of nodes and space complexity is O(n)
+
+
+class Solution {
+    public void inorder(TreeNode root, List<Integer> ans){  // inorder function to store the inorder traversal
+        if(root == null){  // if the root is null
+            return;  // return
+        }
+        inorder(root.left, ans);  // call the inorder function for the left subtree
+        ans.add(root.val);  // push the root value into the ans vector
+        inorder(root.right, ans);  // call the inorder function for the right subtree
+    }
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();  // ans is the vector to store the inorder traversal
+        inorder(root, ans);  // call the inorder function
+        return ans;  // return the ans vector
+    }
+}
+
+
