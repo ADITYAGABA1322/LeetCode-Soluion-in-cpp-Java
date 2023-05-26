@@ -50,3 +50,45 @@ public:
 
 
 Java:
+
+
+// Time Complexity : O(n^2) where n is the number of piles and space complexity is O(n^2)
+
+
+
+
+
+
+
+class Solution {
+    public boolean stoneGame(int[] piles) {  // function to find if the first player can win the game
+        int n = piles.length;  // n is the size of the piles vector
+        int[][] dp = new int[n][n];  // dp vector to store the maximum score
+        for(int i=0; i<n; i++){  // for each pile
+            dp[i][i] = piles[i];  // initialize the dp vector
+        }
+        for(int l=2; l<=n; l++){  // for each length
+            for(int i=0; i<=n-l; i++){  // for each pile
+                int j = i+l-1;  // j is the index of the last pile
+                dp[i][j] = Math.max(piles[i]-dp[i+1][j], piles[j]-dp[i][j-1]);  // calculate the maximum score
+            }
+        }
+        return dp[0][n-1] > 0;  // return true if the maximum score is greater than 0
+    }
+}
+
+
+
+            OR 
+
+
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        return true;
+    }
+}
+
+
+
+
+
