@@ -52,3 +52,41 @@ public:
 
 
 Java:
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the number of nodes in the linked lists and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {  // function to merge two sorted linked lists
+        ListNode head = new ListNode();  // head is the head of the merged linked list
+        ListNode temp = head;  // temp is the temporary pointer to the head of the merged linked list
+        while(l1 != null && l2 != null){  // while both the linked lists are not empty
+            if(l1.val < l2.val){  // if the value of the first linked list is less than the value of the second linked list
+                temp.next = l1;  // point the next pointer of the temporary pointer to the first linked list
+                l1 = l1.next;  // move the first linked list pointer to the next node
+            }
+            else{  // if the value of the second linked list is less than the value of the first linked list
+                temp.next = l2;  // point the next pointer of the temporary pointer to the second linked list
+                l2 = l2.next;  // move the second linked list pointer to the next node
+            }
+            temp = temp.next;  // move the temporary pointer to the next node
+        }
+        if(l1 != null){  // if the first linked list is not empty
+            temp.next = l1;  // point the next pointer of the temporary pointer to the first linked list
+        }
+        else{  // if the second linked list is not empty
+            temp.next = l2;  // point the next pointer of the temporary pointer to the second linked list
+        }
+        return head.next;  // return the head of the merged linked list
+    }
+}
