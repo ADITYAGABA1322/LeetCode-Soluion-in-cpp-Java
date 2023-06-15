@@ -1,7 +1,6 @@
 # LeetCode-Soluion-in-C-Java
 
 
-
 1.Two Sum
 
 
