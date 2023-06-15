@@ -4,3 +4,6 @@
 *.js linguist-detectable=false  
 *.html linguist-detectable=false  
 *.xml linguist-detectable=false   
+*.swift.gyb linguist-language=Swift
+*.cpp.gyb linguist-language=C++
+*.bat text eol=crlf
