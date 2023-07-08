@@ -50,3 +50,42 @@ public:
 
 
 Java:
+
+
+
+
+
+
+
+// Time Complexity : O(max(m, n)) where m is the length of the first linked list and n is the length of the second linked list and space complexity is O(max(m, n))
+
+
+
+
+
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode();  // head pointer
+        ListNode temp = head;  // temp pointer
+        int carry = 0;  // variable to store the carry
+        while(l1 != null || l2 != null || carry != 0){  // iterate until the end of the linked lists
+            int sum = 0;  // variable to store the sum
+            if(l1 != null){  // if the first linked list is not empty
+                sum += l1.val;  // update the sum
+                l1 = l1.next;  // update the first linked list
+            }
+            if(l2 != null){  // if the second linked list is not empty
+                sum += l2.val;  // update the sum
+                l2 = l2.next;  // update the second linked list
+            }
+            sum += carry;  // update the sum
+            carry = sum / 10;  // update the carry
+            ListNode node = new ListNode(sum % 10);  // create a new node
+            temp.next = node;  // update the temp pointer
+            temp = temp.next;  // update the temp pointer
+        }
+        return head.next;  // return the head pointer
+    }
+}
+
