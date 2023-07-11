@@ -72,3 +72,33 @@ public:
 
 
 Java:
+
+
+
+
+// Time Complexity : O(n * m) where n is the number of strings and m is the length of the longest string and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String result = "";  // variable to store the result
+        int n = strs.length;  // variable to store the number of strings
+        int m = strs[0].length();  // variable to store the length of the longest string
+        for(int i = 0; i < m; i++){  // iterate through the characters
+            char ch = strs[0].charAt(i);  // variable to store the current character
+            for(int j = 1; j < n; j++){  // iterate through the strings
+                if(i >= strs[j].length() || strs[j].charAt(i) != ch){  // if the current character is not present in the current string
+                    return result;  // return the result
+                }
+            }
+            result += ch;  // update the result
+        }
+        return result;  // return the result
+    }
+}
+
