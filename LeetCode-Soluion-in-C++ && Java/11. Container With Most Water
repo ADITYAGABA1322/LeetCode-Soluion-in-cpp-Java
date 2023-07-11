@@ -42,3 +42,32 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public int maxArea(int[] height) {
+        int n = height.length;  // variable to store the length of the array
+        int left = 0;  // variable to store the left pointer
+        int right = n - 1;  // variable to store the right pointer
+        int result = 0;  // variable to store the result
+        while(left < right){  // iterate until the left pointer is less than the right pointer
+            result = Math.max(result, Math.min(height[left], height[right]) * (right - left));  // update the result
+            if(height[left] < height[right]){  // if the left height is less than the right height
+                left++;  // increment the left pointer
+            }
+            else{  // if the right height is less than the left height
+                right--;  // decrement the right pointer
+            }
+        }
+        return result;  // return the result
+    }
+}
