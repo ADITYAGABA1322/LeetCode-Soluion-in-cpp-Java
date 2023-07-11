@@ -12,6 +12,63 @@ Easy
 
 C++:
 
+// Time Complexity : O(n * m) where n is the number of strings and m is the length of the longest string and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string result = "";  // variable to store the result
+        int n = strs.size();  // variable to store the number of strings
+        int m = strs[0].length();  // variable to store the length of the longest string
+        for(int i = 0; i < m; i++){  // iterate through the characters
+            char ch = strs[0][i];  // variable to store the current character
+            for(int j = 1; j < n; j++){  // iterate through the strings
+                if(i >= strs[j].length() || strs[j][i] != ch){  // if the current character is not present in the current string
+                    return result;  // return the result
+                }
+            }
+            result += ch;  // update the result
+        }
+        return result;  // return the result
+    }
+};
+
+
+
+
+2nd Method
+
+
+
+
+
+
+// Time Complexity : O(n * m) where n is the number of strings and m is the length of the longest string and space complexity is O(1)
+
+
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        std::sort(strs.begin() , strs.end());
+        std::string s1 = strs[0];
+        std::string s2 = strs[strs.size() - 1];
+        int i = 0;
+        while(i<s1.length() && s2.length()){
+            if(s1[i] == s2[i]) i++;
+            else break;
+        }
+        return s1.substr(0,i);
+    }
+};
+
+
 
 
 Java:
