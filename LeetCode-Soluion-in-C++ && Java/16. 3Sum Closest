@@ -51,3 +51,42 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        int n = nums.length;  // variable to store the length of the array
+        int result = nums[0] + nums[1] + nums[2];  // variable to store the result
+        Arrays.sort(nums);  // sort the array
+        for(int i = 0; i < n; i++){  // iterate through the array
+            int left = i + 1;  // variable to store the left pointer
+            int right = n - 1;  // variable to store the right pointer
+            while(left < right){  // iterate until the left pointer is less than the right pointer
+                int sum = nums[i] + nums[left] + nums[right];  // variable to store the sum
+                if(sum == target){  // if the sum is equal to the target
+                    return sum;  // return the sum
+                }
+                else if(sum < target){  // if the sum is less than the target
+                    left++;  // increment the left pointer
+                }
+                else{  // if the sum is greater than the target
+                    right--;  // decrement the right pointer
+                }
+                if(Math.abs(sum - target) < Math.abs(result - target)){  // if the absolute difference between the sum and the target is less than the absolute difference between the result and the target
+                    result = sum;  // update the result
+                }
+            }
+        }
+        return result;  // return the result
+    }
+}
+
