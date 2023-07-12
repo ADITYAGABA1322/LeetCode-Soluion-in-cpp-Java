@@ -58,3 +58,44 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(n^3) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        int n = nums.length;  // variable to store the length of the vector nums
+        List<List<Integer>> result = new ArrayList<>();  // list to store the result
+        if(n < 4) return result;  // return the result if the length of the vector nums is less than 4
+        Arrays.sort(nums);  // sort the vector nums
+        for(int i = 0; i < n - 3; i++){  // iterate through the vector nums
+            if(i > 0 && nums[i] == nums[i - 1]) continue;  // continue if the current value is equal to the previous value
+            for(int j = i + 1; j < n - 2; j++){  // iterate through the vector nums
+                if(j > i + 1 && nums[j] == nums[j - 1]) continue;  // continue if the current value is equal to the previous value
+                int left = j + 1;  // variable to store the left pointer
+                int right = n - 1;  // variable to store the right pointer
+                while(left < right){  // iterate until the left pointer is less than the right pointer
+                   long  sum = (long)nums[i] + nums[j] + nums[left] + nums[right];  // variable to store the sum
+                    if(sum == target){  // if the sum is equal to the target
+                        result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));  // add the values to the result
+                        left++;  // increment the left pointer
+                        right--;  // decrement the right pointer
+                        while(left < right && nums[left] == nums[left - 1]) left++;  // increment the left pointer until the current value is equal to the previous value
+                        while(left < right && nums[right] == nums[right + 1]) right--;  // decrement the right pointer until the current value is equal to the previous value
+                    }
+                    else if(sum < target){  // if the sum is less than the target
+                        left++;  // increment the left pointer
+                    }
+                    else{  // if the sum is greater than the target
+                        right--;  // decrement the right pointer
+                    }
+                }
+            }
+        }
+        return result;  // return the result
+    }
+}
