@@ -12,4 +12,35 @@ C++:
 
 
 
+
+// Time Complexity : O(n) where n is the number of nodes in the linked list and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *dummy = new ListNode();  // dummy node
+        dummy -> next = head;  // update the next pointer of the dummy node
+        ListNode *slow = dummy;  // slow pointer
+        ListNode *fast = dummy;  // fast pointer
+        for(int i = 0; i <= n; i++){  // iterate until the fast pointer reaches the nth node
+            fast = fast -> next;  // update the fast pointer
+        }
+        while(fast != NULL){  // iterate until the fast pointer reaches the end
+            slow = slow -> next;  // update the slow pointer
+            fast = fast -> next;  // update the fast pointer
+        }
+        slow -> next = slow -> next -> next;  // update the next pointer of the slow pointer
+        return dummy -> next;  // return the next pointer of the dummy node
+    }
+};
+
+
+
+
 Java:
