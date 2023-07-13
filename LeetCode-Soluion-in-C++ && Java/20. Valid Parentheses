@@ -44,3 +44,42 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();  // stack to store the characters
+        for(int i = 0; i < s.length(); i++){  // iterate through the string
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '['){  // if the current character is '(' or '{' or '['
+                st.push(s.charAt(i));  // push the character to the stack
+            }
+            else if(s.charAt(i) == ')' && !st.empty() && st.peek() == '('){  // if the current character is ')' and the stack is not empty and the top of the stack is '('
+                st.pop();  // pop the top of the stack
+            }
+            else if(s.charAt(i) == '}' && !st.empty() && st.peek() == '{'){  // if the current character is '}' and the stack is not empty and the top of the stack is '{'
+                st.pop();  // pop the top of the stack
+            }
+            else if(s.charAt(i) == ']' && !st.empty() && st.peek() == '['){  // if the current character is ']' and the stack is not empty and the top of the stack is '['
+                st.pop();  // pop the top of the stack
+            }
+            else{  // if the current character is not '(' or '{' or '[' or ')' or '}' or ']'
+                return false;  // return false
+            }
+        }
+        return st.empty();  // return true if the stack is empty else return false
+    }
+}
+
+
+
+
+
+
+
