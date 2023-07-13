@@ -12,4 +12,35 @@ Easy
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the string and space complexity is O(n)
+
+
+
+
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;  // stack to store the characters
+        for(int i = 0; i < s.length(); i++){  // iterate through the string
+            if(s[i] == '(' || s[i] == '{' || s[i] == '['){  // if the current character is '(' or '{' or '['
+                st.push(s[i]);  // push the character to the stack
+            }
+            else if(s[i] == ')' && !st.empty() && st.top() == '('){  // if the current character is ')' and the stack is not empty and the top of the stack is '('
+                st.pop();  // pop the top of the stack
+            }
+            else if(s[i] == '}' && !st.empty() && st.top() == '{'){  // if the current character is '}' and the stack is not empty and the top of the stack is '{'
+                st.pop();  // pop the top of the stack
+            }
+            else if(s[i] == ']' && !st.empty() && st.top() == '['){  // if the current character is ']' and the stack is not empty and the top of the stack is '['
+                st.pop();  // pop the top of the stack
+            }
+            else{  // if the current character is not '(' or '{' or '[' or ')' or '}' or ']'
+                return false;  // return false
+            }
+        }
+        return st.empty();  // return true if the stack is empty else return false
+    }
+}
+
+
 Java:
