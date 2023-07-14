@@ -51,3 +51,32 @@ public:
 
 
 Java:
+
+
+
+
+// Time Complexity : O(n) where n is the number of nodes in the linked list and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode();  // dummy node
+        dummy.next = head;  // update the next pointer of the dummy node
+        ListNode prev = dummy;  // variable to store the previous node
+        while(head != null && head.next != null){  // iterate until the head reaches the end
+            ListNode first = head;  // variable to store the first node
+            ListNode second = head.next;  // variable to store the second node
+            prev.next = second;  // update the next pointer of the previous node
+            first.next = second.next;  // update the next pointer of the first node
+            second.next = first;  // update the next pointer of the second node
+            prev = first;  // update the previous node
+            head = first.next;  // update the head
+        }
+        return dummy.next;  // return the next pointer of the dummy node
+    }
+}
