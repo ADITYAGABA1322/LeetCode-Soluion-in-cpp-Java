@@ -147,12 +147,100 @@ public:
 
 
 
-
-
-
-
-
 Java:
+
+
+
+// Time Complexity : O(n) where n is the number of nodes in the linked list and space complexity is O(K)
+
+
+// Recursive Approach
+
+
+
+1st Method
+
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode curr = head;
+        int count = 0;
+
+        // Count the number of nodes in the current group
+        while (curr != null && count < k) {
+            curr = curr.next;
+            count++;
+        }
+
+        // If the number of nodes is less than k, return the head
+        if (count < k) {
+            return head;
+        }
+
+        // Reverse the current group
+        curr = reverseKGroup(curr, k);
+        while (count > 0) {
+            ListNode nextNode = head.next;
+            head.next = curr;
+            curr = head;
+            head = nextNode;
+            count--;
+        }
+
+        return curr;
+    }
+}
+
+
+
+
+
+2nd Method
+
+
+// Iterative Approach
+
+
+
+
+// Time Complexity : O(n) where n is the number of nodes in the linked list and space complexity is O(1)
+
+
+
+
+
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode();  // dummy node
+        dummy.next = head;  // update the next pointer of the dummy node
+        ListNode prev = dummy;  // variable to store the previous node
+        while(head != null){  // iterate until the head reaches the end
+            ListNode tail = prev;  // variable to store the tail node
+            for(int i = 0; i < k; i++){  // iterate k times
+                tail = tail.next;  // update the tail node
+                if(tail == null) return dummy.next;  // return the next pointer of the dummy node if the tail node reaches the end
+            }
+            ListNode next = tail.next;  // variable to store the next node
+            reverse(head, tail);  // call the reverse function
+            prev.next = tail;  // update the next pointer of the previous node
+            head.next = next;  // update the next pointer of the head node
+            prev = head;  // update the previous node
+            head = next;  // update the head
+        }
+        return dummy.next;  // return the next pointer of the dummy node
+    }
+    void reverse(ListNode head, ListNode tail){  // function to reverse the linked list
+        ListNode prev = null;  // variable to store the previous node
+        ListNode curr = head;  // variable to store the current node
+        while(curr != tail){  // iterate until the current node reaches the tail node
+            ListNode next = curr.next;  // variable to store the next node
+            curr.next = prev;  // update the next pointer of the current node
+            prev = curr;  // update the previous node
+            curr = next;  // update the current node
+        }
+        curr.next = prev;  // update the next pointer of the current node
+    }
+}
 
 
 
