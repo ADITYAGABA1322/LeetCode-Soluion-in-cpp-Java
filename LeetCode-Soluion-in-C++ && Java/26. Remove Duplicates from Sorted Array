@@ -1,15 +1,43 @@
 26. Remove Duplicates from Sorted Array
 
 
+
+
 16 July 2023
+
 
 
 
 Easy
 
 
+
 C++:
 
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();  // variable to store the length of the vector nums
+        if(n == 0) return 0;  // return 0 if the length of the vector nums is 0
+        int i = 0;  // variable to store the index
+        for(int j = 1; j < n; j++){  // iterate through the vector nums
+            if(nums[j] != nums[i]){  // if the current value is not equal to the previous value
+                i++;  // increment the index
+                nums[i] = nums[j];  // update the value at the index
+            }
+        }
+        return i + 1;  // return the length of the vector nums
+    }
+};
 
 
 Java:
