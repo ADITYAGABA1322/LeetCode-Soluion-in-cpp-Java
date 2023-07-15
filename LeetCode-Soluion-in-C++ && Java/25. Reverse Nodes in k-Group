@@ -11,7 +11,46 @@
 Hard
 
 
-2 Methods -> 1.) By recirseive , 2.) By iterative
+2 Methods -> 1.) By recursive ,  2.) By iterative
+
+
+Both methods are valid approaches to solve the "Reverse Nodes in k-Group" problem, and the choice between them depends on personal preference and coding style. Let's discuss the two methods:
+
+First Method:
+
+This method uses recursion to reverse the linked list in groups of size k.
+It counts the number of nodes in the current group and checks if it's less than k. If so, it returns the head as is.
+It recursively reverses the remaining groups by calling reverseKGroup on the next group of nodes.
+The reversal of the current group is done using iterative swapping of nodes.
+Overall, this method follows a top-down recursive approach.
+Second Method:
+
+This method uses an iterative approach to reverse the linked list in groups of size k.
+It uses a dummy node and a prev pointer to keep track of the previous node.
+It iterates through the list until the end, processing groups of k nodes at a time.
+Within each group, it identifies the tail node and the next node after the group.
+It calls a separate reverse function to reverse the group of nodes between head and tail.
+The prev and head pointers are updated accordingly, and the process continues until the end of the list.
+Overall, this method follows a bottom-up iterative approach.
+Both methods achieve the same result of reversing the nodes in groups of size k. The first method utilizes recursion, which may provide a clearer and more concise implementation. On the other hand, the second method uses an iterative approach, which can be advantageous for cases where recursion is not preferred or may lead to stack overflow issues with large input sizes.
+
+Ultimately, the choice between the two methods depends on personal preference, coding style, and the specific requirements of the problem at hand.
+
+
+
+First Method:
+
+Time Complexity: The time complexity of this method is O(n), where n is the total number of nodes in the linked list. This is because the method traverses each node in the linked list once in order to reverse the groups of size k.
+Space Complexity: The space complexity of this method is O(k), where k is the size of the groups to be reversed. This is due to the recursive calls made to reverse each group. The space used by the recursive stack is proportional to the number of recursive calls, which is determined by k.
+Second Method:
+
+Time Complexity: The time complexity of this method is O(n), where n is the total number of nodes in the linked list. This is because the method iterates through each node in the linked list once to perform the necessary swaps and reversals.
+Space Complexity: The space complexity of this method is O(1) since it uses a constant amount of extra space. It only requires a few additional pointers and variables to perform the swaps and reversals, regardless of the size of the input.
+In terms of time complexity, both methods have the same efficiency, traversing each node once. However, the second method has a better space complexity as it uses a constant amount of extra space, whereas the first method's space complexity depends on the group size k.
+
+Therefore, if memory usage is a concern and the group size is small, the second method may be more preferable. On the other hand, if a recursive approach is preferred or the group size is large, the first method can still be a valid choice.
+
+
 
 
 C++:
