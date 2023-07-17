@@ -1,0 +1,128 @@
+29. Divide Two Integers
+
+
+
+17 July 2023
+
+
+
+Medium
+
+
+C++:
+
+
+
+// Time Complexity : O(log n) where n is the absolute value of the dividend and space complexity is O(1)
+
+
+
+
+// public:: This indicates the access specifier of the function. In this case, the divide function is declared as public, meaning it can be accessed from outside the class.
+
+// int divide(int dividend, int divisor) { ... }: This is the definition of the divide function, which takes two integer arguments dividend and divisor and returns an integer as the result of the division.
+
+// if(dividend==INT_MIN && divisor==-1) return INT_MAX;: This is a special case check to handle the scenario where dividing INT_MIN by -1 would result in integer overflow. In such a case, the function returns INT_MAX to represent positive infinity.
+
+// long dvd=abs(dividend),dvs=abs(divisor),ans=0;: Here, three variables are declared and initialized:
+
+// dvd: The absolute value of the dividend.
+// dvs: The absolute value of the divisor.
+// ans: The variable that will store the result of the division.
+// int sign=dividend>0 ^ divisor>0 ? -1 : 1;: This line determines the sign of the result by performing bitwise XOR operations on the signs of the dividend and divisor. If the signs are different, the result will be negative, otherwise, it will be positive.
+
+// while(dvd>=dvs) { ... }: This loop performs the main division calculation. It continues as long as the absolute value of the dividend (dvd) is greater than or equal to the absolute value of the divisor (dvs).
+
+// long temp=dvs,m=1;: Two variables temp and m are declared and initialized. temp is used to store the current value of the divisor, and m is used to keep track of how many times the divisor is doubled during the division process.
+
+// while(temp<<1 <= dvd) { ... }: This nested loop continues as long as doubling the temp (dvs) does not exceed or become greater than the current dvd value. It effectively finds the largest multiple of dvs that is less than or equal to dvd and stores it in temp.
+
+// temp<<=1; m<<=1;: In this line, both temp and m are doubled by left-shifting them, effectively multiplying by 2.
+
+// ans+=m; dvd-=temp;: The loop updates the ans variable by adding the value of m, which represents how many times the divisor was doubled during the division process. It also subtracts temp from dvd, effectively reducing the remaining value to be divided.
+
+// return sign*ans;: Finally, the function returns the result of the division, which is calculated by multiplying ans with the sign variable to apply the correct sign (positive or negative) to the result.
+
+// This implementation of the divide function ensures better accuracy and handles special cases like integer overflow when dividing INT_MIN by -1.
+
+
+
+
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend == INT_MIN && divisor == -1) return INT_MAX;
+        int sign =  (dividend > 0) ^ (divisor > 0) ? -1 : 1;
+        long dvd = abs(dividend) , dvs = abs(divisor) , ans = 0;
+        while(dvd >= dvs){
+            long temp = dvs , m = 1;
+            while(temp<<1 <= dvd){
+               temp<<=1;
+               m<<=1;
+            }
+            ans += m;
+            dvd -= temp;
+        }
+        return sign * ans;
+    }
+};
+
+
+
+2nd Method 
+
+
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        // Handle special cases
+        if (divisor == 0) {
+            // Division by zero is undefined, return a large value to represent infinity
+            return INT_MAX;
+        }
+
+        if (dividend == INT_MIN && divisor == -1) {
+            // Handling integer overflow when dividing INT_MIN by -1
+            return INT_MAX;
+        }
+
+        // Determine the sign of the result
+        int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+
+        // Convert both dividend and divisor to positive to simplify calculation
+        long long absDividend = llabs(dividend);
+        long long absDivisor = llabs(divisor);
+
+        // Perform the division
+        long long result = 0;
+        while (absDividend >= absDivisor) {
+            long long temp = absDivisor;
+            long long quotient = 1;
+            while (absDividend >= (temp << 1)) {
+                temp <<= 1;
+                quotient <<= 1;
+            }
+            absDividend -= temp;
+            result += quotient;
+        }
+
+        // Apply the sign to the result
+        result = sign * result;
+
+        // Check for integer overflow and return the result
+        if (result > INT_MAX || result < INT_MIN) {
+            return INT_MAX;
+        } else {
+            return static_cast<int>(result);
+        }
+    }
+};
+
+
+
+
+
+
+Java:
