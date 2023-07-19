@@ -10,11 +10,8 @@ Hard
 
 C++:
 
+
 // Time Complexity : O(n * m) where n is the length of the string s and m is the length of the vector words and space complexity is O(n + m)
-
-
-
-
 
 
 
@@ -68,12 +65,62 @@ public:
 
 
 
-
-
-
-
-
-
 Java:
 
+
+// Time Complexity : O(n * m) where n is the length of the string s and m is the length of the vector words and space complexity is O(n + m)
+
+
+
+
+
+
+
+
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> result = new ArrayList<>();
+        if (s.isEmpty() || words.length == 0) return result;
+
+        int wordLength = words[0].length();
+        int totalWords = words.length;
+        int totalLength = wordLength * totalWords;
+
+        if (s.length() < totalLength) return result;
+
+        Map<String, Integer> wordFreq = new HashMap<>();
+
+        // Count the frequency of each word in the 'words' array
+        for (String word : words)
+            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
+
+        for (int i = 0; i < wordLength; ++i) { // Start from each possible starting position for a word
+            int left = i;
+            int right = i;
+            Map<String, Integer> seenWords = new HashMap<>();
+
+            while (right + wordLength <= s.length()) {
+                String word = s.substring(right, right + wordLength);
+                right += wordLength;
+
+                if (!wordFreq.containsKey(word)) {
+                    seenWords.clear();
+                    left = right;
+                } else {
+                    seenWords.put(word, seenWords.getOrDefault(word, 0) + 1);
+                    while (seenWords.get(word) > wordFreq.get(word)) {
+                        String leftWord = s.substring(left, left + wordLength);
+                        seenWords.put(leftWord, seenWords.get(leftWord) - 1);
+                        left += wordLength;
+                    }
+
+                    if (right - left == totalLength)
+                        result.add(left);
+                }
+            }
+        }
+
+        return result;
+    }
+}
 
