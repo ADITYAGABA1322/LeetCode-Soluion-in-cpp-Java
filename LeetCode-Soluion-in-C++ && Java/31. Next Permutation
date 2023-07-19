@@ -59,3 +59,46 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;  // variable to store the length of the vector nums
+        int i = n - 2;  // variable to store the index
+        while(i >= 0 && nums[i] >= nums[i + 1]){  // iterate until the current value is greater than the next value
+            i--;  // decrement the index
+        }
+        if(i >= 0){  // if the index is greater than or equal to 0
+            int j = n - 1;  // variable to store the index
+            while(j >= 0 && nums[j] <= nums[i]){  // iterate until the current value is less than the next value
+                j--;  // decrement the index
+            }
+            swap(nums, i, j);  // swap the values
+        }
+        reverse(nums, i + 1, n - 1);  // reverse the vector nums
+    }
+    void swap(int[] nums, int i, int j){  // function to swap the values
+        int temp = nums[i];  // variable to store the value
+        nums[i] = nums[j];  // update the value
+        nums[j] = temp;  // update the value
+    }
+    void reverse(int[] nums, int i, int j){  // function to reverse the vector nums
+        while(i < j){  // iterate until the i is less than j
+            swap(nums, i, j);  // swap the values
+            i++;  // increment i
+            j--;  // decrement j
+        }
+    }
+}
+
+
+
