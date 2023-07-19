@@ -70,10 +70,57 @@ public:
 
 
 
-
-
-
-
-
-
 Java:
+
+
+// Time Complexity : O(log n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int firstPosition = -1;
+        int lastPosition = -1;
+        int start = 0;
+        int end = nums.length - 1;
+
+        // Binary search to find the first occurrence of the target element
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] == target) {
+                firstPosition = mid;
+                end = mid - 1; // Move left to find the first occurrence
+            } else if (nums[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        // Reset start and end for the second binary search
+        start = 0;
+        end = nums.length - 1;
+
+        // Binary search to find the last occurrence of the target element
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (nums[mid] == target) {
+                lastPosition = mid;
+                start = mid + 1; // Move right to find the last occurrence
+            } else if (nums[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return new int[]{firstPosition, lastPosition};
+    }
+}
+
