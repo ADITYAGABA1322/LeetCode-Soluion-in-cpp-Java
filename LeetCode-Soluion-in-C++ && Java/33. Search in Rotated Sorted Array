@@ -57,3 +57,45 @@ public:
 
 
 Java:
+
+
+
+// Time Complexity : O(log n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int n = nums.length;  // variable to store the length of the vector nums
+        int low = 0;  // variable to store the low index
+        int high = n - 1;  // variable to store the high index
+        while(low <= high){  // iterate until the low is less than or equal to high
+            int mid = low + (high - low) / 2;  // variable to store the mid index
+            if(nums[mid] == target) return mid;  // return the mid index if the current value is equal to the target value
+            else if(nums[mid] >= nums[low]){  // if the current value is greater than or equal to the low value
+                if(target >= nums[low] && target < nums[mid]){  // if the target value is greater than or equal to the low value and less than the mid value
+                    high = mid - 1;  // update the high index
+                }
+                else{  // if the target value is less than the low value or greater than or equal to the mid value
+                    low = mid + 1;  // update the low index
+                }
+            }
+            else{  // if the current value is less than the low value
+                if(target <= nums[high] && target > nums[mid]){  // if the target value is less than or equal to the high value and greater than the mid value
+                    low = mid + 1;  // update the low index
+                }
+                else{  // if the target value is greater than the high value or less than or equal to the mid value
+                    high = mid - 1;  // update the high index
+                }
+            }
+        }
+        return -1;  // return -1 if the target value is not found
+    }
+}
+
+
+
