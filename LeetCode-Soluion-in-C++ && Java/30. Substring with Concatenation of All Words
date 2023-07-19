@@ -10,6 +10,68 @@ Hard
 
 C++:
 
+// Time Complexity : O(n * m) where n is the length of the string s and m is the length of the vector words and space complexity is O(n + m)
+
+
+
+
+
+
+
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        vector<int> result;
+        if (s.empty() || words.empty()) return result;
+
+        int wordLength = words[0].length();
+        int totalWords = words.size();
+        int totalLength = wordLength * totalWords;
+
+        if (s.length() < totalLength) return result;
+
+        unordered_map<string, int> wordFreq;
+
+        // Count the frequency of each word in the 'words' array
+        for (const string& word : words)
+            wordFreq[word]++;
+
+        for (int i = 0; i < wordLength; ++i) { // Start from each possible starting position for a word
+            int left = i;
+            int right = i;
+            unordered_map<string, int> seenWords;
+
+            while (right + wordLength <= s.length()) {
+                string word = s.substr(right, wordLength);
+                right += wordLength;
+
+                if (wordFreq.find(word) == wordFreq.end()) {
+                    seenWords.clear();
+                    left = right;
+                } else {
+                    seenWords[word]++;
+                    while (seenWords[word] > wordFreq[word]) {
+                        string leftWord = s.substr(left, wordLength);
+                        seenWords[leftWord]--;
+                        left += wordLength;
+                    }
+
+                    if (right - left == totalLength)
+                        result.push_back(left);
+                }
+            }
+        }
+
+        return result;
+    }
+};
+
+
+
+
+
+
+
 
 
 Java:
