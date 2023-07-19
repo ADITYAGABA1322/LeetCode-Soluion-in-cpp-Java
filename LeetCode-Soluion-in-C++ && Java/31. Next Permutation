@@ -14,5 +14,48 @@ Medium
 C++:
 
 
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();  // variable to store the length of the vector nums
+        int i = n - 2;  // variable to store the index
+        while(i >= 0 && nums[i] >= nums[i + 1]){  // iterate until the current value is greater than the next value
+            i--;  // decrement the index
+        }
+        if(i >= 0){  // if the index is greater than or equal to 0
+            int j = n - 1;  // variable to store the index
+            while(j >= 0 && nums[j] <= nums[i]){  // iterate until the current value is less than the next value
+                j--;  // decrement the index
+            }
+            swap(nums[i], nums[j]);  // swap the values
+        }
+        reverse(nums.begin() + i + 1, nums.end());  // reverse the vector nums
+    }
+};
+
+
+
+2nd Method
+
+
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        next_permutation(nums.begin() , nums.end());
+    }
+};
+
+
+
+
 
 Java:
