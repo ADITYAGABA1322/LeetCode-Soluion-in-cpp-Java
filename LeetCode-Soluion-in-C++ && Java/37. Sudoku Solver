@@ -15,6 +15,88 @@ C++;
 
 
 
+// Time Complexity : O(1) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        solve(board, 0, 0);  // call the solve function
+    }
+    bool solve(vector<vector<char>>& board, int row, int col){  // function to solve the sudoku
+        if(row == 9) return true;  // return true if the row is equal to 9
+        if(col == 9) return solve(board, row + 1, 0);  // return the solve function if the column is equal to 9
+        if(board[row][col] != '.') return solve(board, row, col + 1);  // return the solve function if the current value is not equal to '.'
+        for(char c = '1'; c <= '9'; c++){  // iterate through the numbers from 1 to 9
+            if(isValid(board, row, col, c)){  // if the current value is valid
+                board[row][col] = c;  // update the value
+                if(solve(board, row, col + 1)) return true;  // return true if the solve function returns true
+                board[row][col] = '.';  // update the value
+            }
+        }
+        return false;  // return false
+    }
+    bool isValid(vector<vector<char>>& board, int row, int col, char c){  // function to check if the current value is valid
+        for(int i = 0; i < 9; i++){  // iterate through the board
+            if(board[row][i] == c) return false;  // return false if the current value is equal to c
+            if(board[i][col] == c) return false;  // return false if the current value is equal to c
+            if(board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false;  // return false if the current value is equal to c
+        }
+        return true;  // return true
+    }
+};
+
+
+
+
+
+
+
 
 Java:
+
+
+
+
+
+
+// Time Complexity : O(1) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public void solveSudoku(char[][] board) {
+        solve(board, 0, 0);  // call the solve function
+    }
+    boolean solve(char[][] board, int row, int col){  // function to solve the sudoku
+        if(row == 9) return true;  // return true if the row is equal to 9
+        if(col == 9) return solve(board, row + 1, 0);  // return the solve function if the column is equal to 9
+        if(board[row][col] != '.') return solve(board, row, col + 1);  // return the solve function if the current value is not equal to '.'
+        for(char c = '1'; c <= '9'; c++){  // iterate through the numbers from 1 to 9
+            if(isValid(board, row, col, c)){  // if the current value is valid
+                board[row][col] = c;  // update the value
+                if(solve(board, row, col + 1)) return true;  // return true if the solve function returns true
+                board[row][col] = '.';  // update the value
+            }
+        }
+        return false;  // return false
+    }
+    boolean isValid(char[][] board, int row, int col, char c){  // function to check if the current value is valid
+        for(int i = 0; i < 9; i++){  // iterate through the board
+            if(board[row][i] == c) return false;  // return false if the current value is equal to c
+            if(board[i][col] == c) return false;  // return false if the current value is equal to c
+            if(board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false;  // return false if the current value is equal to c
+        }
+        return true;  // return true
+    }
+}
 
