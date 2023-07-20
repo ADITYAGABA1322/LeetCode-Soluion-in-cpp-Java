@@ -12,4 +12,35 @@ Medium
 C++:
 
 
+// Time Complexity : O(1) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<unordered_set<int>> row(9);  // vector to store the row values
+        vector<unordered_set<int>> col(9);  // vector to store the column values
+        vector<unordered_set<int>> box(9);  // vector to store the box values
+        for(int i = 0; i < 9; i++){  // iterate through the board
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] != '.'){  // if the current value is not equal to '.'
+                    int num = board[i][j] - '0';  // variable to store the value
+                    if(row[i].count(num) || col[j].count(num) || box[(i / 3) * 3 + j / 3].count(num)) return false;  // return false if the value is already present in the row, column or box
+                    row[i].insert(num);  // insert the value in the row
+                    col[j].insert(num);  // insert the value in the column
+                    box[(i / 3) * 3 + j / 3].insert(num);  // insert the value in the box
+                }
+            }
+        }
+        return true;  // return true if the board is valid
+    }
+};
+
+
+
 Java:
