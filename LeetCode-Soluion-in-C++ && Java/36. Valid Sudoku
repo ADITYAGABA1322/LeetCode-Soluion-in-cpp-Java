@@ -44,3 +44,40 @@ public:
 
 
 Java:
+
+
+// Time Complexity : O(1) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<Integer>[] row = new HashSet[9];  // vector to store the row values
+        Set<Integer>[] col = new HashSet[9];  // vector to store the column values
+        Set<Integer>[] box = new HashSet[9];  // vector to store the box values
+        for(int i = 0; i < 9; i++){  // iterate through the board
+            row[i] = new HashSet<>();  // initialize the row
+            col[i] = new HashSet<>();  // initialize the column
+            box[i] = new HashSet<>();  // initialize the box
+        }
+        for(int i = 0; i < 9; i++){  // iterate through the board
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] != '.'){  // if the current value is not equal to '.'
+                    int num = board[i][j] - '0';  // variable to store the value
+                    if(row[i].contains(num) || col[j].contains(num) || box[(i / 3) * 3 + j / 3].contains(num)) return false;  // return false if the value is already present in the row, column or box
+                    row[i].add(num);  // insert the value in the row
+                    col[j].add(num);  // insert the value in the column
+                    box[(i / 3) * 3 + j / 3].add(num);  // insert the value in the box
+                }
+            }
+        }
+        return true;  // return true if the board is valid
+    }
+}
+
+
