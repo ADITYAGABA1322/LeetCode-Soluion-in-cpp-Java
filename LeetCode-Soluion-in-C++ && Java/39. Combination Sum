@@ -54,3 +54,33 @@ public:
 
 
 Java:
+
+
+// Time Complexity : O(n * m) where n is the length of the vector nums and space complexity is O(n + m)
+
+
+
+
+
+
+
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();  // vector to store the result
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> temp = new ArrayList<>();  // vector to store the temporary result
+        backtrack(candidates, target, temp, 0);  // call the backtrack function
+        return result;  // return the result
+    }
+    void backtrack(int[] candidates, int target, List<Integer> temp, int index){  // function to backtrack
+        if(target == 0){  // if the target is equal to 0
+            result.add(new ArrayList<>(temp));  // push the temp into the result
+            return;  // return
+        }
+        if(target < 0) return;  // if the target is less than 0, return
+        for(int i = index; i < candidates.length; i++){  // iterate through the candidates
+            temp.add(candidates[i]);  // push the current value into the temp
+            backtrack(candidates, target - candidates[i], temp, i);  // call the backtrack function
+            temp.remove(temp.size() - 1);  // pop the value from the temp
+        }
+    }
+}
