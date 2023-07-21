@@ -15,4 +15,64 @@ C++:
 
 
 
+
+Comparison:
+Both implementations provide the same output, but the second implementation is more efficient in terms of time complexity. It avoids the need for explicit iteration and uses a direct mathematical formula to calculate the result. Additionally, the second implementation is more concise and easier to read.
+
+In conclusion, the second implementation with the mathematical formula is better than the first one in terms of both time and space complexity.
+
+
+
+
+
+// Time Complexity : O(time) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+         int  position = 1;
+    bool going_right = true;
+
+    for(int i=0;i<time;i++){
+        if(going_right)
+            position += 1;
+        else
+            position -= 1;
+
+        if(position == 1 || position == n)
+            going_right = !going_right;
+    }
+
+    return position;
+    }
+};
+
+
+
+
+
+2nd Method 
+
+
+
+
+
+
+// Time Complexity : O(1) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+class Solution {
+public:
+    int passThePillow(int n, int time) {
+          return n - abs(n - 1 - time % (n * 2 - 2));
+    }
+};
+
+
+
+
 Java:
