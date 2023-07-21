@@ -34,3 +34,18 @@ public:
 
 
 Java:
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+class Solution {
+    public int findDelayedArrivalTime(int arrivalTime, int delayedTime) {
+        return (arrivalTime + delayedTime) % 24;
+    }
+}
