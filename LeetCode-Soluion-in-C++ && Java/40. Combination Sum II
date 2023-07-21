@@ -18,6 +18,37 @@ C++:
 
 
 
+// Time Complexity : O(n * m) where n is the length of the vector nums and space complexity is O(n + m)
+
+
+
+
+
+
+
+class Solution {
+public:
+    vector<vector<int>> result;  // vector to store the result
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int> temp;  // vector to store the temporary result
+        sort(candidates.begin(), candidates.end());  // sort the candidates
+        backtrack(candidates, target, temp, 0);  // call the backtrack function
+        return result;  // return the result
+    }
+    void backtrack(vector<int>& candidates, int target, vector<int>& temp, int index){  // function to backtrack
+        if(target == 0){  // if the target is equal to 0
+            result.push_back(temp);  // push the temp into the result
+            return;  // return
+        }
+        if(target < 0) return;  // if the target is less than 0, return
+        for(int i = index; i < candidates.size(); i++){  // iterate through the candidates
+            if(i > index && candidates[i] == candidates[i - 1]) continue;  // if the current value is equal to the previous value, continue
+            temp.push_back(candidates[i]);  // push the current value into the temp
+            backtrack(candidates, target - candidates[i], temp, i + 1);  // call the backtrack function
+            temp.pop_back();  // pop the value from the temp
+        }
+    }
+};
 
 
 
