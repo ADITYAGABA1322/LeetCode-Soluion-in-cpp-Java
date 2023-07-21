@@ -101,4 +101,54 @@ Java:
 
 
 
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;  // variable to store the length of the vector nums
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]){  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+                swap(nums, i, nums[i] - 1);  // swap the values
+            }
+        }
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            if(nums[i] != i + 1) return i + 1;  // return the index + 1 if the current value is not equal to the index + 1
+        }
+        return n + 1;  // return n + 1
+    }
+    void swap(int[] nums, int i, int j){  // function to swap the values
+        int temp = nums[i];  // variable to store the value
+        nums[i] = nums[j];  // update the value
+        nums[j] = temp;  // update the value
+    }
+}
+
+
+
+
+
+2nd Method 
+
+
+
+
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        Arrays.sort(nums);
+        int missing = 1;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i] > 0 && nums[i] == missing ) missing ++;
+        }
+        return missing;
+    }
+}
+
+
+
 
