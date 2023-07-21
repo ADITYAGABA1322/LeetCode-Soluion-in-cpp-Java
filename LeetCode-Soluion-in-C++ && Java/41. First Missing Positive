@@ -16,8 +16,89 @@ Hard
 C++:
 
 
+// Time Complexity:
+// Swapping Technique:
+
+// The time complexity of the swapping technique is O(n), where n is the number of elements in the array.
+// In the first loop, we iterate through the array once to rearrange the elements using swaps, which takes O(n) time in the worst case.
+// In the second loop, we iterate through the array again to find the first missing positive number, which also takes O(n) time in the worst case.
+// Therefore, the overall time complexity is O(n).
+// Inbuilt sort Function:
+
+// The time complexity of the inbuilt sort function is O(nlogn), where n is the number of elements in the array.
+// Sorting the array using the sort function takes O(nlogn) time in the worst case.
+// After sorting, we iterate through the array once to find the first missing positive number, which takes O(n) time in the worst case.
+// Therefore, the overall time complexity is dominated by the sorting step, which is O(nlogn).
+// Space Complexity:
+// Swapping Technique:
+
+// The swapping technique uses constant extra space, O(1), as it only requires a few variables for iteration and swapping.
+// It modifies the input array in place without using additional memory.
+// Inbuilt sort Function:
+
+// The inbuilt sort function may require O(logn) space for its internal recursive calls during the sorting process.
+// However, since the sorting is done in place on the input vector, the space complexity for the sorting step is considered to be O(1).
+// The rest of the algorithm uses only a few variables, so it requires O(1) additional space for the rest of the steps.
+// In conclusion:
+
+// The swapping technique has a better time complexity of O(n) compared to the inbuilt sort function's O(nlogn).
+// Both techniques have the same space complexity of O(1) because they use constant extra space, but the inbuilt sort function might require some extra space for its internal operations (recursive calls) during sorting.
+// Overall, the swapping technique is generally more efficient in terms of both time and space complexity compared to using the inbuilt sort function.
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();  // variable to store the length of the vector nums
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]){  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+                swap(nums[i], nums[nums[i] - 1]);  // swap the values
+            }
+        }
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            if(nums[i] != i + 1) return i + 1;  // return the index + 1 if the current value is not equal to the index + 1
+        }
+        return n + 1;  // return n + 1
+    }
+};
+
+
+2nd Method 
+
+
+
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        sort(nums.begin() , nums.end());
+        int missing = 1;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] > 0 && nums[i] == missing ) missing ++;
+        }
+        return missing;
+    }
+};
+
+
+
+
 
 
 Java:
+
+
 
 
