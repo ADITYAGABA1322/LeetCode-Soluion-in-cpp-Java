@@ -1,20 +1,10 @@
 41. First Missing Positive
 
-
-
-
 21 July 2023
-
-
-
 
 Hard
 
-
-
-
 C++:
-
 
 // Time Complexity:
 // Swapping Technique:
@@ -45,17 +35,7 @@ C++:
 // Both techniques have the same space complexity of O(1) because they use constant extra space, but the inbuilt sort function might require some extra space for its internal operations (recursive calls) during sorting.
 // Overall, the swapping technique is generally more efficient in terms of both time and space complexity compared to using the inbuilt sort function.
 
-
-
-
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
-
-
 
 
 class Solution {
@@ -77,9 +57,6 @@ public:
 
 2nd Method 
 
-
-
-
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
@@ -93,21 +70,10 @@ public:
 };
 
 
-
-
-
-
 Java:
 
 
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
-
-
 
 class Solution {
     public int firstMissingPositive(int[] nums) {
@@ -130,13 +96,7 @@ class Solution {
 }
 
 
-
-
-
 2nd Method 
-
-
-
 
 class Solution {
     public int firstMissingPositive(int[] nums) {
@@ -150,15 +110,9 @@ class Solution {
 }
 
 
-
 Python :
 
-
-
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
 
 class Solution(object):
     def firstMissingPositive(self, nums):
@@ -179,15 +133,7 @@ class Solution(object):
             if nums[i] != i + 1: return i + 1  # return the index + 1 if the current value is not equal to the index + 1
         return n + 1  # return n + 1
 
-
-
-
-
-
  2nd  Method
-
-
-
 
 class Solution(object):
     def firstMissingPositive(self, nums):
@@ -203,22 +149,11 @@ class Solution(object):
             if nums[i] > 0 and nums[i] == missing:
                 missing += 1
         return missing
-               
-
-
-
-
-
-
-
+            
 Python3 :
 
 
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
 
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
@@ -240,10 +175,6 @@ class Solution:
 
 2nd Method
 
-
-
-
-
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         nums.sort()
@@ -252,23 +183,10 @@ class Solution:
             if nums[i] > 0 and nums[i] == missing:
                 missing += 1
         return missing
-
-
-
-
-
-
-
 C:
 
 
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
-
-
 
 int firstMissingPositive(int* nums, int numsSize){
     int n = numsSize;  // variable to store the length of the vector nums
@@ -289,16 +207,7 @@ int firstMissingPositive(int* nums, int numsSize){
 
 C# :
 
-
-
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
-
-
 
 public class Solution {
     public int FirstMissingPositive(int[] nums) {
@@ -320,14 +229,7 @@ public class Solution {
     }
 }
 
-
-
-
-
 2nd Method 
-
-
-
 
 public class Solution {
     public int FirstMissingPositive(int[] nums) {
@@ -341,19 +243,9 @@ public class Solution {
 }
 
 
-
-
-
 JavaScript :
 
-
-
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
 
 var firstMissingPositive = function(nums) {
     let n = nums.length;  // variable to store the length of the vector nums
@@ -371,14 +263,7 @@ var firstMissingPositive = function(nums) {
 };
 
 
-
-
-
-
-
 2nd Method
-
-
 
 var firstMissingPositive = function(nums) {
     // Filter out non-positive numbers and duplicates
@@ -401,9 +286,6 @@ var firstMissingPositive = function(nums) {
     // then the next missing positive would be the length of the array + 1.
     return missing;
 };
-
-
-
             OR
 
 /**
@@ -423,23 +305,9 @@ var firstMissingPositive = function(nums) {
 };
 
 
-
-
-
 Swift:
 
-
-
-
-
-
 // Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
-
-
-
-
-
-
 
 class Solution {
     func firstMissingPositive(_ nums: [Int]) -> Int {
@@ -461,18 +329,7 @@ class Solution {
     }
 }
 
-
-
-
-
-
-
-
 2nd Method 
-
-
-
-
 
 class Solution {
     func firstMissingPositive(_ nums: [Int]) -> Int {
@@ -487,16 +344,4 @@ class Solution {
         return missing  // return the missing value
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
