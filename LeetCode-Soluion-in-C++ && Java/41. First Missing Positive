@@ -151,4 +151,352 @@ class Solution {
 
 
 
+Python :
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+class Solution(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+
+        n = len(nums)  # variable to store the length of the vector nums
+
+
+        for i in range(n):  # iterate through the vector nums
+            while nums[i] > 0 and nums[i] <= n and nums[i] != nums[nums[i] - 1]:  # iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+                nums[i], nums[nums[i] - 1] = nums[nums[i] - 1], nums[i]  # swap the values
+            
+        for i in range(n):  # iterate through the vector nums
+            if nums[i] != i + 1: return i + 1  # return the index + 1 if the current value is not equal to the index + 1
+        return n + 1  # return n + 1
+
+
+
+
+
+
+ 2nd  Method
+
+
+
+
+class Solution(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+
+        nums.sort()
+        missing = 1
+        for i in range(len(nums)):
+            if nums[i] > 0 and nums[i] == missing:
+                missing += 1
+        return missing
+               
+
+
+
+
+
+
+
+Python3 :
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        # Cyclic Sort to arrange the positive integers correctly
+        for i in range(n):
+            while 1 <= nums[i] <= n and nums[i] != nums[nums[i] - 1]:
+                nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+        
+        # Find the first missing positive integer
+        for i in range(n):
+            if nums[i] != i + 1:
+                return i + 1
+        
+        return n + 1
+
+
+
+2nd Method
+
+
+
+
+
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        nums.sort()
+        missing = 1
+        for i in range(len(nums)):
+            if nums[i] > 0 and nums[i] == missing:
+                missing += 1
+        return missing
+
+
+
+
+
+
+
+C:
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+int firstMissingPositive(int* nums, int numsSize){
+    int n = numsSize;  // variable to store the length of the vector nums
+    for(int i = 0; i < n; i++){  // iterate through the vector nums
+        while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]){  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+            int temp = nums[i];  // swap the values
+            nums[i] = nums[temp - 1];
+            nums[temp - 1] = temp;       
+        }
+    }
+    for(int i = 0; i < n; i++){  // iterate through the vector nums
+        if(nums[i] != i + 1) return i + 1;  // return the index + 1 if the current value is not equal to the index + 1
+    }
+    return n + 1;  // return n + 1
+}
+
+
+
+C# :
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+public class Solution {
+    public int FirstMissingPositive(int[] nums) {
+        int n = nums.Length;  // variable to store the length of the vector nums
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]){  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+                swap(nums, i, nums[i] - 1);  // swap the values
+            }
+        }
+        for(int i = 0; i < n; i++){  // iterate through the vector nums
+            if(nums[i] != i + 1) return i + 1;  // return the index + 1 if the current value is not equal to the index + 1
+        }
+        return n + 1;  // return n + 1
+    }
+    void swap(int[] nums, int i, int j){  // function to swap the values
+        int temp = nums[i];  // variable to store the value
+        nums[i] = nums[j];  // update the value
+        nums[j] = temp;  // update the value
+    }
+}
+
+
+
+
+
+2nd Method 
+
+
+
+
+public class Solution {
+    public int FirstMissingPositive(int[] nums) {
+        Array.Sort(nums);
+        int missing = 1;
+        for(int i=0; i<nums.Length; i++){
+            if(nums[i] > 0 && nums[i] == missing ) missing ++;
+        }
+        return missing;
+    }
+}
+
+
+
+
+
+JavaScript :
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+var firstMissingPositive = function(nums) {
+    let n = nums.length;  // variable to store the length of the vector nums
+    for(let i = 0; i < n; i++){  // iterate through the vector nums
+        while(nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i] - 1]){  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+            let tmp = nums[i];  // swap the values
+            nums[i] = nums[tmp - 1];
+            nums[tmp - 1] = tmp;       
+        }
+    }
+    for(let i = 0; i < n; i++){  // iterate through the vector nums
+        if(nums[i] != i + 1) return i + 1;  // return the index + 1 if the current value is not equal to the index + 1
+    }
+    return n + 1;  // return n + 1
+};
+
+
+
+
+
+
+
+2nd Method
+
+
+
+var firstMissingPositive = function(nums) {
+    // Filter out non-positive numbers and duplicates
+    const filteredNums = [...new Set(nums)].filter(num => num > 0);
+
+    // Sort the filtered array in ascending order
+    filteredNums.sort((a, b) => a - b);
+
+    let missing = 1;
+    for (let i = 0; i < filteredNums.length; i++) {
+        if (filteredNums[i] === missing) {
+            missing++;
+        } else {
+            // If the missing positive is found, return it
+            return missing;
+        }
+    }
+
+    // If all positive integers up to the length of the array are present,
+    // then the next missing positive would be the length of the array + 1.
+    return missing;
+};
+
+
+
+            OR
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var firstMissingPositive = function(nums) {
+    let missingPositive = 1;
+    let set = new Set(nums);
+
+    while(set.has(missingPositive)) {
+        missingPositive++
+    }
+
+
+    return missingPositive
+};
+
+
+
+
+
+Swift:
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    func firstMissingPositive(_ nums: [Int]) -> Int {
+        var nums = nums  // variable to store the vector nums
+        let n = nums.count  // variable to store the length of the vector nums
+        for i in 0..<n{  // iterate through the vector nums
+            var num = nums[i]  // variable to store the value
+            while num > 0 && num <= n && num != nums[num - 1]{  // iterate until the current value is greater than 0 and less than or equal to n and the current value is not equal to the value at the index current value - 1
+                nums.swapAt(i, num - 1)  // swap the values
+                num = nums[i]  // update the value
+            }
+        }
+        for i in 0..<n{  // iterate through the vector nums
+            if nums[i] != i + 1{  // if the current value is not equal to the index + 1
+                return i + 1  // return the index + 1
+            }
+        }
+        return n + 1  // return n + 1
+    }
+}
+
+
+
+
+
+
+
+
+2nd Method 
+
+
+
+
+
+class Solution {
+    func firstMissingPositive(_ nums: [Int]) -> Int {
+        var nums = nums  // variable to store the vector nums
+        nums.sort()  // sort the vector nums
+        var missing = 1  // variable to store the missing value
+        for i in 0..<nums.count{  // iterate through the vector nums
+            if nums[i] > 0 && nums[i] == missing{  // if the current value is greater than 0 and equal to the missing value
+                missing += 1  // increment the missing value
+            }
+        }
+        return missing  // return the missing value
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
