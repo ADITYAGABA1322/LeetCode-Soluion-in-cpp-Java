@@ -324,3 +324,1092 @@ class Solution {
 }
 
 
+42. Trapping Rain Water in python using brute force
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        n = len(height)  # variable to store the length of the array
+        result = 0  # variable to store the result
+        for i in range(1, n - 1):  # iterate through the array
+            leftMax = 0  # variable to store the left max value
+            rightMax = 0  # variable to store the right max value
+            for j in range(i, -1, -1):  # iterate through the array from the current index to the left
+                leftMax = max(leftMax, height[j])  # calculate the left max value
+            for j in range(i, n):  # iterate through the array from the current index to the right
+                rightMax = max(rightMax, height[j])  # calculate the right max value
+            result += min(leftMax, rightMax) - height[i]  # calculate the result
+        return result  # return the result
+
+
+
+
+
+
+2nd Method using dp 
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        n = len(height)  # variable to store the length of the array
+        leftMax = [0] * n  # list to store the left max values
+        rightMax = [0] * n  # list to store the right max values
+        result = 0  # variable to store the result
+        leftMax[0] = height[0]  # update the left max value
+        for i in range(1, n):  # iterate through the array
+            leftMax[i] = max(leftMax[i - 1], height[i])  # calculate the left max value
+        rightMax[n - 1] = height[n - 1]  # update the right max value
+        for i in range(n - 2, -1, -1):  # iterate through the array
+            rightMax[i] = max(rightMax[i + 1], height[i])  # calculate the right max value
+        for i in range(n):  # iterate through the array
+            result += min(leftMax[i], rightMax[i]) - height[i]  # calculate the result
+        return result  # return the result
+
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        n = len(height)  # variable to store the length of the array
+        left = 0  # variable to store the left pointer
+        right = n - 1  # variable to store the right pointer
+        leftMax = 0  # variable to store the left max value
+        rightMax = 0  # variable to store the right max value
+        result = 0  # variable to store the result
+        while left <= right:  # iterate through the array
+            if height[left] <= height[right]:  # if the left value is less than or equal to the right value
+                if height[left] >= leftMax:  # if the left value is greater than or equal to the left max value
+                    leftMax = height[left]  # update the left max value
+                else:  # if the left value is less than the left max value
+                    result += leftMax - height[left]  # calculate the result
+                left += 1  # increment the left pointer
+            else:  # if the right value is less than the left value
+                if height[right] >= rightMax:  # if the right value is greater than or equal to the right max value
+                    rightMax = height[right]  # update the right max value
+                else:  # if the right value is less than the right max value
+                    result += rightMax - height[right]  # calculate the result
+                right -= 1  # decrement the right pointer
+        return result  # return the result
+
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        n = len(height)  # variable to store the length of the array
+        st = []  # stack to store the indices
+        result = 0  # variable to store the result
+        for i in range(n):  # iterate through the array
+            while st and height[i] > height[st[-1]]:  # if the stack is not empty and the current value is greater than the top value of the stack
+                top = st.pop()  # variable to store the top value of the stack
+                if not st:  # if the stack is empty
+                    break  # break
+                distance = i - st[-1] - 1  # variable to store the distance
+                boundedHeight = min(height[i], height[st[-1]]) - height[top]  # variable to store the bounded height
+                result += distance * boundedHeight  # calculate the result
+            st.append(i)  # push the current index to the stack
+        return result  # return the result
+
+
+
+
+42. Trapping Rain Water in python3 using brute force
+
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution:
+    def trap(self, height: List[int]) -> int: 
+        n = len(height)  #variable to store the length of the array
+        result = 0  # variable to store the result
+        for i in range(1, n - 1):  # iterate through the array
+            leftMax = 0  # variable to store the left max value
+            rightMax = 0  # variable to store the right max value
+            for j in range(i, -1, -1):  # iterate through the array from the current index to the left
+                leftMax = max(leftMax, height[j])  # calculate the left max value
+            for j in range(i, n):  # iterate through the array from the current index to the right
+                rightMax = max(rightMax, height[j])  # calculate the right max value
+            result += min(leftMax, rightMax) - height[i]  # calculate the result
+        return result  # return the result
+
+
+
+
+2nd Method using dp
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)  # variable to store the length of the array
+        leftMax = [0] * n  # list to store the left max values
+        rightMax = [0] * n  # list to store the right max values
+        result = 0  # variable to store the result
+        leftMax[0] = height[0]  # update the left max value
+        for i in range(1, n):  # iterate through the array
+            leftMax[i] = max(leftMax[i - 1], height[i])  # calculate the left max value
+        rightMax[n - 1] = height[n - 1]  # update the right max value
+        for i in range(n - 2, -1, -1):  # iterate through the array
+            rightMax[i] = max(rightMax[i + 1], height[i])  # calculate the right max value
+        for i in range(n):  # iterate through the array
+            result += min(leftMax[i], rightMax[i]) - height[i]  # calculate the result
+        return result  # return the result
+
+
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)  # variable to store the length of the array
+        left = 0  # variable to store the left pointer
+        right = n - 1  # variable to store the right pointer
+        leftMax = 0  # variable to store the left max value
+        rightMax = 0  # variable to store the right max value
+        result = 0  # variable to store the result
+        while left <= right:  # iterate through the array
+            if height[left] <= height[right]:  # if the left value is less than or equal to the right value
+                if height[left] >= leftMax:  # if the left value is greater than or equal to the left max value
+                    leftMax = height[left]  # update the left max value
+                else:  # if the left value is less than the left max value
+                    result += leftMax - height[left]  # calculate the result
+                left += 1  # increment the left pointer
+            else:  # if the right value is less than the left value
+                if height[right] >= rightMax:  # if the right value is greater than or equal to the right max value
+                    rightMax = height[right]  # update the right max value
+                else:  # if the right value is less than the right max value
+                    result += rightMax - height[right]  # calculate the result
+                right -= 1  # decrement the right pointer
+        return result  # return the result
+
+
+
+
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)  # variable to store the length of the array
+        st = []  # stack to store the indices
+        result = 0  # variable to store the result
+        for i in range(n):  # iterate through the array
+            while st and height[i] > height[st[-1]]:  # if the stack is not empty and the current value is greater than the top value of the stack
+                top = st.pop()  # variable to store the top value of the stack
+                if not st:  # if the stack is empty
+                    break  # break
+                distance = i - st[-1] - 1  # variable to store the distance
+                boundedHeight = min(height[i], height[st[-1]]) - height[top]  # variable to store the bounded height
+                result += distance * boundedHeight  # calculate the result
+            st.append(i)  # push the current index to the stack
+        return result  # return the result
+
+
+
+
+
+
+
+
+
+
+42. Trapping Rain Water in c using brute force
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+int trap(int* height, int heightSize){
+    int n = heightSize;  // variable to store the length of the array
+    int result = 0;  // variable to store the result
+    for(int i = 1; i < n - 1; i++){  // iterate through the array
+        int leftMax = 0;  // variable to store the left max value
+        int rightMax = 0;  // variable to store the right max value
+        for(int j = i; j >= 0; j--){  // iterate through the array from the current index to the left
+            leftMax = fmax(leftMax, height[j]);  // calculate the left max value
+        }
+        for(int j = i; j < n; j++){  // iterate through the array from the current index to the right
+            rightMax = fmax(rightMax, height[j]);  // calculate the right max value
+        }
+        result += fmin(leftMax, rightMax) - height[i];  // calculate the result
+    }
+    return result;  // return the result
+}
+
+
+
+
+
+
+
+
+2nd Method using dp
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+int trap(int* height, int heightSize){
+    int n = heightSize;  // variable to store the length of the array
+    int leftMax[n];  // array to store the left max values
+    int rightMax[n];  // array to store the right max values
+    int result = 0;  // variable to store the result
+    leftMax[0] = height[0];  // update the left max value
+    for(int i = 1; i < n; i++){  // iterate through the array
+        leftMax[i] = fmax(leftMax[i - 1], height[i]);  // calculate the left max value
+    }
+    rightMax[n - 1] = height[n - 1];  // update the right max value
+    for(int i = n - 2; i >= 0; i--){  // iterate through the array
+        rightMax[i] = fmax(rightMax[i + 1], height[i]);  // calculate the right max value
+    }
+    for(int i = 0; i < n; i++){  // iterate through the array
+        result += fmin(leftMax[i], rightMax[i]) - height[i];  // calculate the result
+    }
+    return result;  // return the result
+}
+
+
+
+
+
+
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+int trap(int* height, int heightSize){
+    int n = heightSize;  // variable to store the length of the array
+    int left = 0;  // variable to store the left pointer
+    int right = n - 1;  // variable to store the right pointer
+    int leftMax = 0;  // variable to store the left max value
+    int rightMax = 0;  // variable to store the right max value
+    int result = 0;  // variable to store the result
+    while(left <= right){  // iterate through the array
+        if(height[left] <= height[right]){  // if the left value is less than or equal to the right value
+            if(height[left] >= leftMax){  // if the left value is greater than or equal to the left max value
+                leftMax = height[left];  // update the left max value
+            }
+            else{  // if the left value is less than the left max value
+                result += leftMax - height[left];  // calculate the result
+            }
+            left++;  // increment the left pointer
+        }
+        else{  // if the right value is less than the left value
+            if(height[right] >= rightMax){  // if the right value is greater than or equal to the right max value
+                rightMax = height[right];  // update the right max value
+            }
+            else{  // if the right value is less than the right max value
+                result += rightMax - height[right];  // calculate the result
+            }
+            right--;  // decrement the right pointer
+        }
+    }
+    return result;  // return the result
+}
+
+
+
+
+
+
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+int trap(int* height, int heightSize){
+    int n = heightSize;  // variable to store the length of the array
+    int st[n];  // stack to store the indices
+    int top = -1;  // variable to store the top index of the stack
+    int result = 0;  // variable to store the result
+    for(int i = 0; i < n; i++){  // iterate through the array
+        while(top != -1 && height[i] > height[st[top]]){  // if the stack is not empty and the current value is greater than the top value of the stack
+            int topIndex = st[top];  // variable to store the top index of the stack
+            top--;  // pop the top value of the stack
+            if(top == -1){  // if the stack is empty
+                break;  // break
+            }
+            int distance = i - st[top] - 1;  // variable to store the distance
+            int boundedHeight = fmin(height[i], height[st[top]]) - height[topIndex];  // variable to store the bounded height
+            result += distance * boundedHeight;  // calculate the result
+        }
+        top++;  // push the current index to the stack
+        st[top] = i;  // push the current index to the stack
+    }
+    return result;  // return the result
+}
+
+
+
+
+
+
+
+
+
+
+42. Trapping Rain Water in c# using brute force
+
+
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+public class Solution {
+    public int Trap(int[] height) {
+        int n = height.Length;  // variable to store the length of the array
+        int result = 0;  // variable to store the result
+        for(int i = 1; i < n - 1; i++){  // iterate through the array
+            int leftMax = 0;  // variable to store the left max value
+            int rightMax = 0;  // variable to store the right max value
+            for(int j = i; j >= 0; j--){  // iterate through the array from the current index to the left
+                leftMax = Math.Max(leftMax, height[j]);  // calculate the left max value
+            }
+            for(int j = i; j < n; j++){  // iterate through the array from the current index to the right
+                rightMax = Math.Max(rightMax, height[j]);  // calculate the right max value
+            }
+            result += Math.Min(leftMax, rightMax) - height[i];  // calculate the result
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+
+
+
+
+
+2nd Method using dp
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+public class Solution {
+    public int Trap(int[] height) {
+        int n = height.Length;  // variable to store the length of the array
+        int[] leftMax = new int[n];  // array to store the left max values
+        int[] rightMax = new int[n];  // array to store the right max values
+        int result = 0;  // variable to store the result
+        leftMax[0] = height[0];  // update the left max value
+        for(int i = 1; i < n; i++){  // iterate through the array
+            leftMax[i] = Math.Max(leftMax[i - 1], height[i]);  // calculate the left max value
+        }
+        rightMax[n - 1] = height[n - 1];  // update the right max value
+        for(int i = n - 2; i >= 0; i--){  // iterate through the array
+            rightMax[i] = Math.Max(rightMax[i + 1], height[i]);  // calculate the right max value
+        }
+        for(int i = 0; i < n; i++){  // iterate through the array
+            result += Math.Min(leftMax[i], rightMax[i]) - height[i];  // calculate the result
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+public class Solution {
+    public int Trap(int[] height) {
+        int n = height.Length;  // variable to store the length of the array
+        int left = 0;  // variable to store the left pointer
+        int right = n - 1;  // variable to store the right pointer
+        int leftMax = 0;  // variable to store the left max value
+        int rightMax = 0;  // variable to store the right max value
+        int result = 0;  // variable to store the result
+        while(left <= right){  // iterate through the array
+            if(height[left] <= height[right]){  // if the left value is less than or equal to the right value
+                if(height[left] >= leftMax){  // if the left value is greater than or equal to the left max value
+                    leftMax = height[left];  // update the left max value
+                }
+                else{  // if the left value is less than the left max value
+                    result += leftMax - height[left];  // calculate the result
+                }
+                left++;  // increment the left pointer
+            }
+            else{  // if the right value is less than the left value
+                if(height[right] >= rightMax){  // if the right value is greater than or equal to the right max value
+                    rightMax = height[right];  // update the right max value
+                }
+                else{  // if the right value is less than the right max value
+                    result += rightMax - height[right];  // calculate the result
+                }
+                right--;  // decrement the right pointer
+            }
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+public class Solution {
+    public int Trap(int[] height) {
+        int n = height.Length;  // variable to store the length of the array
+        Stack<int> st = new Stack<int>();  // stack to store the indices
+        int result = 0;  // variable to store the result
+        for(int i = 0; i < n; i++){  // iterate through the array
+            while(st.Count != 0 && height[i] > height[st.Peek()]){  // if the stack is not empty and the current value is greater than the top value of the stack
+                int top = st.Pop();  // variable to store the top value of the stack
+                if(st.Count == 0){  // if the stack is empty
+                    break;  // break
+                }
+                int distance = i - st.Peek() - 1;  // variable to store the distance
+                int boundedHeight = Math.Min(height[i], height[st.Peek()]) - height[top];  // variable to store the bounded height
+                result += distance * boundedHeight;  // calculate the result
+            }
+            st.Push(i);  // push the current index to the stack
+        }
+        return result;  // return the result
+    }
+}
+
+
+
+
+
+
+
+
+
+
+42. Trapping Rain Water in javascript using brute force
+
+
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+
+var trap = function(height) {
+    let n = height.length;  // variable to store the length of the array
+    let result = 0;  // variable to store the result
+    for(let i = 1; i < n - 1; i++){  // iterate through the array
+        let leftMax = 0;  // variable to store the left max value
+        let rightMax = 0;  // variable to store the right max value
+        for(let j = i; j >= 0; j--){  // iterate through the array from the current index to the left
+            leftMax = Math.max(leftMax, height[j]);  // calculate the left max value
+        }
+        for(let j = i; j < n; j++){  // iterate through the array from the current index to the right
+            rightMax = Math.max(rightMax, height[j]);  // calculate the right max value
+        }
+        result += Math.min(leftMax, rightMax) - height[i];  // calculate the result
+    }
+    return result;  // return the result
+
+};
+
+
+
+
+
+
+
+
+
+
+2nd Method using dp
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+
+var trap = function(height) {
+    let n = height.length;  // variable to store the length of the array
+    let leftMax = new Array(n);  // array to store the left max values
+    let rightMax = new Array(n);  // array to store the right max values
+    let result = 0;  // variable to store the result
+    leftMax[0] = height[0];  // update the left max value
+    for(let i = 1; i < n; i++){  // iterate through the array
+        leftMax[i] = Math.max(leftMax[i - 1], height[i]);  // calculate the left max value
+    }
+    rightMax[n - 1] = height[n - 1];  // update the right max value
+    for(let i = n - 2; i >= 0; i--){  // iterate through the array
+        rightMax[i] = Math.max(rightMax[i + 1], height[i]);  // calculate the right max value
+    }
+    for(let i = 0; i < n; i++){  // iterate through the array
+        result += Math.min(leftMax[i], rightMax[i]) - height[i];  // calculate the result
+    }
+    return result;  // return the result
+};
+
+
+
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+
+
+var trap = function(height) {
+    let n = height.length;  // variable to store the length of the array
+    let left = 0;  // variable to store the left pointer
+    let right = n - 1;  // variable to store the right pointer
+    let leftMax = 0;  // variable to store the left max value
+    let rightMax = 0;  // variable to store the right max value
+    let result = 0;  // variable to store the result
+    while(left <= right){  // iterate through the array
+        if(height[left] <= height[right]){  // if the left value is less than or equal to the right value
+            if(height[left] >= leftMax){  // if the left value is greater than or equal to the left max value
+                leftMax = height[left];  // update the left max value
+            }
+            else{  // if the left value is less than the left max value
+                result += leftMax - height[left];  // calculate the result
+            }
+            left++;  // increment the left pointer
+        }
+        else{  // if the right value is less than the left value
+            if(height[right] >= rightMax){  // if the right value is greater than or equal to the right max value
+                rightMax = height[right];  // update the right max value
+            }
+            else{  // if the right value is less than the right max value
+                result += rightMax - height[right];  // calculate the result
+            }
+            right--;  // decrement the right pointer
+        }
+    }
+    return result;  // return the result
+};
+
+
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+
+
+var trap = function(height) {
+    let n = height.length;  // variable to store the length of the array
+    let st = [];  // stack to store the indices
+    let result = 0;  // variable to store the result
+    for(let i = 0; i < n; i++){  // iterate through the array
+        while(st.length != 0 && height[i] > height[st[st.length - 1]]){  // if the stack is not empty and the current value is greater than the top value of the stack
+            let top = st.pop();  // variable to store the top value of the stack
+            if(st.length == 0){  // if the stack is empty
+                break;  // break
+            }
+            let distance = i - st[st.length - 1] - 1;  // variable to store the distance
+            let boundedHeight = Math.min(height[i], height[st[st.length - 1]]) - height[top];  // variable to store the bounded height
+            result += distance * boundedHeight;  // calculate the result
+        }
+        st.push(i);  // push the current index to the stack
+    }
+    return result;  // return the result
+};
+
+
+
+
+
+
+
+
+
+
+42. Trapping Rain Water in Swift using brute force
+
+
+
+
+
+
+
+
+// Time Complexity : O(n^2) where n is the length of the array and space complexity is O(1)
+
+
+
+
+
+
+
+class Solution {
+    func trap(_ height: [Int]) -> Int {
+        let n = height.count  // variable to store the length of the array
+        var result = 0  // variable to store the result
+        for i in 1..<n - 1{  // iterate through the array
+            var leftMax = 0  // variable to store the left max value
+            var rightMax = 0  // variable to store the right max value
+            for j in stride(from: i, through: 0, by: -1){  // iterate through the array from the current index to the left
+                leftMax = max(leftMax, height[j])  // calculate the left max value
+            }
+            for j in stride(from: i, through: n - 1, by: 1){  // iterate through the array from the current index to the right
+                rightMax = max(rightMax, height[j])  // calculate the right max value
+            }
+            result += min(leftMax, rightMax) - height[i]  // calculate the result
+        }
+        return result  // return the result
+    }
+}
+
+
+
+
+
+2nd Method using dp
+
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)
+
+
+
+
+
+
+
+class Solution {
+    func trap(_ height: [Int]) -> Int {
+        let n = height.count  // variable to store the length of the array
+        var leftMax = Array(repeating: 0, count: n)  // array to store the left max values
+        var rightMax = Array(repeating: 0, count: n)  // array to store the right max values
+        var result = 0  // variable to store the result
+        leftMax[0] = height[0]  // update the left max value
+        for i in 1..<n{  // iterate through the array
+            leftMax[i] = max(leftMax[i - 1], height[i])  // calculate the left max value
+        }
+        rightMax[n - 1] = height[n - 1]  // update the right max value
+        for i in stride(from: n - 2, through: 0, by: -1){  // iterate through the array
+            rightMax[i] = max(rightMax[i + 1], height[i])  // calculate the right max value
+        }
+        for i in 0..<n{  // iterate through the array
+            result += min(leftMax[i], rightMax[i]) - height[i]  // calculate the result
+        }
+        return result  // return the result
+    }
+}
+
+
+
+
+
+3rd Method using two pointers
+
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(1)
+
+
+
+
+class Solution {
+    func trap(_ height: [Int]) -> Int {
+        var left = 0
+        var right = height.count - 1
+        var leftMax = 0
+        var rightMax = 0
+        var result = 0
+        while left <= right{
+            if height[left] <= height[right]{
+                if height[left] >= leftMax{
+                    leftMax = height[left]
+                }
+                else{
+                    result += leftMax - height[left]
+                }
+                left += 1
+            }
+            else{
+                if height[right] >= rightMax{
+                    rightMax = height[right]
+                }
+                else{
+                    result += rightMax - height[right]
+                }
+                right -= 1
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+4th Method using stack
+
+
+
+
+
+
+
+
+// Time Complexity : O(n) where n is the length of the array and space complexity is O(n)\
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    func trap(_ height: [Int]) -> Int {
+        let n = height.count  // variable to store the length of the array
+        var st = [Int]()  // stack to store the indices
+        var result = 0  // variable to store the result
+        for i in 0..<n{  // iterate through the array
+            while !st.isEmpty && height[i] > height[st.last!]{
+                let top = st.popLast()!
+                if st.isEmpty{
+                    break
+                }
+                let distance = i - st.last! - 1
+                let boundedHeight = min(height[i], height[st.last!]) - height[top]
+                result += distance * boundedHeight
+            }
+            st.append(i)
+        }
+        return result
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
