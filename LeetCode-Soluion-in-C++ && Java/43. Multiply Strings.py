@@ -321,6 +321,66 @@ JavaScript:
 
 
 
+// Time Complexity : O(n * m) where n is the length of the first string and m is the length of the second string and space complexity is O(n + m)
+
+
+
+
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+
+
+var multiply = function(num1, num2) {
+    let n = num1.length;  // variable to store the length of the first string
+    let m = num2.length;  // variable to store the length of the second string
+
+    if(num1 == "0" || num2 == "0"){  // if any of the strings is zero
+        return "0";  // return zero
+    }
+
+    let result = new Array(n + m).fill(0);  // array to store the result
+    for(let i = n - 1; i >= 0; i--){  // iterate through the first string
+        for(let j = m - 1; j >= 0; j--){  // iterate through the second string
+            let product = (num1[i] - '0') * (num2[j] - '0');  // variable to store the product
+            let sum = product + result[i + j + 1];  // variable to store the sum
+            result[i + j + 1] = sum % 10;  // update the result
+            result[i + j] += Math.floor(sum / 10);  // update the result
+        }
+    }
+    
+    let res = "";  // variable to store the result
+    for(let i = 0; i < n + m; i++){  // iterate through the result
+        if(result[i] == 0 && res.length == 0){  // if the current value is zero and the result is empty
+            continue;  // continue
+        }
+        res += result[i];  // update the result
+    }
+    return res;  // return the result
+};
+
+
+
+
+2nd Method 
+
+
+
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var multiply = function(num1, num2) {
+     return (BigInt(num1)*BigInt(num2)).toString();
+
+};
+
+
+
+
 
 Swift:
 
