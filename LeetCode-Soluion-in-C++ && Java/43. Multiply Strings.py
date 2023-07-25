@@ -384,3 +384,55 @@ var multiply = function(num1, num2) {
 
 Swift:
 
+
+
+// Time Complexity : O(n * m) where n is the length of the first string and m is the length of the second string and space complexity is O(n + m)
+
+
+
+
+
+
+
+class Solution {
+    func multiply(_ num1: String, _ num2: String) -> String {
+        let n = num1.count  // variable to store the length of the first string
+        let m = num2.count  // variable to store the length of the second string
+
+        if num1 == "0" || num2 == "0" {  // if any of the strings is zero
+            return "0"  // return zero
+        }
+
+        var result = Array(repeating: 0, count: n + m)  // array to store the result
+        for i in stride(from: n - 1, through: 0, by: -1) {  // iterate through the first string
+            for j in stride(from: m - 1, through: 0, by: -1) {  // iterate through the second string
+                let index1 = num1.index(num1.startIndex, offsetBy: i)
+                let index2 = num2.index(num2.startIndex, offsetBy: j)
+                
+                let digit1 = Int(String(num1[index1]))!
+                let digit2 = Int(String(num2[index2]))!
+                
+                let product = digit1 * digit2  // variable to store the product
+                let sum = product + result[i + j + 1]  // variable to store the sum
+                result[i + j + 1] = sum % 10  // update the result
+                result[i + j] += sum / 10  // update the result
+            }
+        }
+        
+        var res = ""  // variable to store the result
+        for i in 0..<n + m {  // iterate through the result
+            if result[i] == 0 && res.isEmpty {  // if the current value is zero and the result is empty
+                continue  // continue
+            }
+            res += String(result[i])  // update the result
+        }
+        return res  // return the result
+    }
+}
+
+
+
+
+
+
+
