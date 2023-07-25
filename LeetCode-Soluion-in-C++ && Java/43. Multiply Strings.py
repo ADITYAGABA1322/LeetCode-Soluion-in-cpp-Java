@@ -274,6 +274,49 @@ C#
 
 
 
+
+
+// Time Complexity : O(n * m) where n is the length of the first string and m is the length of the second string and space complexity is O(n + m)
+
+
+
+
+
+
+
+public class Solution {
+    public string Multiply(string num1, string num2) {
+        int n = num1.Length;  // variable to store the length of the first string
+        int m = num2.Length;  // variable to store the length of the second string
+
+        if(num1 == "0" || num2 == "0"){  // if any of the strings is zero
+            return "0";  // return zero
+        }
+
+        int[] result = new int[n + m];  // array to store the result
+        for(int i = n - 1; i >= 0; i--){  // iterate through the first string
+            for(int j = m - 1; j >= 0; j--){  // iterate through the second string
+                int product = (num1[i] - '0') * (num2[j] - '0');  // variable to store the product
+                int sum = product + result[i + j + 1];  // variable to store the sum
+                result[i + j + 1] = sum % 10;  // update the result
+                result[i + j] += sum / 10;  // update the result
+            }
+        }
+        
+        StringBuilder res = new StringBuilder();  // variable to store the result
+        for(int i = 0; i < n + m; i++){  // iterate through the result
+            if(result[i] == 0 && res.Length == 0){  // if the current value is zero and the result is empty
+                continue;  // continue
+            }
+            res.Append(result[i]);  // update the result
+        }
+        return res.ToString();  // return the result
+    }
+}
+
+
+
+
 JavaScript:
 
 
