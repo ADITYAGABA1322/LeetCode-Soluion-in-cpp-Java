@@ -141,6 +141,46 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n * m) where n is the length of the first string and m is the length of the second string and space complexity is O(n + m)
+
+
+
+
+
+
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        n = len(num1)  # variable to store the length of the first string
+        m = len(num2)  # variable to store the length of the second string
+
+        if num1 == "0" or num2 == "0":  # if any of the strings is zero
+            return "0"  # return zero
+
+        result = [0] * (n + m)  # list to store the result
+        for i in range(n - 1, -1, -1):  # iterate through the first string
+            for j in range(m - 1, -1, -1):  # iterate through the second string
+                product = (ord(num1[i]) - ord('0')) * (ord(num2[j]) - ord('0'))  # variable to store the product
+                sum = product + result[i + j + 1]  # variable to store the sum
+                result[i + j + 1] = sum % 10  # update the result
+                result[i + j] += sum // 10  # update the result
+
+        res = ""  # variable to store the result
+        for i in range(n + m):  # iterate through the result
+            if result[i] == 0 and len(res) == 0:  # if the current value is zero and the result is empty
+                continue  # continue
+            res += str(result[i])  # update the result
+        return res  # return the result
+
+
+
+
+
+
 
 
 Python3:
