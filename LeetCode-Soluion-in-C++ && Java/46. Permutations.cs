@@ -215,6 +215,35 @@ public class Solution {
 JavaScript:
 
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+var permute = function(nums) {
+    let res = [];  // list to store the result
+    let temp = [];  // list to store the temporary result
+    let visited = new Array(nums.length).fill(false);  // array to store the visited values
+    permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+    return res;  // return the result
+};
+
+var permuteHelper = function(nums, res, temp, visited){
+    if(temp.length == nums.length){  // if the size of the temporary result is equal to the size of the vector nums
+        res.push(temp.slice());  // push the temporary result into the result
+        return;  // return
+    }
+    for(let i = 0; i < nums.length; i++){  // iterate through the vector nums
+        if(visited[i]){  // if the current value is visited
+            continue;  // continue
+        }
+        visited[i] = true;  // update the visited value
+        temp.push(nums[i]);  // push the current value into the temporary result
+        permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+        temp.pop();  // pop the current value from the temporary result
+        visited[i] = false;  // update the visited value
+    }
+};
+
+
+
 
 
 
