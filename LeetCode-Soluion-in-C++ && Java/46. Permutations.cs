@@ -142,6 +142,27 @@ class Solution:
 C:
 
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+void permuteHelper(int* nums, int numsSize, int** res, int* returnSize, int* temp, bool* visited, int index){
+    if(index == numsSize){  // if the size of the temporary result is equal to the size of the vector nums
+        res[*returnSize] = (int*)malloc(sizeof(int) * numsSize);  // push the temporary result into the result
+        memcpy(res[*returnSize], temp, sizeof(int) * numsSize);  // push the temporary result into the result
+        (*returnSize)++;  // increment the result
+        return;  // return
+    }
+    for(int i = 0; i < numsSize; i++){  // iterate through the vector nums
+        if(visited[i]){  // if the current value is visited
+            continue;  // continue
+        }
+        visited[i] = true;  // update the visited value
+        temp[index] = nums[i];  // push the current value into the temporary result
+        permuteHelper(nums, numsSize, res, returnSize, temp, visited, index + 1);  // call the function to find the permutations
+        visited[i] = false;  // update the visited value
+    }
+}
+
+
 
 C#
 
