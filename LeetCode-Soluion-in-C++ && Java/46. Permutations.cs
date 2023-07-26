@@ -113,6 +113,29 @@ class Solution(object):
 
 Python3:
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []  # list to store the result
+        temp = []  # list to store the temporary result
+        visited = [False] * len(nums)  # array to store the visited values
+        self.permuteHelper(nums, res, temp, visited)  # call the function to find the permutations
+        return res  # return the result
+    
+    def permuteHelper(self, nums, res, temp, visited):
+        if len(temp) == len(nums):  # if the size of the temporary result is equal to the size of the vector nums
+            res.append(temp[:])  # push the temporary result into the result
+            return  # return
+        for i in range(len(nums)):  # iterate through the vector nums
+            if visited[i]:  # if the current value is visited
+                continue  # continue
+            visited[i] = True  # update the visited value
+            temp.append(nums[i])  # push the current value into the temporary result
+            self.permuteHelper(nums, res, temp, visited)  # call the function to find the permutations
+            temp.pop()  # pop the current value from the temporary result
+            visited[i] = False  # update the visited value
+
 
 
 
