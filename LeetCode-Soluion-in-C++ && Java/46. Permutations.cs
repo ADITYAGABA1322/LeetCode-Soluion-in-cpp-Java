@@ -162,6 +162,20 @@ void permuteHelper(int* nums, int numsSize, int** res, int* returnSize, int* tem
     }
 }
 
+int** permute(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
+    int** res = (int**)malloc(sizeof(int*) * 10000);  // vector to store the result
+    int* temp = (int*)malloc(sizeof(int) * numsSize);  // vector to store the temporary result
+    bool* visited = (bool*)malloc(sizeof(bool) * numsSize);  // array to store the visited values
+    memset(visited, false, sizeof(bool) * numsSize);  // update the visited value
+    *returnSize = 0;  // update the result
+    permuteHelper(nums, numsSize, res, returnSize, temp, visited, 0);  // call the function to find the permutations
+    *returnColumnSizes = (int*)malloc(sizeof(int) * (*returnSize));  // vector to store the result
+    for(int i = 0; i < *returnSize; i++){  // iterate through the vector nums
+        (*returnColumnSizes)[i] = numsSize;  // update the result
+    }
+    return res;  // return the result
+}
+
 
 
 C#
