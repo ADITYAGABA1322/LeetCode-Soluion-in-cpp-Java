@@ -47,8 +47,36 @@ public:
 
 
 
-
 Java:
+
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();  // list to store the result
+        List<Integer> temp = new ArrayList<>();  // list to store the temporary result
+        boolean[] visited = new boolean[nums.length];  // array to store the visited values
+        permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+        return res;  // return the result
+    }
+    
+    public void permuteHelper(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] visited){
+        if(temp.size() == nums.length){  // if the size of the temporary result is equal to the size of the vector nums
+            res.add(new ArrayList<>(temp));  // push the temporary result into the result
+            return;  // return
+        }
+        for(int i = 0; i < nums.length; i++){  // iterate through the vector nums
+            if(visited[i]){  // if the current value is visited
+                continue;  // continue
+            }
+            visited[i] = true;  // update the visited value
+            temp.add(nums[i]);  // push the current value into the temporary result
+            permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+            temp.remove(temp.size() - 1);  // pop the current value from the temporary result
+            visited[i] = false;  // update the visited value
+        }
+    }
+}
 
 
 
