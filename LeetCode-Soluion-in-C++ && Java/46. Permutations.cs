@@ -181,6 +181,35 @@ int** permute(int* nums, int numsSize, int* returnSize, int** returnColumnSizes)
 C#
 
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+public class Solution {
+    public IList<IList<int>> Permute(int[] nums) {
+        IList<IList<int>> res = new List<IList<int>>();  // list to store the result
+        List<int> temp = new List<int>();  // list to store the temporary result
+        bool[] visited = new bool[nums.Length];  // array to store the visited values
+        permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+        return res;  // return the result
+    }
+    
+    public void permuteHelper(int[] nums, IList<IList<int>> res, List<int> temp, bool[] visited){
+        if(temp.Count == nums.Length){  // if the size of the temporary result is equal to the size of the vector nums
+            res.Add(new List<int>(temp));  // push the temporary result into the result
+            return;  // return
+        }
+        for(int i = 0; i < nums.Length; i++){  // iterate through the vector nums
+            if(visited[i]){  // if the current value is visited
+                continue;  // continue
+            }
+            visited[i] = true;  // update the visited value
+            temp.Add(nums[i]);  // push the current value into the temporary result
+            permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+            temp.RemoveAt(temp.Count - 1);  // pop the current value from the temporary result
+            visited[i] = false;  // update the visited value
+        }
+    }
+}
+
 
 
 JavaScript:
