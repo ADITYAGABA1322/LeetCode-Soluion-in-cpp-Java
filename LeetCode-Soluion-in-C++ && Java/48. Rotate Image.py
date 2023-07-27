@@ -67,7 +67,8 @@ class Solution(object):
         for i in range(n):  # iterate through the vector matrix
             matrix[i].reverse()  # reverse the vector
 
-48. Rotate Image in python3
+
+python3:
 
 // Time Complexity : O(n^2) where n is the length of the vector matrix and space complexity is O(1)
 
