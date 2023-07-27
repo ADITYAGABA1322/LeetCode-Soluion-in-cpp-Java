@@ -108,6 +108,22 @@ Python3:
 
 
 
+// Time Complexity : O(n * klogk) where n is the length of the vector strs and k is the length of the string in the vector strs and space complexity is O(n)
+
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]: // add the missing bracket after List[str]
+        res = []  # list to store the result
+        map = {}  # map to store the temporary result
+        for s in strs:  # iterate through the vector strs
+            temp = ''.join(sorted(s))  # variable to store the temporary result
+            if temp not in map:  # if the map does not contain the key
+                map[temp] = []  # push the temporary result into the map
+            map[temp].append(s)  # push the temporary result into the map
+        for m in map:  # iterate through the map
+            res.append(map[m])  # push the temporary result into the result
+        return res  # return the result
+
+
 
 
 C#:
