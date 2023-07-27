@@ -193,3 +193,26 @@ var groupAnagrams = function(strs) {
 
 
 Swift:
+
+
+// Time Complexity : O(n * klogk) where n is the length of the vector strs and k is the length of the string in the vector strs and space complexity is O(n)
+
+class Solution {
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+        var res = [[String]]();  // list to store the result
+        var map = [String: [String]]();  // map to store the temporary result
+        for s in strs {  // iterate through the vector strs
+            let temp = String(s.sorted());  // variable to store the temporary result
+            if map[temp] == nil {  // if the map does not contain the key
+                map[temp] = [String]();  // push the temporary result into the map
+            }
+            map[temp]?.append(s);  // push the temporary result into the map
+        }
+        for m in map {  // iterate through the map
+            res.append(m.value);  // push the temporary result into the result
+        }
+        return res;  // return the result
+    }
+}
+
+
