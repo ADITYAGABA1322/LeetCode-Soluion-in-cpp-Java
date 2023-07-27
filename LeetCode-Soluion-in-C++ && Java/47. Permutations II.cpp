@@ -253,3 +253,33 @@ var permuteHelper = function(nums, res, temp, visited){
 
 
 Swift:
+
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+class Solution {
+    func permuteUnique(_ nums: [Int]) -> [[Int]] {
+        var res = [[Int]]()  // list to store the result
+        var temp = [Int]()  // list to store the temporary result
+        var visited = [Bool](repeating: false, count: nums.count)  // array to store the visited values
+        let sortedNums = nums.sorted()  // Sort the input array in ascending order
+        permuteHelper(sortedNums, &res, &temp, &visited)  // call the function to find the permutations
+        return res  // return the result
+    }
+    
+    func permuteHelper(_ nums: [Int], _ res: inout [[Int]], _ temp: inout [Int], _ visited: inout [Bool]) {
+        if temp.count == nums.count {  // if the size of the temporary result is equal to the size of the vector nums
+            res.append(temp)  // push the temporary result into the result
+            return  // return
+        }
+        for i in 0..<nums.count {  // iterate through the vector nums
+            if visited[i] || (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {  // if the current value is visited or the current value is equal to the previous value and the previous value is not visited
+                continue  // continue
+            }
+            visited[i] = true  // update the visited value
+            temp.append(nums[i])  // push the current value into the temporary result
+            permuteHelper(nums, &res, &temp, &visited)  // call the function to find the permutations
+            temp.removeLast()  // pop the current value from the temporary result
+            visited[i] = false  // update the visited value
+        }
+    }
+}
