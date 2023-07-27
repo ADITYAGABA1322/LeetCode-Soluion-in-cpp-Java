@@ -222,6 +222,34 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+var permuteUnique = function(nums) {
+    let res = [];  // list to store the result
+    let temp = [];  // list to store the temporary result
+    let visited = new Array(nums.length).fill(false);  // array to store the visited values
+    nums.sort();  // sort the vector nums
+    permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+    return res;  // return the result
+};
+
+var permuteHelper = function(nums, res, temp, visited){
+    if(temp.length == nums.length){  // if the size of the temporary result is equal to the size of the vector nums
+        res.push(temp.slice());  // push the temporary result into the result
+        return;  // return
+    }
+    for(let i = 0; i < nums.length; i++){  // iterate through the vector nums
+        if(visited[i] || (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1])){  // if the current value is visited or the current value is equal to the previous value and the previous value is not visited
+            continue;  // continue
+        }
+        visited[i] = true;  // update the visited value
+        temp.push(nums[i]);  // push the current value into the temporary result
+        permuteHelper(nums, res, temp, visited);  // call the function to find the permutations
+        temp.pop();  // pop the current value from the temporary result
+        visited[i] = false;  // update the visited value
+    }
+};
+
 
 
 Swift:
