@@ -128,6 +128,46 @@ class Solution:
 
 C#:
 
+// Time Complexity : O(n * klogk) where n is the length of the vector strs and k is the length of the string in the vector strs and space complexity is O(n)
+
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        IList<IList<string>> res = new List<IList<string>>();  // list to store the result
+        Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();  // map to store the temporary result
+        foreach(string s in strs){  // iterate through the vector strs
+            char[] temp = s.ToCharArray();  // variable to store the temporary result
+            Array.Sort(temp);  // sort the string
+            string sorted = new string(temp);  // variable to store the temporary result
+            if(!map.ContainsKey(sorted)){  // if the map does not contain the key
+                map.Add(sorted, new List<string>());  // push the temporary result into the map
+            }
+            map[sorted].Add(s);  // push the temporary result into the map
+        }
+        foreach(KeyValuePair<string, List<string>> m in map){  // iterate through the map
+            res.Add(m.Value);  // push the temporary result into the result
+        }
+        return res;  // return the result
+    }
+}
+
+2nd Method 
+
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        IList<IList<string>> res = new List<IList<string>>();
+        Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
+        foreach(string s in strs){
+            char[] temp = s.ToCharArray();
+            Array.Sort(temp);
+            string sorted = new string(temp);
+            if(!map.ContainsKey(sorted)) map.Add(sorted, new List<string>());
+            map[sorted].Add(s);
+        }
+        return new List<IList<string>>(map.Values);
+    }
+}
+
+
 
 
 JavaScript:
