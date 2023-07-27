@@ -50,7 +50,7 @@ class Solution {
     }
 }
 
-48. Rotate Image in python
+python:
 
 // Time Complexity : O(n^2) where n is the length of the vector matrix and space complexity is O(1)
 
