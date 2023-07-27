@@ -148,6 +148,41 @@ class Solution:
 C:
 
 
+// Time Complexity : O(n!) where n is the length of the vector nums and space complexity is O(n)
+
+void permuteHelper(int* nums, int numsSize, int** res, int* returnSize, int* temp, bool* visited, int index){
+    if(index == numsSize){  // if the size of the temporary result is equal to the size of the vector nums
+        res[*returnSize] = (int*)malloc(sizeof(int) * numsSize);  // push the temporary result into the result
+        memcpy(res[*returnSize], temp, sizeof(int) * numsSize);  // push the temporary result into the result
+        (*returnSize)++;  // increment the result
+        return;  // return
+    }
+    for(int i = 0; i < numsSize; i++){  // iterate through the vector nums
+        if(visited[i] || (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1])){  // if the current value is visited or the current value is equal to the previous value and the previous value is not visited
+            continue;  // continue
+        }
+        visited[i] = true;  // update the visited value
+        temp[index] = nums[i];  // push the current value into the temporary result
+        permuteHelper(nums, numsSize, res, returnSize, temp, visited, index + 1);  // call the function to find the permutations
+        visited[i] = false;  // update the visited value
+    }
+}
+
+int** permuteUnique(int* nums, int numsSize, int* returnSize, int** returnColumnSizes){
+    int** res = (int**)malloc(sizeof(int*) * 10000);  // vector to store the result
+    int* temp = (int*)malloc(sizeof(int) * numsSize);  // vector to store the temporary result
+    bool* visited = (bool*)malloc(sizeof(bool) * numsSize);  // array to store the visited values
+    memset(visited, false, sizeof(bool) * numsSize);  // update the visited value
+    *returnSize = 0;  // update the result
+    qsort(nums, numsSize, sizeof(int), cmpfunc);  // sort the vector nums
+    permuteHelper(nums, numsSize, res, returnSize, temp, visited, 0);  // call the function to find the permutations
+    *returnColumnSizes = (int*)malloc(sizeof(int) * (*returnSize));  // vector to store the result
+    for(int i = 0; i < *returnSize; i++){  // iterate through the vector nums
+        (*returnColumnSizes)[i] = numsSize;  // update the result
+    }
+    return res;  // return the result
+}
+
 C#
 
 
