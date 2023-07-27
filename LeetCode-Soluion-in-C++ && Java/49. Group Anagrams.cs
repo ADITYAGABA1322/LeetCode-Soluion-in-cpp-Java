@@ -172,6 +172,24 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(n * klogk) where n is the length of the vector strs and k is the length of the string in the vector strs and space complexity is O(n)
+
+var groupAnagrams = function(strs) {
+    let res = [];  // list to store the result
+    let map = {};  // map to store the temporary result
+    for(let s of strs){  // iterate through the vector strs
+        let temp = s.split('').sort().join('');  // variable to store the temporary result
+        if(!(temp in map)){  // if the map does not contain the key
+            map[temp] = [];  // push the temporary result into the map
+        }
+        map[temp].push(s);  // push the temporary result into the map
+    }
+    for(let m in map){  // iterate through the map
+        res.push(map[m]);  // push the temporary result into the result
+    }
+    return res;  // return the result
+};
+
 
 
 Swift:
