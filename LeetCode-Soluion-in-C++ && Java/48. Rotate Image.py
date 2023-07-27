@@ -105,7 +105,7 @@ void rotate(int** matrix, int matrixSize, int* matrixColSize){
     }
 }
 
-48. Rotate Image in c#
+C#:
 
 // Time Complexity : O(n^2) where n is the length of the vector matrix and space complexity is O(1)
 
@@ -129,7 +129,7 @@ public class Solution {
     }
 }
 
-48. Rotate Image in javascript
+javascript:
 
 // Time Complexity : O(n^2) where n is the length of the vector matrix and space complexity is O(1)
 
@@ -147,7 +147,7 @@ var rotate = function(matrix) {
     }
 };
 
-48. Rotate Image in Swift
+Swift:
 
 // Time Complexity : O(n^2) where n is the length of the vector matrix and space complexity is O(1)
 
