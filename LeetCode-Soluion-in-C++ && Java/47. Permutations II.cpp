@@ -182,6 +182,9 @@ int** permuteUnique(int* nums, int numsSize, int* returnSize, int** returnColumn
     }
     return res;  // return the result
 }
+int cmpfunc(const void* a, const void* b){
+    return (*(int*)a - *(int*)b);  // return the result
+}
 
 C#
 
