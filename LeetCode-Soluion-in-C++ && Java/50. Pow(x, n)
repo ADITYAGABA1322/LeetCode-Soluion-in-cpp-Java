@@ -190,6 +190,41 @@ double myPow(double x, int n){
 
 C#:
 
+// Time Complexity : O(logn) where n is the value of the variable n and space complexity is O(1)
+
+public class Solution {
+    public double MyPow(double x, int n) {
+        double res = 1.0;  // variable to store the result
+        long temp = n;  // variable to store the temporary result
+        if(temp < 0){  // if the value of the variable temp is less than 0
+            temp = -1 * temp;  // update the value of the variable temp
+        }
+        while(temp > 0){  // iterate until the value of the variable temp is greater than 0
+            if(temp % 2 == 0){  // if the value of the variable temp is even
+                x = x * x;  // update the value of the variable x
+                temp = temp / 2;  // update the value of the variable temp
+            }
+            else{  // if the value of the variable temp is odd
+                res = res * x;  // update the value of the variable res
+                temp = temp - 1;  // update the value of the variable temp
+            }
+        }
+        if(n < 0){  // if the value of the variable n is less than 0
+            res = (double)(1.0) / (double)(res);  // update the value of the variable res
+        }
+        return res;  // return the result
+    }
+}
+
+
+2nd Method
+
+public class Solution {
+    public double MyPow(double x, int n) {
+        return Math.Pow(x, n);
+    }
+}
+
 
 JavaScript:
 
