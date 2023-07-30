@@ -108,21 +108,100 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """ 
+        maxSum = nums[0]  # variable to store the maximum sum
+        currSum = nums[0]  # variable to store the current sum
+        for i in range(1, len(nums)):  # iterate through the vector nums
+            currSum = max(nums[i], currSum + nums[i])  # update the value of the variable currSum
+            maxSum = max(maxSum, currSum)  # update the value of the variable maxSum
+        return maxSum  # return the maximum sum
 
 
 Python3:
 
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        maxSum = nums[0]  # variable to store the maximum sum
+        currSum = nums[0]  # variable to store the current sum
+        for i in range(1, len(nums)):  # iterate through the vector nums
+            currSum = max(nums[i], currSum + nums[i])  # update the value of the variable currSum
+            maxSum = max(maxSum, currSum)  # update the value of the variable maxSum
+        return maxSum  # return the maximum sum
+
 
 C:
 
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+int maxSubArray(int* nums, int numsSize){
+    int maxSum = nums[0];  // variable to store the maximum sum
+    int currSum = nums[0];  // variable to store the current sum
+    for(int i = 1; i < numsSize; i++){  // iterate through the vector nums
+        currSum = fmax(nums[i], currSum + nums[i]);  // update the value of the variable currSum
+        maxSum = fmax(maxSum, currSum);  // update the value of the variable maxSum
+    }
+    return maxSum;  // return the maximum sum
+}
 
 
 C#:
 
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public int MaxSubArray(int[] nums) {
+        int maxSum = nums[0];  // variable to store the maximum sum
+        int currSum = nums[0];  // variable to store the current sum
+        for(int i = 1; i < nums.Length; i++){  // iterate through the vector nums
+            currSum = Math.Max(nums[i], currSum + nums[i]);  // update the value of the variable currSum
+            maxSum = Math.Max(maxSum, currSum);  // update the value of the variable maxSum
+        }
+        return maxSum;  // return the maximum sum
+    }
+}
+
 JavaScript:
 
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+var maxSubArray = function(nums) {
+    let maxSum = nums[0];  // variable to store the maximum sum
+    let currSum = nums[0];  // variable to store the current sum
+    for(let i = 1; i < nums.length; i++){  // iterate through the vector nums
+        currSum = Math.max(nums[i], currSum + nums[i]);  // update the value of the variable currSum
+        maxSum = Math.max(maxSum, currSum);  // update the value of the variable maxSum
+    }
+    return maxSum;  // return the maximum sum
+};
+
+
 Swift:
+
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func maxSubArray(_ nums: [Int]) -> Int {
+        var maxSum = nums[0]  // variable to store the maximum sum
+        var currSum = nums[0]  // variable to store the current sum
+        for i in 1..<nums.count {  // iterate through the vector nums
+            currSum = max(nums[i], currSum + nums[i])  // update the value of the variable currSum
+            maxSum = max(maxSum, currSum)  // update the value of the variable maxSum
+        }
+        return maxSum  // return the maximum sum
+    }
+}
 
