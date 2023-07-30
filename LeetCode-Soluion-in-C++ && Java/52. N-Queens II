@@ -425,3 +425,51 @@ function isValid(temp, row, col, n){
 
 
 Swift:
+
+
+// Time Complexity : O(n!) where n is the value of the variable n and space complexity is O(n)
+
+class Solution {
+    func totalNQueens(_ n: Int) -> Int {
+        var res = 0  // variable to store the result
+        var temp = [[String]](repeating: [String](repeating: ".", count: n), count: n)  // list to store the temporary result
+        solveHelper(&res, &temp, 0, n)  // call the function to find the solution
+        return res  // return the result
+    }
+    
+    func solveHelper(_ res: inout Int, _ temp: inout [[String]], _ row: Int, _ n: Int) {
+        if row == n {  // if the value of the variable row is equal to the value of the variable n
+            res += 1  // update the value of the variable res
+            return  // return
+        }
+        for col in 0..<n {  // iterate through the vector temp
+            if isValid(temp, row, col, n) {  // if the current position is valid
+                temp[row][col] = "Q"  // update the value of the vector temp
+                solveHelper(&res, &temp, row + 1, n)  // call the function to find the solution
+                temp[row][col] = "."  // update the value of the vector temp
+            }
+        }
+    }
+    
+    func isValid(_ temp: [[String]], _ row: Int, _ col: Int, _ n: Int) -> Bool {
+        for i in 0..<row {  // iterate through the vector temp
+            if temp[i][col] == "Q" {  // if the current position is valid
+                return false  // return false
+            }
+        }
+        for (i, j) in zip((0..<row).reversed(), (0..<col).reversed()) {  // iterate through the vector temp
+            if temp[i][j] == "Q" {  // if the current position is valid
+                return false  // return false
+            }
+        }
+        for (i, j) in zip((0..<row).reversed(), col + 1..<n) {  // iterate through the vector temp
+            if temp[i][j] == "Q" {  // if the current position is valid
+                return false  // return false
+            }
+        }
+        return true  // return true
+    }
+}
+
+
+
