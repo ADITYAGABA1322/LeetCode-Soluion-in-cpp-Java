@@ -258,6 +258,60 @@ class Solution:
 C:
 
 
+// Time Complexity : O(n!) where n is the value of the variable n and space complexity is O(n)
+
+void solveHelper(int* res, char** temp, int row, int n);
+bool isValid(char** temp, int row, int col, int n);
+
+int totalNQueens(int n){
+    int res = 0;  // variable to store the result
+    char** temp = (char**)malloc(sizeof(char*) * n);  // vector to store the temporary result
+    for(int i = 0; i < n; i++){  // iterate through the vector temp
+        temp[i] = (char*)malloc(sizeof(char) * (n + 1));  // vector to store the temporary result
+        for(int j = 0; j < n; j++){  // iterate through the vector temp
+            temp[i][j] = '.';  // update the value of the vector temp
+        }
+        temp[i][n] = '\0';  // update the value of the vector temp
+    }
+    solveHelper(&res, temp, 0, n);  // call the function to find the solution
+    return res;  // return the result
+}
+
+void solveHelper(int* res, char** temp, int row, int n){
+    if(row == n){  // if the value of the variable row is equal to the value of the variable n
+        (*res)++;  // update the value of the variable res
+        return;  // return
+    }
+    for(int col = 0; col < n; col++){  // iterate through the vector temp
+        if(isValid(temp, row, col, n)){  // if the current position is valid
+            temp[row][col] = 'Q';  // update the value of the vector temp
+            solveHelper(res, temp, row + 1, n);  // call the function to find the solution
+            temp[row][col] = '.';  // update the value of the vector temp
+        }
+    }
+}
+
+bool isValid(char** temp, int row, int col, int n){
+    for(int i = 0; i < row; i++){  // iterate through the vector temp
+        if(temp[i][col] == 'Q'){  // if the current position is valid
+            return false;  // return false
+        }
+    }
+    for(int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--){  // iterate through the vector temp
+        if(temp[i][j] == 'Q'){  // if the current position is valid
+            return false;  // return false
+        }
+    }
+    for(int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++){  // iterate through the vector temp
+        if(temp[i][j] == 'Q'){  // if the current position is valid
+            return false;  // return false
+        }
+    }
+    return true;  // return true
+}
+
+
+
 
 C#
 
