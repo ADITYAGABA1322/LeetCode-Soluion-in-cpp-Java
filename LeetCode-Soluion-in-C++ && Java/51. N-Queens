@@ -328,6 +328,60 @@ bool isValid(char** temp, int row, int col, int n){
 
 C#:
 
+// Time Complexity : O(n!) where n is the value of the variable n and space complexity is O(n)
+
+public class Solution {
+    public IList<IList<string>> SolveNQueens(int n) {
+        IList<IList<string>> res = new List<IList<string>>();  // list to store the result
+        IList<string> temp = new List<string>();  // list to store the temporary result
+        for(int i = 0; i < n; i++){  // iterate through the vector temp
+            StringBuilder sb = new StringBuilder();  // variable to store the temporary result
+            for(int j = 0; j < n; j++){  // iterate through the vector temp
+                sb.Append('.');  // append the value into the string builder
+            }
+            temp.Add(sb.ToString());  // push the temporary result into the list
+        }
+        solveHelper(res, temp, 0, n);  // call the function to find the solution
+        return res;  // return the result
+    }
+    
+    void solveHelper(IList<IList<string>> res, IList<string> temp, int row, int n){
+        if(row == n){  // if the value of the variable row is equal to the value of the variable n
+            res.Add(new List<string>(temp));  // push the temporary result into the result
+            return;  // return
+        }
+        for(int col = 0; col < n; col++){  // iterate through the vector temp
+            if(isValid(temp, row, col, n)){  // if the current position is valid
+                StringBuilder sb = new StringBuilder(temp[row]);  // variable to store the temporary result
+                sb[col] = 'Q';  // update the value of the vector temp
+                temp[row] = sb.ToString();  // update the value of the vector temp
+                solveHelper(res, temp, row + 1, n);  // call the function to find the solution
+                sb[col] = '.';  // update the value of the vector temp
+                temp[row] = sb.ToString();  // update the value of the vector temp
+            }
+        }
+    }
+    
+    bool isValid(IList<string> temp, int row, int col, int n){
+        for(int i = 0; i < row; i++){  // iterate through the vector temp
+            if(temp[i][col] == 'Q'){  // if the current position is valid
+                return false;  // return false
+            }
+        }
+        for(int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--){  // iterate through the vector temp
+            if(temp[i][j] == 'Q'){  // if the current position is valid
+                return false;  // return false
+            }
+        }
+        for(int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++){  // iterate through the vector temp
+            if(temp[i][j] == 'Q'){  // if the current position is valid
+                return false;  // return false
+            }
+        }
+        return true;  // return true
+    }
+}
+
 
 
 JavaScript:
