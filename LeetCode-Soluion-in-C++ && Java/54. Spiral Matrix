@@ -213,6 +213,47 @@ int* spiralOrder(int** matrix, int matrixSize, int* matrixColSize, int* returnSi
 
 C#:
 
+// Time Complexity : O(m * n) where m is the number of rows and n is the number of columns and space complexity is O(1)
+
+public class Solution {
+    public IList<int> SpiralOrder(int[][] matrix) {
+        IList<int> result = new List<int>();  // list to store the result
+        if(matrix.Length == 0){  // if the matrix is empty
+            return result;  // return the result
+        }
+        int m = matrix.Length;  // variable to store the number of rows
+        int n = matrix[0].Length;  // variable to store the number of columns
+        int top = 0;  // variable to store the top row
+        int bottom = m - 1;  // variable to store the bottom row
+        int left = 0;  // variable to store the left column
+        int right = n - 1;  // variable to store the right column
+        while(top <= bottom && left <= right){  // iterate until the top row is less than or equal to the bottom row and the left column is less than or equal to the right column
+            for(int i = left; i <= right; i++){  // iterate through the top row
+                result.Add(matrix[top][i]);  // add the element to the result
+            }
+            top++;  // increment the top row
+            for(int i = top; i <= bottom; i++){  // iterate through the right column
+                result.Add(matrix[i][right]);  // add the element to the result
+            }
+            right--;  // decrement the right column
+            if(top <= bottom){  // if the top row is less than or equal to the bottom row
+                for(int i = right; i >= left; i--){  // iterate through the bottom row
+                    result.Add(matrix[bottom][i]);  // add the element to the result
+                }
+                bottom--;  // decrement the bottom row
+            }
+            if(left <= right){  // if the left column is less than or equal to the right column
+                for(int i = bottom; i >= top; i--){  // iterate through the left column
+                    result.Add(matrix[i][left]);  // add the element to the result
+                }
+                left++;  // increment the left column
+            }
+        }
+        return result;  // return the result
+    }
+}
+
+
 JavaScript:
 
 
