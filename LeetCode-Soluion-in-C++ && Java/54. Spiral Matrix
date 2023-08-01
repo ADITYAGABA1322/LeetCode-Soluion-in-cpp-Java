@@ -105,6 +105,39 @@ class Solution {
 
 Python:
 
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """ 
+        result = []  # list to store the result
+        if len(matrix) == 0:  # if the matrix is empty
+            return result  # return the result
+        m = len(matrix)  # variable to store the number of rows
+        n = len(matrix[0])  # variable to store the number of columns
+        top = 0  # variable to store the top row
+        bottom = m - 1  # variable to store the bottom row
+        left = 0  # variable to store the left column
+        right = n - 1  # variable to store the right column
+        while top <= bottom and left <= right:  # iterate until the top row is less than or equal to the bottom row and the left column is less than or equal to the right column
+            for i in range(left, right + 1):  # iterate through the top row
+                result.append(matrix[top][i])  # append the element to the result
+            top += 1  # increment the top row
+            for i in range(top, bottom + 1):  # iterate through the right column
+                result.append(matrix[i][right])  # append the element to the result
+            right -= 1  # decrement the right column
+            if top <= bottom:  # if the top row is less than or equal to the bottom row
+                for i in range(right, left - 1, -1):  # iterate through the bottom row
+                    result.append(matrix[bottom][i])  # append the element to the result
+                bottom -= 1  # decrement the bottom row
+            if left <= right:  # if the left column is less than or equal to the right column
+                for i in range(bottom, top - 1, -1):  # iterate through the left column
+                    result.append(matrix[i][left])  # append the element to the result
+                left += 1  # increment the left column
+        return result  # return the result
+
+
 Python3:
 
 C:
