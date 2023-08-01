@@ -4,30 +4,147 @@
 1 August 2023
 
 
+
 Medium
 
 
 C++:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {    // canJump function
+        int n = nums.size();  // n = nums.size()
+        int maxReach = 0;  //   maxReach = 0
+        for(int i=0; i<n; i++){ //   loop for i
+            if(i>maxReach) return false;  //  if condition is true
+            maxReach = max(maxReach, i+nums[i]);   // maxReach = max(maxReach, i+nums[i])  
+        }
+        return true; // return true
+    }
+};
 
 Java:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public boolean canJump(int[] nums) {    // canJump function
+        int n = nums.length;  // n = nums.length
+        int maxReach = 0;  //   maxReach = 0
+        for(int i=0; i<n; i++){ //   loop for i
+            if(i>maxReach) return false;  //  if condition is true
+            maxReach = Math.max(maxReach, i+nums[i]);   // maxReach = max(maxReach, i+nums[i])  
+        }
+        return true; // return true
+    }
+}
+
+
 
 Python:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """ 
+        n = len(nums)  # n = len(nums)
+        maxReach = 0  # maxReach = 0
+        for i in range(n):  # loop for i
+            if i > maxReach:  # if condition is true
+                return False  # return False
+            maxReach = max(maxReach, i + nums[i])  # maxReach = max(maxReach, i+nums[i])  
+        return True  # return True
+
 
 
 Python3:
 
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)  # n = len(nums)
+        maxReach = 0  # maxReach = 0
+        for i in range(n):  # loop for i
+            if i > maxReach:  # if condition is true
+                return False  # return False
+            maxReach = max(maxReach, i + nums[i])  # maxReach = max(maxReach, i+nums[i])  
+        return True  # return True
+
+
+
 C:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+bool canJump(int* nums, int numsSize){
+    int n = numsSize;  // n = numsSize
+    int maxReach = 0;  // maxReach = 0
+    for(int i=0; i<n; i++){ //   loop for i
+        if(i>maxReach) return false;  //  if condition is true
+        maxReach = fmax(maxReach, i+nums[i]);   // maxReach = max(maxReach, i+nums[i])  
+    }
+    return true; // return true
+}
 
 
 C#:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public bool CanJump(int[] nums) {    // canJump function
+        int n = nums.Length;  // n = nums.Length
+        int maxReach = 0;  //   maxReach = 0
+        for(int i=0; i<n; i++){ //   loop for i
+            if(i>maxReach) return false;  //  if condition is true
+            maxReach = Math.Max(maxReach, i+nums[i]);   // maxReach = max(maxReach, i+nums[i])  
+        }
+        return true; // return true
+    }
+}
+
+
 
 JavaScript:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+var canJump = function(nums) {
+    let n = nums.length;  // n = nums.length
+    let maxReach = 0;  //   maxReach = 0
+    for(let i=0; i<n; i++){ //   loop for i
+        if(i>maxReach) return false;  //  if condition is true
+        maxReach = Math.max(maxReach, i+nums[i]);   // maxReach = max(maxReach, i+nums[i])  
+    }
+    return true; // return true
+};
+
 
 Swift:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func canJump(_ nums: [Int]) -> Bool {
+        var n = nums.count  // n = nums.count
+        var maxReach = 0  //   maxReach = 0
+        for i in 0..<n { //   loop for i
+            if i > maxReach {  //  if condition is true
+                return false  //  return false
+            }
+            maxReach = max(maxReach, i + nums[i])  // maxReach = max(maxReach, i+nums[i])  
+        }
+        return true  // return true
+    }
+}
+
 
 
