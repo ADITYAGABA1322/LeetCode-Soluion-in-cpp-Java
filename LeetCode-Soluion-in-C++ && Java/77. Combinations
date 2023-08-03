@@ -109,6 +109,22 @@ class Solution:
 C:
 
 
+// Time Complexity : O(n^k) where n is the number of elements and k is the size of the vector nums and space complexity is O(n^k)
+
+void combineHelper(int** combs, int* comb, int start, int n, int k, int* returnSize, int** returnColumnSizes){
+    if(k == 0){  // if k is equal to 0
+        combs[*returnSize] = (int*)malloc(sizeof(int) * n);  // push the vector comb to the vector combs
+        memcpy(combs[*returnSize], comb, sizeof(int) * n);  // push the vector comb to the vector combs
+        (*returnColumnSizes)[*returnSize] = n;  // push the vector comb to the vector combs
+        (*returnSize)++;  // push the vector comb to the vector combs
+        return;  // return
+    }
+    for(int i = start; i <= n; i++){  // loop for i
+        comb[n - k] = i;  // push the element to the vector comb
+        combineHelper(combs, comb, i + 1, n, k - 1, returnSize, returnColumnSizes);  // call the combine function
+    }
+}
+
 
 C#
 
