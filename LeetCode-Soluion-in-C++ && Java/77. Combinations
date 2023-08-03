@@ -126,6 +126,16 @@ void combineHelper(int** combs, int* comb, int start, int n, int k, int* returnS
 }
 
 
+int** combine(int n, int k, int* returnSize, int** returnColumnSizes){
+    int** combs = (int**)malloc(sizeof(int*) * 10000);  // vector to store the result
+    int* comb = (int*)malloc(sizeof(int) * k);  // vector to store the combination
+    *returnSize = 0;  // variable to store the size of the result
+    *returnColumnSizes = (int*)malloc(sizeof(int) * 10000);  // variable to store the size of the result
+    combineHelper(combs, comb, 1, n, k, returnSize, returnColumnSizes);  // call the combine function
+    return combs;  // return the vector combs
+}
+
+
 C#
 
 
