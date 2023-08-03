@@ -187,3 +187,27 @@ var combineHelper = function(combs, comb, start, n, k){
 
 
 Swift:
+
+// Time Complexity : O(n^k) where n is the number of elements and k is the size of the vector nums and space complexity is O(n^k)
+
+class Solution {
+    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+        var combs = [[Int]]()  // vector to store the result
+        var comb = [Int]()  // vector to store the combination
+        func combineHelper(start: Int, comb: inout[Int] , k: Int){ // call the combine function
+            if k == 0{  // if k is equal to 0
+            combs.append(comb)  // push the vector comb to the vector combs
+            return  // return
+        }
+        if start > n{ return } // if start is greater than n then return 
+        for i in start...n{  // loop for i
+            comb.append(i)  // push the element to the vector comb
+            combineHelper(start: i + 1, comb: &comb, k: k - 1)  // call the combine function
+            comb.removeLast()  // pop the element from the vector comb
+        }
+        }
+        combineHelper(start: 1, comb: &comb, k: k)  // call the combine function
+        return combs  // return the vector combs
+    }
+}
+
