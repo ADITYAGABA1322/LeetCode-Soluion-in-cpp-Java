@@ -54,6 +54,21 @@ class Solution {
 
 Python:
 
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """ 
+        intervals.sort(key = lambda x: x[0])  # sort the vector intervals
+        merge = []  # vector to store the result
+        for it in intervals:  # iterate through the vector intervals
+            if not merge or merge[-1][1] < it[0]:  # if the vector merge is empty or the last element of the vector merge is less than the first element of the vector it
+                merge.append(it)  # push the vector it to the vector merge
+            else:  # else
+                merge[-1][1] = max(merge[-1][1], it[1])  # update the last element of the vector merge
+        return merge  # return the vector merge
+
 
 Python3:
 
