@@ -32,12 +32,25 @@ public:
     }
 };
 
-
-
-
-
 Java:
 
+// Time Complexity : O(nlogn) where n is the size of the vector intervals and space complexity is O(1)
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // sort the vector intervals
+        LinkedList<int[]> merge = new LinkedList<>(); // vector to store the result
+        for(int[] it : intervals){ // iterate through the vector intervals
+            if(merge.isEmpty() || merge.getLast()[1] < it[0]){ // if the vector merge is empty or the last element of the vector merge is less than the first element of the vector it
+                merge.add(it); // push the vector it to the vector merge
+            }
+            else{ // else
+                merge.getLast()[1] = Math.max(merge.getLast()[1], it[1]); // update the last element of the vector merge
+            }
+        }
+        return merge.toArray(new int[merge.size()][]); // return the vector merge
+    }
+}
 
 Python:
 
