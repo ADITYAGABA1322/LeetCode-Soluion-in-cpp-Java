@@ -13,6 +13,28 @@ Medium
 C++:
 
 
+// Time Complexity : O(nlogn) where n is the size of the vector intervals and space complexity is O(1)
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+         vector<vector<int>> merge; // vector to store the result
+         sort(intervals.begin(), intervals.end()); // sort the vector intervals
+         for(auto it : intervals){ // iterate through the vector intervals
+             if(merge.empty() || merge.back()[1] < it[0]){ // if the vector merge is empty or the last elemet of the vector merge is less than the first element of the vector it
+                 merge.push_back(it); // push the vector it to the vector merge
+             }
+             else{ // else
+                 merge.back()[1] = max(merge.back()[1], it[1]); // update the last element of the vector merge
+             }
+         }
+        return merge; // return the vector merge
+    }
+};
+
+
+
+
 
 Java:
 
