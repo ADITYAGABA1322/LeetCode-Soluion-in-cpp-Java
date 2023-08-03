@@ -10,6 +10,29 @@ Medium
 
 C++:
 
+// Time Complexity : O(n^k) where n is the number of elements and k is the size of the vector nums and space complexity is O(n^k)
+
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+         vector<vector<int>> combs; // vector to store the result
+            vector<int> comb; // vector to store the combination
+            combine(combs, comb, 1, n, k); // call the combine function
+            return combs; // return the vector combs
+    }
+    void combine(vector<vector<int>>& combs, vector<int>& comb, int start, int n, int k) {
+        if(k==0){ // if k is equal to 0
+            combs.push_back(comb); // push the vector comb to the vector combs
+            return; // return
+        }
+        for(int i=start; i<=n; i++){ // loop for i
+            comb.push_back(i); // push the element to the vector comb
+            combine(combs, comb, i+1, n, k-1); // call the combine function
+            comb.pop_back(); // pop the element from the vector comb
+        }
+    }
+};
+
 
 
 Java:
