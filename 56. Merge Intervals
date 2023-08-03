@@ -139,5 +139,21 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(nlogn) where n is the size of the vector intervals and space complexity is O(1)
+
+var merge = function(intervals) {
+    intervals.sort((a, b) => a[0] - b[0]);  // sort the vector intervals
+    let merge = [];  // vector to store the result
+    for(let it of intervals){  // iterate through the vector intervals
+        if(merge.length == 0 || merge[merge.length - 1][1] < it[0]){  // if the vector merge is empty or the last element of the vector merge is less than the first element of the vector it
+            merge.push(it);  // push the vector it to the vector merge
+        }
+        else{  // else
+            merge[merge.length - 1][1] = Math.max(merge[merge.length - 1][1], it[1]);  // update the last element of the vector merge
+        }
+    }
+    return merge;  // return the vector merge
+};
+
 
 Swift:
