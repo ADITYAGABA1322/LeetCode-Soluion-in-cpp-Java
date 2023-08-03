@@ -157,3 +157,22 @@ var merge = function(intervals) {
 
 
 Swift:
+
+// Time Complexity : O(nlogn) where n is the size of the vector intervals and space complexity is O(1)
+
+class Solution {
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        var intervals = intervals.sorted(by: { $0[0] < $1[0] })  // sort the vector intervals
+        var merge = [[Int]]()  // vector to store the result
+        for it in intervals{  // iterate through the vector intervals
+            if merge.isEmpty || merge[merge.count - 1][1] < it[0]{  // if the vector merge is empty or the last element of the vector merge is less than the first element of the vector it
+                merge.append(it)  // push the vector it to the vector merge
+            }
+            else{  // else
+                merge[merge.count - 1][1] = max(merge[merge.count - 1][1], it[1])  // update the last element of the vector merge
+            }
+        }
+        return merge  // return the vector merge
+    }
+}
+
