@@ -163,6 +163,27 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(n^k) where n is the number of elements and k is the size of the vector nums and space complexity is O(n^k)
+
+var combine = function(n, k) {
+    let combs = [];  // vector to store the result
+    let comb = [];  // vector to store the combination
+    combineHelper(combs, comb, 1, n, k);  // call the combine function
+    return combs;  // return the vector combs
+};
+
+var combineHelper = function(combs, comb, start, n, k){
+    if(k == 0){  // if k is equal to 0
+        combs.push(comb.slice());  // push the vector comb to the vector combs
+        return;  // return
+    }
+    for(let i = start; i <= n; i++){  // loop for i
+        comb.push(i);  // push the element to the vector comb
+        combineHelper(combs, comb, i + 1, n, k - 1);  // call the combine function
+        comb.pop();  // pop the element from the vector comb
+    }
+};
+
 
 
 Swift:
