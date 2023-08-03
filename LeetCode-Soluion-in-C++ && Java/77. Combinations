@@ -136,7 +136,29 @@ int** combine(int n, int k, int* returnSize, int** returnColumnSizes){
 }
 
 
-C#
+C#:
+
+// Time Complexity : O(n^k) where n is the number of elements and k is the size of the vector nums and space complexity is O(n^k)
+
+public class Solution {
+    public IList<IList<int>> Combine(int n, int k) {
+        IList<IList<int>> combs = new List<IList<int>>();  // vector to store the result
+        IList<int> comb = new List<int>();  // vector to store the combination
+        CombineHelper(combs, comb, 1, n, k);  // call the combine function
+        return combs;  // return the vector combs
+    }
+    public void CombineHelper(IList<IList<int>> combs, IList<int> comb, int start, int n, int k){
+        if(k == 0){  // if k is equal to 0
+            combs.Add(new List<int>(comb));  // push the vector comb to the vector combs
+            return;  // return
+        }
+        for(int i = start; i <= n; i++){  // loop for i
+            comb.Add(i);  // push the element to the vector comb
+            CombineHelper(combs, comb, i + 1, n, k - 1);  // call the combine function
+            comb.RemoveAt(comb.Count - 1);  // pop the element from the vector comb
+        }
+    }
+}
 
 
 JavaScript:
