@@ -47,6 +47,22 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """ 
+        n = len(s)  # n is the size of the string s
+        count = 0  # count is the length of the last word
+        for i in range(n-1, -1, -1):  # loop for i
+            if s[i] == ' ' and count > 0:  # if the character is space and count is greater than 0
+                break  # break
+            elif s[i] != ' ':  # else if the character is not space
+                count += 1  # increment the count
+        return count  # return the count
 
 
 
