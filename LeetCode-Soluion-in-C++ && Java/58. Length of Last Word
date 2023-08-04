@@ -134,3 +134,52 @@ var lengthOfLastWord = function(s) {
 
 
 Swift:
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution {
+    func lengthOfLastWord(_ s: String) -> Int {
+        let n = s.count;  // n is the size of the string s
+        var count = 0;  // count is the length of the last word
+        for i in stride(from: n-1, through: 0, by: -1){  // loop for i
+            if s[s.index(s.startIndex, offsetBy: i)] == " " && count > 0{  // if the character is space and count is greater than 0
+                break;  // break
+            }
+            else if s[s.index(s.startIndex, offsetBy: i)] != " "{  // else if the character is not space
+                count += 1;  // increment the count
+            }
+        }
+        return count;  // return the count
+    }
+}
+
+2nd Method
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution {
+    func lengthOfLastWord(_ s: String) -> Int {
+        guard let word = s.split(separator: " ").last else { return 0 }
+        return word.count
+    }
+}
+
+3rd Method
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution {
+    func lengthOfLastWord(_ s: String) -> Int {
+        var count = 0
+        for char in s.reversed() {
+            if char == " " && count > 0 {
+                break
+            } else if char != " " {
+                count += 1
+            }
+        }
+        return count
+    }
+}
+
+
