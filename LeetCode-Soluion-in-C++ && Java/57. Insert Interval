@@ -192,3 +192,31 @@ var insert = function(intervals, newInterval) {
 
 Swift:
 
+
+// Time Complexity : O(n) where n is the size of the vector intervals and space complexity is O(1)
+
+class Solution {
+    func insert(_ intervals: [[Int]], _ newInterval: [Int]) -> [[Int]] {
+        var n = intervals.count;  // n is the size of the vector of intervals
+        var start = newInterval[0];  // start is the start of the interval
+        var end = newInterval[1];  // end is the end of the interval
+        var i = 0;  // i is the index of the interval
+        var result = [[Int]]();  // result is the vector of intervals after inserting the interval
+        while i < n && intervals[i][1] < start {  // while the end of the interval is less than the start of the interval
+            result.append(intervals[i]);  // push the interval in the result    
+            i += 1;  // increment the index of the interval
+        }
+        while i < n && intervals[i][0] <= end {  // while the start of the interval is less than or equal to the end of the interval
+            start = min(start, intervals[i][0]);  // update the start of the interval
+            end = max(end, intervals[i][1]);  // update the end of the interval
+            i += 1;  // increment the in interval
+        }
+        result.append([start, end]);  // push the interval in the result
+        while i < n {  // while the index of the interval is less than the size of the vector of intervals
+            result.append(intervals[i]);  // push the interval in the result
+            i += 1;  // increment the index of the interval
+        }
+        return result;  // return the result
+    }
+}
+
