@@ -99,8 +99,21 @@ int lengthOfLastWord(char * s){
 
 
 
-
 C#:
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+public class Solution {
+    public int LengthOfLastWord(string s) {
+        int n = s.Length;  // n is the size of the string s
+        int count = 0;  // count is the length of the last word
+        for(int i=n-1; i>=0; i--){  // loop for i
+            if(s[i] == ' ' && count > 0) break;  // if the character is space and count is greater than 0
+            else if(s[i] != ' ') count++;  // else if the character is not space
+        }
+        return count;  // return the count
+    }
+}
 
 
 
