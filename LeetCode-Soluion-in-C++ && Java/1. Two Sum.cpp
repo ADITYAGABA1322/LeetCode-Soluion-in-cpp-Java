@@ -1,4 +1,4 @@
-# LeetCode-Soluion-in-C-Java
+# LeetCode-Soluion-in-Cpp-Java
 
 
 1.Two Sum
