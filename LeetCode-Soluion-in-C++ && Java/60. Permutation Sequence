@@ -161,6 +161,30 @@ class Solution:
 C:
 
 
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+char * getPermutation(int n, int k){
+    char *s = (char*)malloc(sizeof(char)*n);  // string to store the result
+    int *nums = (int*)malloc(sizeof(int)*n);  // vector to store the numbers
+    int fact = 1;  // variable to store the factorial
+    for(int i=1; i<=n; i++){  // loop for i
+        fact *= i;  // update the factorial
+        nums[i-1] = i;  // update the numbers
+    }
+    for(int i=0, l=k-1; i<n; i++){  // loop for i
+        fact /= n-i;  // update the factorial
+        int index = (l/fact);  // variable to store the index
+        s[i] = nums[index]+'0';  // update the string
+        for(int j=index; j<n-i-1; j++){  // loop for j
+            nums[j] = nums[j+1];  // update the numbers
+        }
+        l -= index*fact;  // update the l
+    }
+    return s;  // return the string
+}
+
+
+
 C#:
 
 
