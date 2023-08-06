@@ -212,5 +212,25 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+var getPermutation = function(n, k) {
+    let s = "";  // string to store the result
+    let nums = [];  // vector to store the numbers
+    let fact = 1;  // variable to store the factorial
+    for(let i=1; i<=n; i++){  // loop for i
+        fact *= i;  // update the factorial
+        nums.push(i);  // push the number in the vector nums
+    }
+    for(let i=0, l=k-1; i<n; i++){  // loop for i
+        fact /= n-i;  // update the factorial
+        let index = Math.floor(l/fact);  // variable to store the index
+        s += nums[index];  // update the string
+        nums.splice(index, 1);  // erase the number from the vector nums
+        l -= index*fact;  // update the l
+    }
+    return s;  // return the string
+};
+
 
 Swift:
