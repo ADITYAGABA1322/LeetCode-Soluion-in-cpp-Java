@@ -10,6 +10,81 @@ Hard
 
 C++:
 
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        string s = ""; // string to store the result
+        vector<int> nums; // vector to store the numbers
+        int fact = 1; // variable to store the factorial
+        for(int i=1; i<=n; i++){ // loop for i
+            fact *= i; // update the factorial
+            nums.push_back(i); // push the number in the vector nums
+        }
+        for(int i=0, l=k-1; i<n; i++){ // loop for i
+            fact /= n-i; // update the factorial
+            int index = (l/fact); // variable to store the index
+            s += to_string(nums[index]); // update the string
+            nums.erase(nums.begin()+index); // erase the number from the vector nums
+            l -= index*fact; // update the l
+        }
+        return s; // return the string
+        
+    }
+};
+
+2nd Method
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+#include <algorithm>
+#include <string>
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        string s = "";
+        for (int i = 1; i <= n; i++) {
+            s += to_string(i);
+        }
+        while (--k) {
+            std::next_permutation(s.begin(), s.end());
+        }
+        return s;
+    }
+};
+
+
+3rd Method 
+
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
+
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        string s = ""; // string to store the result
+        vector<int> fact(n); // vector to store the factorial
+        vector<int> nums(n); // vector to store the numbers
+        fact[0] = 1; // initialize the factorial
+        for(int i=1; i<n; i++){ // loop for i
+            fact[i] = fact[i-1]*i; // update the factorial
+        }
+        for(int i=1; i<=n; i++){ // loop for i
+            nums[i-1] = i; // update the numbers
+        }
+        k--; // decrement the k
+        for(int i=1; i<=n; i++){ // loop for i
+            int index = k/fact[n-i]; // index is the index of the number
+            s += to_string(nums[index]); // update the string
+            nums.erase(nums.begin()+index); // erase the number
+            k -= index*fact[n-i]; // update the k
+        }
+        return s; // return the string
+    }
+};
+
+
 
 
 Java:
