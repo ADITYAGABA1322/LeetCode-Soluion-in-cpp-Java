@@ -140,7 +140,23 @@ class Solution(object):
 
 Python3:
 
+// Time Complexity : O(n) where n is the size of the string s and space complexity is O(1)
 
+class Solution:
+    def getPermutation(self, n: int, k: int -> str:  // add the missing bracket after int
+        s = ""  # string to store the result
+        nums = [i for i in range(1, n+1)]  # vector to store the numbers
+        fact = 1  # variable to store the factorial
+        for i in range(1, n+1):  # loop for i
+            fact *= i  # update the factorial
+        k-=1 # decrement the k
+        for i in range(n):  # loop for i
+            fact /= n-i  # update the factorial
+            index = int(k/fact)  # variable to store the index
+            s += str(nums[index])  # update the string
+            nums.remove(nums[index])  # erase the number from the vector nums
+            k -= index*fact  # update the k
+        return s  # return the string
 
 C:
 
