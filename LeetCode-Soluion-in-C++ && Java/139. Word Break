@@ -65,6 +65,53 @@ public:
 
 Java:
 
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length(); // variable to store the size of the string s
+        boolean[] dp = new boolean[n+1]; // vector to store the result
+        dp[0] = true; // initialize the dp[0] to true
+        for(int i=1; i<=n; i++){ // loop for i
+            for(int j=0; j<i; j++){ // loop for j
+                if(dp[j] && wordDict.contains(s.substring(j, i))){ // if dp[j] is true and the word is present in the dictionary
+                    dp[i] = true; // update the dp[i]
+                    break; // break
+                }
+            }
+        }
+        return dp[n]; // return the dp[n]
+    }
+}
+
+2nd Method using BFS
+
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict); // unordered_set to store the dictionary
+        Queue<Integer> q = new LinkedList<>(); // queue to store the index
+        boolean[] visited = new boolean[s.length()]; // vector to store the visited
+        q.add(0); // push the index 0
+        while(!q.isEmpty()){ // while queue is not empty
+            int start = q.poll(); // variable to store the start
+            if(!visited[start]){ // if start is not visited
+                for(int end=start+1; end<=s.length(); end++){ // loop for end
+                    if(dict.contains(s.substring(start, end))){ // if the word is present in the dictionary
+                        q.add(end); // push the end
+                        if(end == s.length()){ // if end is equal to the size of the string s
+                            return true; // return true
+                        }
+                    }
+                }
+                visited[start] = true; // update the visited
+            }
+        }
+        return false; // return false
+    }
+}
+
 
 
 Python:
