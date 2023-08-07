@@ -180,6 +180,26 @@ bool wordBreak(char * s, char ** wordDict, int wordDictSize){
 
 C#:
 
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+public class Solution {
+    public bool WordBreak(string s, IList<string> wordDict) {
+        int n = s.Length;  // variable to store the size of the string s
+        bool[] dp = new bool[n+1];  // vector to store the result
+        dp[0] = true;  // initialize the dp[0] to true
+        for(int i=1; i<=n; i++){  // loop for i
+            for(int j=0; j<i; j++){  // loop for j
+                if(dp[j] && wordDict.Contains(s.Substring(j, i-j))){  // if dp[j] is true and the word is present in the dictionary
+                    dp[i] = true;  // update the dp[i]
+                    break;  // break
+                }
+            }
+        }
+        return dp[n];  // return the dp[n]
+    }
+}
+
+
 
 
 
