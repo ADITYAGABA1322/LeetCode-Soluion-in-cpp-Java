@@ -158,6 +158,25 @@ class Solution:
 
 C:
 
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+bool wordBreak(char * s, char ** wordDict, int wordDictSize){
+    int n = strlen(s);  // variable to store the size of the string s
+    bool dp[n+1];  // vector to store the result
+    memset(dp, false, sizeof(dp));  // initialize the dp
+    dp[0] = true;  // initialize the dp[0] to true
+    for(int i=1; i<=n; i++){  // loop for i
+        for(int j=0; j<i; j++){  // loop for j
+            if(dp[j] && strstr(s+j, wordDict[i]) != NULL){  // if dp[j] is true and the word is present in the dictionary
+                dp[i] = true;  // update the dp[i]
+                break;  // break
+            }
+        }
+    }
+    return dp[n];  // return the dp[n]
+}
+
+
 
 C#:
 
