@@ -7,7 +7,59 @@
 Medium
 
 
+
 C++:
+
+
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size(); // variable to store the size of the string s
+        vector<bool> dp(n+1, false); // vector to store the result
+        dp[0] = true; // initialize the dp[0] to true
+        for(int i=1; i<=n; i++){ // loop for i
+            for(int j=0; j<i; j++){ // loop for j
+                if(dp[j] && find(wordDict.begin(), wordDict.end(), s.substr(j, i-j)) != wordDict.end()){ // if dp[j] is true and the word is present in the dictionary
+                    dp[i] = true; // update the dp[i]
+                    break; // break
+                }
+            }
+        }
+        return dp[n]; // return the dp[n]
+    }
+};
+
+2nd Method using BFS
+
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> dict(wordDict.begin(), wordDict.end()); // unordered_set to store the dictionary
+        queue<int> q; // queue to store the index
+        vector<bool> visited(s.size(), false); // vector to store the visited
+        q.push(0); // push the index 0
+        while(!q.empty()){ // while queue is not empty
+            int start = q.front(); // variable to store the start
+            q.pop(); // pop the element from the queue
+            if(!visited[start]){ // if start is not visited
+                for(int end=start+1; end<=s.size(); end++){ // loop for end
+                    if(dict.find(s.substr(start, end-start)) != dict.end()){ // if the word is present in the dictionary
+                        q.push(end); // push the end
+                        if(end == s.size()){ // if end is equal to the size of the string s
+                            return true; // return true
+                        }
+                    }
+                }
+                visited[start] = true; // update the visited
+            }
+        }
+        return false; // return false
+    }
+};  
 
 
 
