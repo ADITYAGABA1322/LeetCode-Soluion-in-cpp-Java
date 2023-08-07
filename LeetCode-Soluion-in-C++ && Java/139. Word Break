@@ -201,9 +201,25 @@ public class Solution {
 
 
 
-
-
 JavaScript:
+
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+var wordBreak = function(s, wordDict) {
+    let n = s.length;  // variable to store the size of the string s
+    let dp = new Array(n+1).fill(false);  // vector to store the result
+    dp[0] = true;  // initialize the dp[0] to true
+    for(let i=1; i<=n; i++){  // loop for i
+        for(let j=0; j<i; j++){  // loop for j
+            if(dp[j] && wordDict.includes(s.substring(j, i))){  // if dp[j] is true and the word is present in the dictionary
+                dp[i] = true;  // update the dp[i]
+                break;  // break
+            }
+        }
+    }
+    return dp[n];  // return the dp[n]
+};
+
 
 
 
