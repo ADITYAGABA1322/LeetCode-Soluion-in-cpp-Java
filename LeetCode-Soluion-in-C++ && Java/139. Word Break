@@ -224,3 +224,23 @@ var wordBreak = function(s, wordDict) {
 
 
 Swift:
+
+// Time Complexity : O(n^2) where n is the size of the string s and space complexity is O(n)
+
+class Solution {
+    func wordBreak(_ s: String, _ wordDict: [String]) -> Bool {
+        let n = s.count  // variable to store the size of the string s
+        var dp = [Bool](repeating: false, count: n+1)  // vector to store the result
+        dp[0] = true  // initialize the dp[0] to true
+        for i in 1...n{  // loop for i
+            for j in 0..<i{  // loop for j
+                if dp[j] && wordDict.contains(String(s[s.index(s.startIndex, offsetBy: j)..<s.index(s.startIndex, offsetBy: i)])){  // if dp[j] is true and the word is present in the dictionary
+                    dp[i] = true  // update the dp[i]
+                    break  // break
+                }
+            }
+        }
+        return dp[n]  // return the dp[n]
+    }
+}
+
