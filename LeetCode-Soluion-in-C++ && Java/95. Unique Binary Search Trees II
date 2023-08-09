@@ -42,12 +42,37 @@ public:
 };
 
 
-
-
-
-
 Java:
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
 
+class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        if(n==0){ // if n is equal to 0
+            return new ArrayList<TreeNode>(); // return empty vector
+        }
+        return generateTrees(1, n); // call the generateTrees function
+    }
+    public List<TreeNode> generateTrees(int start, int end){
+        List<TreeNode> trees = new ArrayList<>(); // vector to store the result
+        if(start > end){ // if start is greater than end
+            trees.add(null); // push the null in the vector trees
+            return trees; // return the vector trees
+        }
+        for(int i=start; i<=end; i++){ // loop for i
+            List<TreeNode> leftTrees = generateTrees(start, i-1); // vector to store the leftTrees
+            List<TreeNode> rightTrees = generateTrees(i+1, end); // vector to store the rightTrees
+            for(TreeNode leftTree: leftTrees){ // loop for leftTreeT
+                for(TreeNode rightTree: rightTrees){ // loop for rightTree
+                    TreeNode root = new TreeNode(i); // create the root
+                    root.left = leftTree; // update the left
+                    root.right = rightTree; // update the right
+                    trees.add(root); // push the root in the vector trees
+                }
+            }
+        }
+        return trees; // return the vector trees
+    }
+}
 
 
 Python:
