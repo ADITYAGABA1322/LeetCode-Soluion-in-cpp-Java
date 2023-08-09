@@ -77,6 +77,33 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+class Solution(object):
+    def generateTrees(self, n):
+        """
+        :type n: int
+        :rtype: List[TreeNode]
+        """ 
+        if n == 0:  # if n is equal to 0
+            return []  # return empty vector
+        return self.generateTreesHelper(1, n)  # call the generateTrees function
+    def generateTreesHelper(self, start, end):
+        trees = []  # vector to store the result
+        if start > end:  # if start is greater than end
+            trees.append(None)  # push the null in the vector trees
+            return trees  # return the vector trees
+        for i in range(start, end + 1):  # loop for i
+            leftTrees = self.generateTreesHelper(start, i - 1)  # vector to store the leftTrees
+            rightTrees = self.generateTreesHelper(i + 1, end)  # vector to store the rightTrees
+            for leftTree in leftTrees:  # loop for leftTreeT
+                for rightTree in rightTrees:  # loop for rightTree
+                    root = TreeNode(i)  # create the root
+                    root.left = leftTree  # update the left
+                    root.right = rightTree  # update the right
+                    trees.append(root)  # push the root in the vector trees
+        return trees  # return the vector trees
+
 
 
 Python3:
