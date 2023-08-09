@@ -9,6 +9,39 @@ Medium
 
 C++:
 
+class Solution {
+public:
+    vector<TreeNode*> generateTrees(int n) {
+        if(n==0){ // if n is equal to 0
+            return {}; // return empty vector
+        }
+        return generateTrees(1, n); // call the generateTrees function
+    }
+    vector<TreeNode*> generateTrees(int start, int end){
+        vector<TreeNode*> trees; // vector to store the result
+        if(start > end){ // if start is greater than end
+            trees.push_back(NULL); // push the null in the vector trees
+            return trees; // return the vector trees
+        }
+        for(int i=start; i<=end; i++){ // loop for i
+            vector<TreeNode*> leftTrees = generateTrees(start, i-1); // vector to store the leftTrees
+            vector<TreeNode*> rightTrees = generateTrees(i+1, end); // vector to store the rightTrees
+            for(auto leftTree: leftTrees){ // loop for leftTreeT
+                for(auto rightTree: rightTrees){ // loop for rightTree
+                    TreeNode* root = new TreeNode(i); // create the root
+                    root->left = leftTree; // update the left
+                    root->right = rightTree; // update the right
+                    trees.push_back(root); // push the root in the vector trees
+                }
+            }
+        }
+        return trees; // return the vector trees
+    }
+};
+
+
+
+
 
 
 Java:
