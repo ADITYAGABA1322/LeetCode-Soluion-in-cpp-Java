@@ -178,6 +178,36 @@ struct TreeNode** generateTreesHelper(int start, int end, int* returnSize){
 
 C#
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+public class Solution {
+    public IList<TreeNode> GenerateTrees(int n) {
+        if(n==0){  // if n is equal to 0
+            return new List<TreeNode>();  // return empty vector
+        }
+        return GenerateTreesHelper(1, n);  // call the generateTrees function
+    }
+    public IList<TreeNode> GenerateTreesHelper(int start, int end){
+        IList<TreeNode> trees = new List<TreeNode>();  // vector to store the result
+        if(start > end){  // if start is greater than end
+            trees.Add(null);  // push the null in the vector trees
+            return trees;  // return the vector trees
+        }
+        for(int i=start; i<=end; i++){  // loop for i
+            IList<TreeNode> leftTrees = GenerateTreesHelper(start, i-1);  // vector to store the leftTrees
+            IList<TreeNode> rightTrees = GenerateTreesHelper(i+1, end);  // vector to store the rightTrees
+            foreach(TreeNode leftTree in leftTrees){  // loop for leftTreeT
+                foreach(TreeNode rightTree in rightTrees){  // loop for rightTree
+                    TreeNode root = new TreeNode(i);  // create the root
+                    root.left = leftTree;  // update the left
+                    root.right = rightTree;  // update the right
+                    trees.Add(root);  // push the root in the vector trees
+                }
+            }
+        }
+        return trees;  // return the vector trees
+    }
+}
 
 
 JavaScript:
