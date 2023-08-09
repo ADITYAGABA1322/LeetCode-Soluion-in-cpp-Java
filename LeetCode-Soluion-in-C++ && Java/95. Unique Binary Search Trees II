@@ -137,6 +137,43 @@ class Solution:
 
 C:
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+struct TreeNode** generateTrees(int n, int* returnSize){
+    if(n==0){  // if n is equal to 0
+        *returnSize = 0;  // return empty vector
+        return NULL;  // return empty vector
+    }
+    return generateTreesHelper(1, n, returnSize);  // call the generateTrees function
+}
+
+struct TreeNode** generateTreesHelper(int start, int end, int* returnSize){
+    struct TreeNode** trees = (struct TreeNode**)malloc(sizeof(struct TreeNode*)*10000);  // vector to store the result
+    if(start > end){  // if start is greater than end
+        trees[0] = NULL;  // push the null in the vector trees
+        *returnSize = 1;  // return the vector trees
+        return trees;  // return the vector t
+    }
+    int index = 0;  // variable to store the index
+    for(int i=start; i<=end; i++){  // loop for i
+        int leftSize = 0;  // variable to store the size of the leftTrees
+        struct TreeNode** leftTrees = generateTreesHelper(start, i-1, &leftSize);  // vector to store the leftTrees
+        int rightSize = 0;  // variable to store the size of the rightTrees
+        struct TreeNode** rightTrees = generateTreesHelper(i+1, end, &rightSize);  // vector to store the rightTrees
+        for(int j=0; j<leftSize; j++){  // loop for leftTreeT
+            for(int k=0; k<rightSize; k++){  // loop for rightTree
+                struct TreeNode* root = (struct TreeNode*)malloc(sizeof(struct TreeNode));  // create the root
+                root->val = i;  // update the root
+                root->left = leftTrees[j];  // update the left
+                root->right = rightTrees[k];  // update the right
+                trees[index++] = root;  // push the root in the vector trees
+            }
+        }
+    }
+    *returnSize = index;  // return the vector trees
+    return trees;  // return the vector trees
+}
+
 
 
 C#
