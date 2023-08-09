@@ -248,6 +248,37 @@ var generateTreesHelper = function(start, end){
 
 Swift:
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+class Solution {
+    func generateTrees(_ n: Int) -> [TreeNode?] {
+        if n==0{  // if n is equal to 0
+            return [];  // return empty vector
+        }
+        return generateTreesHelper(1, n);  // call the generateTrees function
+    }
+    func generateTreesHelper(_ start: Int, _ end: Int) -> [TreeNode?]{
+        var trees = [TreeNode?]();  // vector to store the result
+        if start > end{  // if start is greater than end
+            trees.append(nil);  // push the null in the vector trees
+            return trees;  // return the vector trees
+        }
+        for i in start...end{  // loop for i
+            let leftTrees = generateTreesHelper(start, i-1);  // vector to store the leftTrees
+            let rightTrees = generateTreesHelper(i+1, end);  // vector to store theightTrees
+            for leftTree in leftTrees{  // loop for leftTreeT
+                for rightTree in rightTrees{  // loop for rightTree
+                    let root = TreeNode(i);  // create the root
+                    root.left = leftTree;  // update the left
+                    root.right = rightTree;  // update the right
+                    trees.append(root);  // push the root in the vector trees
+                }
+            }
+        }
+        return trees;  // return the vector trees
+    }
+}
+
 
 
 
