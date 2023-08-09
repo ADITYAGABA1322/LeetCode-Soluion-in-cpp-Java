@@ -213,6 +213,36 @@ public class Solution {
 
 JavaScript:
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+var generateTrees = function(n) {
+    if(n==0){  // if n is equal to 0
+        return [];  // return empty vector
+    }
+    return generateTreesHelper(1, n);  // call the generateTrees function
+};
+
+var generateTreesHelper = function(start, end){
+    let trees = [];  // vector to store the result
+    if(start > end){  // if start is greater than end
+        trees.push(null);  // push the null in the vector tree
+        return trees;  // return the vector trees
+    }
+    for(let i=start; i<=end; i++){  // loop for i
+        let leftTrees = generateTreesHelper(start, i-1);  // vector to store the leftTrees
+        let rightTrees = generateTreesHelper(i+1, end);  // vector to store the rightTrees
+        for(let leftTree of leftTrees){  // loop for leftTreeT
+            for(let rightTree of rightTrees){  // loop for rightTree
+                let root = new TreeNode(i);  // create the root
+                root.left = leftTree;  // update the left
+                root.right = rightTree;  // update the right
+                trees.push(root);  // push the root in the vector trees
+            }
+        }
+    }
+    return trees;  // return the vector trees
+};
+
 
 
 
