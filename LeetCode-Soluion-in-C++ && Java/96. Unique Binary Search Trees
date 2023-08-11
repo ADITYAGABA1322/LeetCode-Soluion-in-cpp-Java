@@ -126,6 +126,22 @@ public class Solution {
 JavaScript:
 
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+var numTrees = function(n) {
+    let dp = new Array(n+1).fill(0);  // vector to store the resuk
+    dp[0] = 1;  // initialize the dp[0] to 1
+    dp[1] = 1;  // initialize the dp[1] to 1
+    for(let i=2; i<=n; i++){  // loop for i
+        for(let j=1; j<=i; j++){  // loop for j 
+            dp[i] += dp[j-1] * dp[i-j];  // update the dp[i] ,  dp[j-1] used for left subtree and dp[i-j] used for right subtree 
+        }
+    }
+    return dp[n];  // return the dp[n]
+};
+
+
+
 Swift:
 
 
