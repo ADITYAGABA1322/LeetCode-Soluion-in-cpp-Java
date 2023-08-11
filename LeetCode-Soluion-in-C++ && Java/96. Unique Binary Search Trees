@@ -145,4 +145,25 @@ var numTrees = function(n) {
 Swift:
 
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+class Solution {
+    func numTrees(_ n: Int) -> Int {
+        if n<2{  // if n is less than 2
+            return 1;  // return 1
+        }
+        var dp = [Int](repeating: 0, count: n+1);  // vector to store the result
+        dp[0] = 1;  // initialize the dp[0] to 1
+        dp[1] = 1;  // initialize the dp[1] to 1
+        for i in 2...n{  // loop for i
+            for j in 1...i{  // loop for j 
+                dp[i] += dp[j-1] * dp[i-j];  // update the dp[i] ,  dp[j-1] used for left subtree and dp[i-j] used for right subtree 
+            }
+        }
+        return dp[n];  // return the dp[n]
+    }
+}
+
+
+
 Dart:
