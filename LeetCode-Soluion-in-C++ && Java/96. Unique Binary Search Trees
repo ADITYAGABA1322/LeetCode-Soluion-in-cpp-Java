@@ -11,6 +11,9 @@ Medium
 C++:
 
 
+// Time Complexity : O(n^2) where n is the size of the vector matrix and space complexity is O(n)
+
+
 class Solution {
 public:
     int numTrees(int n) {
