@@ -322,5 +322,33 @@ var minimizeMax = function(nums, p) {
 
 Swift:
 
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func minimizeMax(_ nums: [Int], _ p: Int) -> Int {
+        var nums = nums.sorted() // sort the vector nums
+        var n = nums.count // variable to store the size of the vector nums
+        var left = 0 , right = nums.last! - nums.first! // variable to store the left and right
+        while left < right { // loop till left is less than right
+            var mid = left + (right - left) / 2 // variable to store the mid
+            var k = 0 , i = 1 // variable to store the k and i
+            while i < n { // loop till i is less than n
+                if nums[i] - nums[i-1] <= mid { // if the difference is less than or equal to mid
+                    k += 1 // increment the k
+                    i += 1 // increment the i
+                }
+                i += 1 // increment the i
+            }
+            if k >= p { // if k is greater than or equal to p
+                right = mid // update the right
+            }
+            else { // else
+                left = mid + 1 // update the left
+            }
+        }
+        return left // return the left
+    }
+}
+
 
 Dart:
