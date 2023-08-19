@@ -11,28 +11,216 @@ Easy
 
 C++:
 
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
 
+class Solution {
+public:
+  int countPairs(vector<int>& nums , int target){ // function to count the pairs whose sum is less than target
+      sort(nums.begin() , nums.end()); // sort the vector nums
+      int count = 0; // variable to store the count
+      int left = 0; // variable to store the left
+      int right = nums.size()-1; // variable to store the right
+      while(left < right){ // loop until left is less than right
+          if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+              count += right-left; // update the count
+              left++; // increment the left
+          }
+          else{ // else
+              right--; // decrement the right
+          }
+      }
+      return count; // return the count
+  }
+};
 
 Java:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public int countPairs(List<Integer> nums, int target) {
+        Collections.sort(nums); // sort the vector nums
+        int count = 0; // variable to store the count
+        int left = 0; // variable to store the left
+        int right = nums.size()-1; // variable to store the right
+        while(left < right){ // loop until left is less than right
+            if(nums.get(left) + nums.get(right) < target){ // if nums[left] + nums[right] is less than target
+                count += right-left; // update the count
+                left++; // increment the left
+            }
+            else{ // else
+                right--; // decrement the right
+            }
+        }
+        return count; // return the count
+        
+    }
+}
 
 
 
 Python:
 
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution(object):
+    def countPairs(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        nums.sort() # sort the vector nums
+        count = 0 # variable to store the count
+        left = 0 # variable to store the left
+        right = len(nums)-1 # variable to store the right
+        while(left < right): # loop until left is less than right
+            if(nums[left] + nums[right] < target): # if nums[left] + nums[right] is less than target
+                count += right-left # update the count
+                left += 1 # increment the left
+            else: # else
+                right -= 1 # decrement the right
+        return count # return the count
+
 
 Python3:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution:
+    def countPairs(self, nums: List[int], target: int) -> int:
+        nums.sort() # sort the vector nums
+        count = 0 # variable to store the count
+        left = 0 # variable to store the left
+        right = len(nums)-1 # variable to store the right
+        while(left < right): # loop until left is less than right
+            if(nums[left] + nums[right] < target): # if nums[left] + nums[right] is less than target
+                count += right-left # update the count
+                left += 1 # increment the left
+            else: # else
+                right -= 1 # decrement the right
+        return count # return the count
 
 
 C:
 
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+int countPairs(int* nums, int numsSize, int target){
+    qsort(nums, numsSize, sizeof(int), cmp); // sort the vector nums
+    int count = 0; // variable to store the count
+    int left = 0; // variable to store the left
+    int right = numsSize-1; // variable to store the right
+    while(left < right){ // loop until left is less than right
+        if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+            count += right-left; // update the count
+            left++; // increment the left
+        }
+        else{ // else
+            right--; // decrement the right
+        }
+    }
+    return count; // return the count
+}
+
+int cmp(const void* a, const void* b){ // function to compare the elements
+    return *(int*)a - *(int*)b; // return the difference
+}
+
 
 C#:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public int CountPairs(IList<int> nums, int target) {
+        nums = nums.OrderBy(x => x).ToList(); // sort the vector nums
+        int count = 0; // variable to store the count
+        int left = 0; // variable to store the left
+        int right = nums.Count-1; // variable to store the right
+        while(left < right){ // loop until left is less than right
+            if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+                count += right-left; // update the count
+                left++; // increment the left
+            }
+            else{ // else
+                right--; // decrement the right
+            }
+        }
+        return count; // return the count
+    }
+}
+
 
 
 JavaScript:
 
 
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+var countPairs = function(nums, target) {
+    nums.sort((a, b) => a-b); // sort the vector nums
+    let count = 0; // variable to store the count
+    let left = 0; // variable to store the left
+    let right = nums.length-1; // variable to store the right
+    while(left < right){ // loop until left is less than right
+        if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+            count += right-left; // update the count
+            left++; // increment the left
+        }
+        else{ // else
+            right--; // decrement the right
+        }
+    }
+    return count; // return the count
+};
+
+
+
 Swift:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func countPairs(_ nums: [Int], _ target: Int) -> Int {
+        var nums = nums.sorted() // sort the vector nums
+        var count = 0 // variable to store the count
+        var left = 0 // variable to store the left
+        var right = nums.count-1 // variable to store the right
+        while(left < right){ // loop until left is less than right
+            if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+                count += right-left // update the count
+                left += 1 // increment the left
+            }
+            else{ // else
+                right -= 1 // decrement the right
+            }
+        }
+        return count // return the count
+    }
+}
+
 
 
 Dart:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+  int countPairs(List<int> nums, int target) {
+    nums.sort(); // sort the vector nums
+    int count = 0; // variable to store the count
+    int left = 0; // variable to store the left
+    int right = nums.length-1; // variable to store the right
+    while(left < right){ // loop until left is less than right
+        if(nums[left] + nums[right] < target){ // if nums[left] + nums[right] is less than target
+            count += right-left; // update the count
+            left++; // increment the left
+        }
+        else{ // else
+            right--; // decrement the right
+        }
+    }
+    return count; // return the count
+  }
+}
