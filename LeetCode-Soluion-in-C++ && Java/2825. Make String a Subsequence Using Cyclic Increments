@@ -48,6 +48,25 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution(object):
+    def canMakeSubsequence(self, str1, str2):
+        """
+        :type str1: str
+        :type str2: str
+        :rtype: bool
+        """
+        i = 0 # variable to store the i
+        j = 0 # variable to store the j
+        n = len(str1) # variable to store the size of the str1
+        m = len(str2) # variable to store the size of the str2
+        while(i<n and j<m): # loop until i is less than n and j is less than m
+              if str2[j] in {str1[i], chr(ord(str1[i]) + 1), chr(ord(str1[i]) - 25)}:  # if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+                j += 1 # increment the j
+            i += 1 # increment the i
+        return j == m # return true if j is eq
+
 
 Python3:
 
