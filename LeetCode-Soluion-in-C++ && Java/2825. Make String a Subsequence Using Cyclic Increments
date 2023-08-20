@@ -87,13 +87,109 @@ class Solution:
 
 C:
 
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+bool canMakeSubsequence(char * str1, char * str2){
+    int i = 0; // variable to store the i
+    int j = 0; // variable to store the j
+    int n = strlen(str1); // variable to store the size of the str1
+    int m = strlen(str2); // variable to store the size of the str2
+    while(i<n && j<m){ // loop until i is less than n and j is less than m
+        if(str1[i] == str2[j] || str1[i]+1 == str2[j] || str1[i] - 25 == str2[j]){  // if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+            j++; // increment the j
+        }
+        i++; // increment the i
+    }
+    return j == m; // return true if j is equal to m else return false
+}
+
 C#:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public bool CanMakeSubsequence(string str1, string str2) {
+        int i = 0; // variable to store the i
+        int j = 0; // variable to store the j
+        int n = str1.Length; // variable to store the size of the str1
+        int m = str2.Length; // variable to store the size of the str2
+        while(i<n && j<m){ // loop until i is less than n and j is less than m
+            if(str1[i] == str2[j] || str1[i]+1 == str2[j] || str1[i] - 25 == str2[j]){  // if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+                j++; // increment the j
+            }
+            i++; // increment the i
+        }
+        return j == m; // return true if j is equal to m else return false
+    }
+}
 
 JavaScript:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+var canMakeSubsequence = function(str1, str2) {
+    let i = 0; // variable to store the i
+    let j = 0; // variable to store the j
+    let n = str1.length; // variable to store the size of the str1
+    let m = str2.length; // variable to store the size of the str2
+    while(i < n && j < m){ // loop until i is less than n and j is less than m
+        if ((str2.charCodeAt(j) - str1.charCodeAt(i) + 26) % 26 <= 1) { 
+            // If the absolute difference between the Unicode values is 0 or 1
+            // str2.charCodeAt(j) and str1.charCodeAt(i): These are used to obtain the Unicode values of the characters at positions j in str2 and i in str1, respectively.
+            // (str2.charCodeAt(j) - str1.charCodeAt(i) + 26) % 26: This part of the condition calculates the difference between the Unicode values of the two characters and ensures the result is non-negative by adding 26 (the number of letters in the English alphabet). This difference modulo 26 ensures that the result remains within the range of a single alphabet cycle.
+            // <= 1: This checks whether the calculated difference is either 0 or 1. If the difference is 0, it means the characters are the same. If the difference is 1, it means the characters are consecutive in the alphabet.
+
+            j++; // increment the j
+        }
+        i++; // increment the i
+    }
+    return j === m; // return true if j is equal to m else return false
+};
+
+
 Swift:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+class Solution {
+    func canMakeSubsequence(_ str1: String, _ str2: String) -> Bool {
+        var i = 0 // variable to store the i
+        var j = 0 // variable to store the j
+        let n = str1.count // variable to store the size of the str1
+        let m = str2.count // variable to store the size of the str2
+        while(i<n && j<m){ // loop until i is less than n and j is less than m
+            let char1 = str1[str1.index(str1.startIndex, offsetBy: i)] // variable to store the char1
+            let char2 = str2[str2.index(str2.startIndex, offsetBy: j)] // variable to store the char2
+            if char1 == char2 || char1.asciiValue! + 1 == char2.asciiValue! || char1.asciiValue! - 25 == char2.asciiValue!{  // if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+                j += 1 // increment the j
+            }
+            i += 1 // increment the i
+        }
+        return j == m // return true if j is equal to m else return false
+    }
+}
+
 Dart:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+  bool canMakeSubsequence(String str1, String str2) {
+    int i = 0; // variable to store the i
+    int j = 0; // variable to store the j
+    int n = str1.length; // variable to store the size of str1
+    int m = str2.length; // variable to store the size of str2
+    while (i < n && j < m) { // loop until i is less than n and j is less than m
+      if (str1[i] == str2[j] || str1[i].codeUnitAt(0) + 1 == str2[j].codeUnitAt(0) || str1[i].codeUnitAt(0) - 25 == str2[j].codeUnitAt(0)) {
+        // if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+        j++; // increment j
+      }
+      i++; // increment i
+    }
+    return j == m; // return true if j is equal to m else return false
+  }
+}
+
 
 
 
