@@ -26,10 +26,25 @@ public:
     }
 };
 
-
-
 Java:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public boolean canMakeSubsequence(String str1, String str2) {
+        int i = 0; // variable to store the i
+        int j = 0; // variable to store the j
+        int n = str1.length(); // variable to store the size of the str1
+        int m = str2.length(); // variable to store the size of the str2
+        while(i<n && j<m){ // loop until i is less than n and j is less than m
+            if(str1.charAt(i) == str2.charAt(j) || str1.charAt(i)+1 == str2.charAt(j) || str1.charAt(i) - 25 == str2.charAt(j)){  // if str1[i] is equal to str2[j] or str1[i]+1 is equal to str2[j] or str1[i] - 25 is equal to str2[j]
+                j++; // increment the j
+            }
+            i++; // increment the i
+        }
+        return j == m; // return true if j is equal to m else return false
+    }
+}
 
 Python:
 
