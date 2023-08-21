@@ -160,8 +160,55 @@ public class Solution {
 
 Javascript:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+var minimumOperations = function(nums) {
+    let n = nums.length; // variable to store the size of the nums
+    let dp = new Array(4).fill(n); // vector to store the dp array
+    for(let num of nums){ // loop for num
+        dp[num]--; // update the dp[num] ,  This line decrements the value of the element in the dp vector at index a. In the context of this code, a represents the current element from the input vector. This decrement operation essentially counts how many occurrences of each value (0, 1, 2, or 3) are present in the input vector.
+        dp[2] = Math.min(dp[2] , dp[1]); // update the dp[2] , This line updates the value of the element at index 2 in the dp vector. It takes the minimum of the current value at index 2 (dp[2]) and the value at index 1 (dp[1]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 1 to value 2.
+        dp[3] = Math.min(dp[3] , dp[2]); // update the dp[3] , Similar to the previous line, this updates the value of the element at index 3 in the dp vector. It takes the minimum of the current value at index 3 (dp[3]) and the updated value at index 2 (dp[2]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 2 to value 3.
+    }
+    return dp[3]; // return the dp[3]
+};
+
+
 
 Swift:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func minimumOperations(_ nums: [Int]) -> Int {
+        let n = nums.count // variable to store the size of the nums
+        var dp = Array(repeating: n, count: 4) // vector to store the dp array
+        for num in nums { // loop for num
+            dp[num] -= 1 // update the dp[num] ,  This line decrements the value of the element in the dp vector at index a. In the context of this code, a represents the current element from the input vector. This decrement operation essentially counts how many occurrences of each value (0, 1, 2, or 3) are present in the input vector.
+            dp[2] = min(dp[2] , dp[1]) // update the dp[2] , This line updates the value of the element at index 2 in the dp vector. It takes the minimum of the current value at index 2 (dp[2]) and the value at index 1 (dp[1]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 1 to value 2.
+            dp[3] = min(dp[3] , dp[2]) // update the dp[3] , Similar to the previous line, this updates the value of the element at index 3 in the dp vector. It takes the minimum of the current value at index 3 (dp[3]) and the updated value at index 2 (dp[2]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 2 to value 3.
+        }
+        return dp[3] // return the dp[3]
+    }
+}
+
+
 
 Dart:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+  int minimumOperations(List<int> nums) {
+    int n = nums.length; // variable to store the size of the nums
+    List<int> dp = new List.filled(4, n); // vector to store the dp array
+    for (int num in nums) { // loop for num
+      dp[num]--; // update the dp[num] ,  This line decrements the value of the element in the dp vector at index a. In the context of this code, a represents the current element from the input vector. This decrement operation essentially counts how many occurrences of each value (0, 1, 2, or 3) are present in the input vector.
+      dp[2] = min(dp[2], dp[1]); // update the dp[2] , This line updates the value of the element at index 2 in the dp vector. It takes the minimum of the current value at index 2 (dp[2]) and the value at index 1 (dp[1]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 1 to value 2.
+      dp[3] = min(dp[3], dp[2]); // update the dp[3] , Similar to the previous line, this updates the value of the element at index 3 in the dp vector. It takes the minimum of the current value at index 3 (dp[3]) and the updated value at index 2 (dp[2]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 2 to value 3.
+    }
+    return dp[3]; // return the dp[3]
+  }
+}
+
+
