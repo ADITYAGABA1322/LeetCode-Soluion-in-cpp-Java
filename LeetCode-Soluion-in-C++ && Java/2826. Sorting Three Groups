@@ -11,6 +11,55 @@ Mdeium
 C++:
 
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+// Brute Force
+
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+        int n = nums.size(); // variable to store the size of the nums
+        int count = 0; // variable to store the count
+        int i = 0; // variable to store the i
+        int j = n-1; // variable to store the j
+        while(i<j){ // loop until i is less than j
+            if(nums[i] == nums[j]){ // if nums[i] is equal to nums[j]
+                i++; // increment the i
+                j--; // decrement the j
+            }
+            else if(nums[i] < nums[j]){ // else if nums[i] is less than nums[j]
+                nums[i+1] += nums[i]; // update the nums[i+1]
+                i++; // increment the i
+                count++; // increment the count
+            }
+            else{ // else
+                nums[j-1] += nums[j]; // update the nums[j-1]
+                j--; // decrement the j
+                count++; // increment the count
+            }
+        }
+        return count; // return the count
+        
+    }
+};
+
+// Optimal Solution using DP
+
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+        int n = nums.size();    // variable to store the size of the nums
+        vector<int> dp(4 , n) ; // vector to store the dp array
+        for(int num : nums) {   // loop for num
+            dp[num]--;        // update the dp[num] ,  This line decrements the value of the element in the dp vector at index a. In the context of this code, a represents the current element from the input vector. This decrement operation essentially counts how many occurrences of each value (0, 1, 2, or 3) are present in the input vector.
+            dp[2] = min(dp[2] , dp[1]); // update the dp[2] , This line updates the value of the element at index 2 in the dp vector. It takes the minimum of the current value at index 2 (dp[2]) and the value at index 1 (dp[1]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 1 to value 2.
+            dp[3] = min(dp[3] , dp[2]); // update the dp[3] , Similar to the previous line, this updates the value of the element at index 3 in the dp vector. It takes the minimum of the current value at index 3 (dp[3]) and the updated value at index 2 (dp[2]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 2 to value 3.
+        }
+        return dp[3]; // return the dp[3]
+    }
+};
+
+
 
 Java:
 
