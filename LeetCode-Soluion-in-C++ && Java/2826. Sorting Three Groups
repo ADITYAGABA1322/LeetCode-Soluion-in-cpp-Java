@@ -137,6 +137,26 @@ int minimumOperations(int* nums, int numsSize){
 
 C#:
 
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public int MinimumOperations(IList<int> nums) {
+        int n = nums.Count; // variable to store the size of the nums
+        int[] dp = new int[4]; // vector to store the dp array
+        Array.Fill(dp, n);  // fill the dp array with n
+
+        for (int i = 0; i < n; i++) {   // loop for i
+            int num = nums[i];  // variable to store the num
+            dp[num]--;  // update the dp[num] ,  This line decrements the value of the element in the dp vector at index a. In the context of this code, a represents the current element from the input vector. This decrement operation essentially counts how many occurrences of each value (0, 1, 2, or 3) are present in the input vector.
+            dp[2] = Math.Min(dp[2], dp[1]); // update the dp[2] , This line updates the value of the element at index 2 in the dp vector. It takes the minimum of the current value at index 2 (dp[2]) and the value at index 1 (dp[1]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 1 to value 2.
+            dp[3] = Math.Min(dp[3], dp[2]); // update the dp[3] , Similar to the previous line, this updates the value of the element at index 3 in the dp vector. It takes the minimum of the current value at index 3 (dp[3]) and the updated value at index 2 (dp[2]). This operation is used to ensure that the minimum number of operations is tracked for transitioning from value 2 to value 3.
+        }
+
+        return dp[3];   // return the dp[3]
+    }
+}
+
+
 
 Javascript:
 
