@@ -72,13 +72,77 @@ class Solution:
 
 C:
 
+// Time Complexity : O(n) and space complexity is O(1)
+#include <math.h> // For fmax function
+
+// Custom max function for integers
+int max_int(int a, int b) {
+    return a > b ? a : b;
+}
+
+int maxJump(int* stones, int stonesSize) {
+    int n = stonesSize;
+    int res = stones[1] - stones[0];
+    for (int i = 2; i < n; i++) {
+        // Using fmax function for floating-point values
+        // res = fmax(res, stones[i] - stones[i - 2]);
+        
+        // Using custom max function for integers
+        res = max_int(res, stones[i] - stones[i - 2]);
+    }
+    return res;
+}
+
+
 C#:
+
+
+// Time Complexity : O(n) and space complexity is O(1)
+
+public class Solution
+{
+public
+    int MaxJump(int[] stones)
+    {
+        int n=stones.Length; // variable to store the size of the stones
+        int res = stones[1] - stones[0]; // variable to store the res
+        for (int i = 2; i < n; i++) { // loop until i is less than n
+            res = Math.Max(res, stones[i] - stones[i - 2]); // update the res
+        }
+        return res; // return the res
+    }
+}
 
 
 JavaScript:
 
+// Time Complexity : O(n) and space complexity is O(1)
+
+var maxJump = function(stones) {
+    const n = stones.length; // variable to store the size of the stones
+    let res = stones[1] - stones[0]; // variable to store the res
+    for (let i = 2; i < n; i++) { // loop until i is less than n
+        res = Math.max(res, stones[i] - stones[i - 2]); // update the res
+    }
+    return res; // return the res
+};
+
+
 
 Swift:
+
+// Time Complexity : O(n) and space complexity is O(1)
+
+class Solution {
+    func maxJump(_ stones: [Int]) -> Int {
+        let n = stones.count // variable to store the size of the stones
+        var res = stones[1] - stones[0] // variable to store the res
+        for i in 2..<n { // loop until i is less than n
+            res = max(res, stones[i] - stones[i - 2]) // update the res
+        }
+        return res // return the res
+    }
+}
 
 
 Dart:
