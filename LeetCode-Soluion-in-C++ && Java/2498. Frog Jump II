@@ -27,12 +27,48 @@ public:
 
 Java:
 
+// Time Complexity : O(n) and space complexity is O(1)
+
+class Solution {
+    public int maxJump(int[] stones) {
+        int n = stones.length; // variable to store the size of the stones
+        int res = stones[1] - stones[0]; // variable to store the res
+        for (int i = 2; i < n; i++) { // loop until i is less than n
+            res = Math.max(res, stones[i] - stones[i - 2]); // update the res
+        }
+        return res; // return the res
+    }
+}
+
 
 Python
+
+// Time Complexity : O(n) and space complexity is O(1)
+
+class Solution(object):
+    def maxJump(self, stones):
+        """
+        :type stones: List[int]
+        :rtype: int
+        """
+        n=len(stones) # variable to store the size of the stones
+        res = stones[1] - stones[0] # variable to store the res
+        for i in range(2,n): # loop until i is less than n
+            res = max(res, stones[i] - stones[i - 2]) # update the res
+        return res # return the res
 
 
 Python3:
 
+// Time Complexity : O(n) and space complexity is O(1)
+
+class Solution:
+    def maxJump(self, stones: List[int]) -> int:
+        n=len(stones) # variable to store the size of the stones
+        res = stones[1] - stones[0] # variable to store the res
+        for i in range(2,n): # loop until i is less than n
+            res = max(res, stones[i] - stones[i - 2]) # update the res
+        return res # return the res
 
 C:
 
