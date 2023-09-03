@@ -109,7 +109,6 @@ class Solution:
             rightSum += int(s[n-i-1])  # update the right sum
         return leftSum == rightSum  # return true if the left sum is equal to the right sum else return false
 
-
 C:
 
 C#:
