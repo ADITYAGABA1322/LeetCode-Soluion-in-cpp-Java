@@ -63,6 +63,31 @@ class Solution {
 
 Python:
 
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+
+class Solution(object): # class Solution 
+    def countSymmetricIntegers(self, low, high): # function to count symmetric integers
+        """
+        :type low: int
+        :type high: int
+        :rtype: int
+        """
+        res = 0 # variable to store the result
+        for i in range(low, high+1): # loop until i is less than or equal to high
+            if self.isSymmetric(i): res += 1 # if the number is symmetric increment the result
+        return res # return the result
+    def isSymmetric(self, num): # function to check if the number is symmetric
+        s = str(num) # variable to store the string
+        n = len(s) # variable to store the length of the string
+        if n%2 == 1: return False # if the length of the string is odd return false
+        leftSum = 0 # variable to store the left sum
+        rightSum = 0 # variable to store the right sum
+        for i in range(n//2): # loop until i is less than n/2
+            leftSum += int(s[i]) # update the left sum
+            rightSum += int(s[n-i-1]) # update the right sum
+        return leftSum == rightSum # return true if the left sum is equal to the right sum else return false
+
+
 Python3:
 
 C:
