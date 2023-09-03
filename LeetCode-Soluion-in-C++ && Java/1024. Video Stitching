@@ -10,20 +10,371 @@ Medium
 
 C++:
 
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    int videoStitching(vector<vector<int>>& clips, int time) {
+        sort(clips.begin(), clips.end());  // sort the clips
+        int i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+        // for(int i=0; start<time;start=end , res++){ // loop until start is less than time
+            // or
+            while(start < time) { // loop until start is less than time
+            while(i<clips.size() && clips[i][0]<=start){
+                end = max(end, clips[i][1]);  // loop until i is less than clips.size() and clips[i][0]<=start
+                i++; // increment i
+        }
+            if(start == end) return -1;  // if start is equal to end return -1
+            start = end;  // update the start
+            res++;  // increment the result
+        }
+        return res;  // return the result
+    }
+};
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution {
+public:
+    int videoStitching(vector<vector<int>>& clips, int time) {
+        vector<int> dp(time+1, time+1);  // vector to store the dp
+        dp[0] = 0;  // update the dp[0]
+        for(int i=1; i<=time; i++){  // loop until i is less than or equal to time
+            for(auto x:clips){  // loop for x
+                if(x[0]<=i && i<=x[1]){  // if x[0]<=i and i<=x[1]
+                    dp[i] = min(dp[i], dp[x[0]]+1);  // update the dp[i]
+                }
+            }
+        }
+        return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+    }
+};
+
+
 
 Java:
 
 
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution {
+    public int videoStitching(int[][] clips, int time) {
+        Arrays.sort(clips, (a,b)->a[0]-b[0]);  // sort the clips
+        int i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+        // for(int i=0; start<time;start=end , res++){ // loop until start is less than time
+            // or
+            while(start < time) { // loop until start is less than time
+            while(i<clips.length && clips[i][0]<=start){
+                end = Math.max(end, clips[i][1]);  // loop until i is less than clips.length and clips[i][0]<=start
+                i++; // increment i
+        }
+            if(start == end) return -1;  // if start is equal to end return -1
+            start = end;  // update the start
+            res++;  // increment the result
+        }
+        return res;  // return the result
+    }
+}
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution {
+    public int videoStitching(int[][] clips, int time) {
+        int[] dp = new int[time+1];  // vector to store the dp
+        Arrays.fill(dp, time+1);  // fill the dp
+        dp[0] = 0;  // update the dp[0]
+        for(int i=1; i<=time; i++){  // loop until i is less than or equal to time
+            for(int[] x:clips){  // loop for x
+                if(x[0]<=i && i<=x[1]){  // if x[0]<=i and i<=x[1]
+                    dp[i] = Math.min(dp[i], dp[x[0]]+1);  // update the dp[i]
+                }
+            }
+        }
+        return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+    }
+}
+
+
 Python:
+
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution(object):
+    def videoStitching(self, clips, time):
+        """
+        :type clips: List[List[int]]
+        :type time: int
+        :rtype: int
+        """
+        clips.sort(key=lambda x:x[0])  # sort the clips
+        i = 0 ;  start = 0 ; end = 0 ; res = 0 # variable to store the i, start, end and res
+        while start < time:  # loop until start is less than time
+            while i<len(clips) and clips[i][0]<=start:
+                end = max(end, clips[i][1])  # loop until i is less than len(clips) and clips[i][0]<=start
+                i+=1  # increment i
+            if start == end: return -1  # if start is equal to end return -1
+            start = end  # update the start
+            res+=1  # increment the result
+        return res  # return the result
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution(object):
+    def videoStitching(self, clips, time):
+        """
+        :type clips: List[List[int]]
+        :type time: int
+        :rtype: int
+        """
+        dp = [time+1]*(time+1)  # vector to store the dp
+        dp[0] = 0  # update the dp[0]
+        for i in range(1, time+1):  # loop until i is less than or equal to time
+            for x in clips:  # loop for x
+                if x[0]<=i and i<=x[1]:  # if x[0]<=i and i<=x[1]
+                    dp[i] = min(dp[i], dp[x[0]]+1)  # update the dp[i]
+        return -1 if dp[time] == time+1 else dp[time]  # return -1 if dp[time] == time+1 else dp[time]
+
 
 Python3:
 
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution:
+    def videoStitching(self, clips: List[List[int], time: int) -> int: # add bracket after List[int]
+        clips.sort(key=lambda x:x[0])  # sort the clips
+        i = 0 ;  start = 0 ; end = 0 ; res = 0 # variable to store the i, start, end and res
+        while start < time:  # loop until start is less than time
+            while i<len(clips) and clips[i][0]<=start:
+                end = max(end, clips[i][1])  # loop until i is less than len(clips) and clips[i][0]<=start
+                i+=1  # increment i
+            if start == end: return -1  # if start is equal to end return -1
+            start = end  # update the start
+            res+=1  # increment the result
+        return res  # return the result
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution:
+    def videoStitching(self, clips: List[List[int], time: int) -> int: # add bracket after List[int]
+        dp = [time+1]*(time+1)  # vector to store the dp
+        dp[0] = 0  # update the dp[0]
+        for i in range(1, time+1):  # loop until i is less than or equal to time
+            for x in clips:  # loop for x
+                if x[0]<=i and i<=x[1]:  # if x[0]<=i and i<=x[1]
+                    dp[i] = min(dp[i], dp[x[0]]+1)  # update the dp[i]
+        return -1 if dp[time] == time+1 else dp[time]  # return -1 if dp[time] == time+1 else dp[time]
+
+
 C:
+
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+int cmp(const void* a, const void* b); // function to compare the elements
+int videoStitching(int** clips, int clipsSize, int* clipsColSize, int time){
+    qsort(clips, clipsSize, sizeof(int*), cmp);  // sort the clips
+    int i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+    while(start < time){  // loop until start is less than time
+        while(i<clipsSize && clips[i][0]<=start){
+            end = fmax(end, clips[i][1]);  // loop until i is less than clipsSize and clips[i][0]<=start
+            i++;  // increment i
+        }
+        if(start == end) return -1;  // if start is equal to end return -1
+        start = end;  // update the start
+        res++;  // increment the result
+    }
+    return res;  // return the result
+}
+
+int cmp(const void* a, const void* b){  // function to compare the elements
+    int* arr1 = *(int**)a;  // variable to store the first element
+    int* arr2 = *(int**)b;  // variable to store the second element
+    return arr1[0] - arr2[0];  // return the difference of the elements
+}
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+int videoStitching(int** clips, int clipsSize, int* clipsColSize, int time){
+    int dp[time+1];  // vector to store the dp
+    memset(dp, time+1, sizeof(dp));  // fill the dp
+    dp[0] = 0;  // update the dp[0]
+    for(int i=1; i<=time; i++){  // loop until i is less than or equal to time
+        for(int j=0; j<clipsSize; j++){  // loop for j
+            if(clips[j][0]<=i && i<=clips[j][1]){  // if clips[j][0]<=i and i<=clips[j][1]
+                dp[i] = fmin(dp[i], dp[clips[j][0]]+1);  // update the dp[i]
+            }
+        }
+    }
+    return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+}
+
 
 C#:
 
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+public class Solution {
+    public int VideoStitching(int[][] clips, int time) {
+        Array.Sort(clips, (a,b)=>a[0]-b[0]);  // sort the clips
+        int i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+        while(start < time){  // loop until start is less than time
+            while(i<clips.Length && clips[i][0]<=start){
+                end = Math.Max(end, clips[i][1]);  // loop until i is less than clips.Length and clips[i][0]<=start
+                i++;  // increment i
+            }
+            if(start == end) return -1;  // if start is equal to end return -1
+            start = end;  // update the start
+            res++;  // increment the result
+        }
+        return res;  // return the result
+    }
+}
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+public class Solution {
+    public int VideoStitching(int[][] clips, int time) {
+        int[] dp = new int[time+1];  // vector to store the dp
+        Array.Fill(dp, time+1);  // fill the dp
+        dp[0] = 0;  // update the dp[0]
+        for(int i=1; i<=time; i++){  // loop until i is less than or equal to time
+            for(int j=0; j<clips.Length; j++){  // loop for j
+                if(clips[j][0]<=i && i<=clips[j][1]){  // if clips[j][0]<=i and i<=clips[j][1]
+                    dp[i] = Math.Min(dp[i], dp[clips[j][0]]+1);  // update the dp[i]
+                }
+            }
+        }
+        return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+    }
+}
+
+
 JavaScript:
+
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+var videoStitching = function(clips, time) {
+    clips.sort((a,b)=>a[0]-b[0]);  // sort the clips
+    let i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+    while(start < time){  // loop until start is less than time
+        while(i<clips.length && clips[i][0]<=start){
+            end = Math.max(end, clips[i][1]);  // loop until i is less than clips.length and clips[i][0]<=start
+            i++;  // increment i
+        }
+        if(start == end) return -1;  // if start is equal to end return -1
+        start = end;  // update the start
+        res++;  // increment the result
+    }
+    return res;  // return the result
+};
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+var videoStitching = function(clips, time) {
+    let dp = new Array(time+1).fill(time+1);  // vector to store the dp
+    dp[0] = 0;  // update the dp[0]
+    for(let i=1; i<=time; i++){  // loop until i is less than or equal to time
+        for(let j=0; j<clips.length; j++){  // loop for j
+            if(clips[j][0]<=i && i<=clips[j][1]){  // if clips[j][0]<=i and i<=clips[j][1]
+                dp[i] = Math.min(dp[i], dp[clips[j][0]]+1);  // update the dp[i]
+            }
+        }
+    }
+    return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+};
 
 Swift:
 
+
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution {
+    func videoStitching(_ clips: [[Int]], _ time: Int) -> Int {
+        var clips = clips.sorted(by: {$0[0]<$1[0]});  // sort the clips
+        var i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+        while(start < time){  // loop until start is less than time
+            while(i<clips.count && clips[i][0]<=start){
+                end = max(end, clips[i][1]);  // loop until i is less than clips.count and clips[i][0]<=start
+                i+=1;  // increment i
+            }
+            if(start == end) { return -1 }  // if start is equal to end return -1
+            start = end;  // update the start
+            res+=1;  // increment the result
+        }
+        return res;  // return the result
+    }
+}
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution {
+    func videoStitching(_ clips: [[Int]], _ time: Int) -> Int {
+        var dp = Array(repeating: time+1, count: time+1);  // vector to store the dp
+        dp[0] = 0;  // update the dp[0]
+        for i in 1...time{  // loop until i is less than or equal to time
+            for j in 0..<clips.count{  // loop for j
+                if(clips[j][0]<=i && i<=clips[j][1]){  // if clips[j][0]<=i and i<=clips[j][1]
+                    dp[i] = min(dp[i], dp[clips[j][0]]+1);  // update the dp[i]
+                }
+            }
+        }
+        return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+    }
+}
+
 Dart:
+
+// Time Complexity : O(nlogn) where n is the length of the vector nums and space complexity is O(1)
+
+class Solution {
+    int videoStitching(List<List<int>> clips, int time) {
+        clips.sort((a,b)=>a[0]-b[0]);  // sort the clips
+        int i = 0 ,  start = 0 , end = 0 , res = 0; // variable to store the i, start, end and res
+        while(start < time){  // loop until start is less than time
+            while(i<clips.length && clips[i][0]<=start){
+                end = max(end, clips[i][1]);  // loop until i is less than clips.length and clips[i][0]<=start
+                i++;  // increment i
+            }
+            if(start == end) return -1;  // if start is equal to end return -1
+            start = end;  // update the start
+            res++;  // increment the result
+        }
+        return res;  // return the result
+    }
+}
+
+2nd Method using Approach 2: Dynamic Programming
+
+// Time Complexity : O(n*T) where n is the length of the vector nums and space complexity is O(T)
+
+class Solution {
+    int videoStitching(List<List<int>> clips, int time) {
+        int dp[time+1];  // vector to store the dp
+        Arrays.fill(dp, time+1);  // fill the dp
+        dp[0] = 0;  // update the dp[0]
+        for(int i=1; i<=time; i++){  // loop until i is less than or equal to time
+            for(int j=0; j<clips.length; j++){  // loop for j
+                if(clips[j][0]<=i && i<=clips[j][1]){  // if clips[j][0]<=i and i<=clips[j][1]
+                    dp[i] = min(dp[i], dp[clips[j][0]]+1);  // update the dp[i]
+                }
+            }
+        }
+        return dp[time] == time+1 ? -1 : dp[time];  // return dp[time] == time+1 ? -1 : dp[time]
+    }
+}
+
