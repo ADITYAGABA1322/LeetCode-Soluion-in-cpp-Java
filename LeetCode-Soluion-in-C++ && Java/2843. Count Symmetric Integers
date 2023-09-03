@@ -9,7 +9,7 @@ Easy
 
 C++:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution {
 public:
@@ -36,7 +36,7 @@ public:
 
 Java:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution {
     public int countSymmetricIntegers(int low, int high) {
@@ -63,7 +63,7 @@ class Solution {
 
 Python:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution(object): # class Solution 
     def countSymmetricIntegers(self, low, high): # function to count symmetric integers
@@ -90,7 +90,7 @@ class Solution(object): # class Solution
 
 Python3:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution:
     def countSymmetricIntegers(self, low: int, high: int) -> int:  # function to count symmetric integers
@@ -111,8 +111,7 @@ class Solution:
 
 C:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
-
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -149,7 +148,7 @@ bool isSymmetric(int num) {  // function to check if the number is symmetric
 
 C#:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 public class Solution {
     public int CountSymmetricIntegers(int low, int high) {
@@ -176,7 +175,7 @@ public class Solution {
 
 JavaScript:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 var countSymmetricIntegers = function(low, high) {
     let res = 0;  // variable to store the result
@@ -201,7 +200,7 @@ var isSymmetric = function(num) {  // function to check if the number is symmetr
 
 Swift:
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution {
     func countSymmetricIntegers(_ low: Int, _ high: Int) -> Int {
@@ -230,7 +229,7 @@ class Solution {
 Dart:
 
 
-// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is  O(1)
 
 class Solution {
     int countSymmetricIntegers(int low, int high) {
