@@ -201,6 +201,32 @@ var isSymmetric = function(num) {  // function to check if the number is symmetr
 
 Swift:
 
+// Time Complexity : O(n) where n is the length of the vector nums and space complexity is O(log(num))
+
+class Solution {
+    func countSymmetricIntegers(_ low: Int, _ high: Int) -> Int {
+        var res = 0;  // variable to store the result
+        for i in low...high {  // loop until i is less than or equal to high
+            if isSymmetric(i) { res += 1
+            } // if the number is symmetric increment the result
+            }
+        return res;  // return the result
+    }
+    func isSymmetric(_ num: Int) -> Bool {  // function to check if the number is symmetric
+        let s = String(num);  // variable to store the string
+        let n = s.count;  // variable to store the length of the string
+        if n%2 == 1 { return false }  // if the length of the string is odd return false
+        var leftSum = 0;  // variable to store the left sum
+        var rightSum = 0;  // variable to store the right sum
+        for i in 0..<n/2 {  // loop until i is less than n/2
+            leftSum += Int(String(s[s.index(s.startIndex, offsetBy: i)]))!;  // update the left sum
+            rightSum += Int(String(s[s.index(s.startIndex, offsetBy: n-i-1)]))!;  // update the right sum
+        }
+        return leftSum == rightSum;  // return true if the left sum is equal to the right sum else return false
+    }
+}
+
+
 Dart:
 
 
