@@ -37,3 +37,28 @@ public:
 
 
 Swift:
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    func maxOperations(_ nums: [Int], _ k: Int) -> Int { // function to find the maxOperations
+        let n = nums.count // variable to store the size of the nums
+        var nums = nums.sorted() // sort the nums
+        var i = 0 // variable to store the i
+        var j = n - 1 // variable to store the j
+        var ans = 0 // variable to store the ans
+        while i < j { // loop until i is less than j
+            if nums[i] + nums[j] == k { // if nums[i]+nums[j] is equal to k
+                ans += 1 // increment the ans
+                i += 1 // increment the i
+                j -= 1 // decrement the j
+            } else if nums[i] + nums[j] > k { // else if nums[i]+nums[j] is greater than k
+                j -= 1 // decrement the j
+            } else { // else
+                i += 1 // increment the i
+            }
+        }
+        return ans // return the ans
+    }
+}
+     
