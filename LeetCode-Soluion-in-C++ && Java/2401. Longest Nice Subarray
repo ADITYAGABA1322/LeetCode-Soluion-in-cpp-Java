@@ -8,3 +8,20 @@ Medium
 
 
 C++:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution
+{
+public:
+    vector<int> findAllLonelyNumbers(vector<int>& nums) { // function to find the findAllLonelyNumbers
+        int n=nums.size(); // variable to store the size of the nums
+        vector<int>ans; // vector to store the ans
+        int freq[100001] = {0}; // variable to store the freq
+        for(auto x:nums)freq[x]++; // loop for x
+        for(auto x:nums){ // loop for x
+            if(freq[x]==1 && (!freq[x-1] || !freq[x+1]))ans.push_back(x); // if freq[x] is equal to 1 and (!freq[x-1] or !freq[x+1]) push the x
+        }
+        return ans; // return the ans
+    }
+};
