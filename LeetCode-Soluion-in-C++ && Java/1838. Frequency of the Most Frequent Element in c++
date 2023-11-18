@@ -1,0 +1,35 @@
+1838. Frequency of the Most Frequent Element in c++
+
+
+18 Nov 2023
+
+
+Medium
+
+
+C++:
+
+
+// Time Complexity : O(nlogn) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    int maxFrequency(vector<int>& nums, int k) { // function to find the maxFrequency
+        int n=nums.size(); // variable to store the size of the nums
+        sort(nums.begin(),nums.end()); // sort the nums
+        long long sum=0; // variable to store the sum
+        int ans=0; // variable to store the ans
+        int i=0; // variable to store the i
+        for(int j=0;j<n;j++){ // loop for j
+            sum+=nums[j]; // update the sum
+            while((long long)nums[j]*(j-i+1)-sum>k){ // while (nums[j]*(j-i+1)-sum) is greater than k
+                sum-=nums[i]; // decrement the sum
+                i++; // increment the i
+            }
+            ans=max(ans,j-i+1); // update the ans
+        }
+        return ans; // return the ans
+    }
+};
+
+
