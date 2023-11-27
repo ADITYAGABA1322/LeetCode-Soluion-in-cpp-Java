@@ -1,8 +1,6 @@
 1323. Maximum 69 Number
 
 	
-
-
 	
 	
 22 Feb 2023
