@@ -3,5 +3,145 @@
 
 3 Dec 2023
 
+
 Easy 
+
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+The intuition for finding peaks in an array is to iterate through the array and identify elements that are greater than both their left and right neighbors. These elements are the peaks. Peaks essentially represent the points where the increasing sequence changes its trend and starts decreasing.
+
+---
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+The approach to finding peaks in the mountain array can be implemented using a simple loop. Here are the steps:
+
+1.) Iterate through the array from the second element to the second-to-last element (i.e., from index 1 to index n-2).
+
+2.) For each element at index i, check if it is greater than both its left neighbor (mountain[i-1]) and its right neighbor (mountain[i+1]).
+
+3.) If the condition is true, then the element at index i is a peak, and its index is added to the result vector.
+
+---
+
+
+# Complexity
+- Time complexity: O(n)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity:O(1)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+# Please Upvote 🫶
+
+---
+
+
+# Code
+
+```C++ []
+#include <vector>
+
+class Solution {
+public:
+    std::vector<int> findPeaks(std::vector<int>& mountain) {
+        int n = mountain.size();
+        std::vector<int> peaks;
+
+        for (int i = 1; i < n - 1; i++) {
+            if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1]) {
+                peaks.push_back(i);
+            }
+        }
+
+        return peaks;
+    }
+};
+```
+```java []
+public class Solution {
+    public List<Integer> findPeaks(int[] mountain) {
+        List<Integer> peaks = new ArrayList<>();
+
+        int n = mountain.length;
+
+        for (int i = 1; i < n - 1; i++) {
+            if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1]) {
+                peaks.add(i);
+            }
+        }
+
+        return peaks;
+    }
+}
+```
+```python []
+class Solution:
+    def findPeaks(self, mountain):
+        peaks = []
+        n = len(mountain)
+
+        for i in range(1, n - 1):
+            if mountain[i] > mountain[i - 1] and mountain[i] > mountain[i + 1]:
+                peaks.append(i)
+
+        return peaks
+``` 
+``` C# []
+public class Solution {
+    public List<int> FindPeaks(int[] mountain) {
+        List<int> peaks = new List<int>();
+        int n = mountain.Length;
+
+        for (int i = 1; i < n - 1; i++) {
+            if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1]) {
+                peaks.Add(i);
+            }
+        }
+
+        return peaks;
+    }
+}
+``` 
+```javascript []
+/**
+ * @param {number[]} mountain
+ * @return {number[]}
+ */
+var findPeaks = function(mountain) {
+    const peaks = [];
+        const n = mountain.length;
+
+        for (let i = 1; i < n - 1; i++) {
+            if (mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1]) {
+                peaks.push(i);
+            }
+        }
+
+        return peaks;
+    
+};
+``` 
+``` Swift []
+class Solution {
+    func findPeaks(_ mountain: [Int]) -> [Int] {
+        var peaks: [Int] = []
+        let n = mountain.count
+        
+        for i in 1..<(n - 1) {
+            if mountain[i] > mountain[i - 1] && mountain[i] > mountain[i + 1] {
+                peaks.append(i)
+            }
+        }
+        
+        return peaks
+    }
+}
+
+
+
 
