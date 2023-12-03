@@ -9,3 +9,26 @@ Hard
 
 
 C++:
+
+
+class Solution {
+public:
+    int minPatches(vector<int>& nums, int n) { // function to find the minPatches
+        long long maxReach=0; // variable to store the maxReach
+        int ans=0; // variable to store the ans
+        for(int num : nums) { // loop for num
+            while(num > maxReach + 1) { // while num is greater than maxReach+1
+                ans++; // increment the ans
+                maxReach += maxReach + 1; // update the maxReach
+                if(maxReach >= n) return ans; // if maxReach is greater than or equal to n return ans
+            }
+            maxReach += num; // update the maxReach
+            if(maxReach >= n) return ans; // if maxReach is greater than or equal to n return ans
+        }
+        while(maxReach < n) { // while maxReach is less than n
+            ans++; // increment the ans
+            maxReach += maxReach + 1; // update the maxReach
+        }
+        return ans; // return the ans
+    }
+};
