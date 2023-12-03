@@ -6,3 +6,198 @@
 
 
 Medium
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+The goal is to find the minimum number of coins that need to be added to an array of coins such that every integer in the range [1, target] is obtainable. The intuition behind this problem lies in considering the greedy approach. The idea is to iteratively choose the coins in a way that maximizes the range of obtainable values.
+---
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+1. Sort the given array of coins in ascending order to process them from the smallest to the largest.
+2. Initialize maxReach to 0, representing the maximum value that can be obtained using the selected coins.
+3. Initialize addedCoins to 0, representing the count of coins added so far.
+4. Iterate through the sorted coins:
+- For each coin, check if it is greater than maxReach + 1.
+- If yes, add coins in a greedy manner to maximize the range. Increment addedCoins accordingly.
+ - Update maxReach to the sum of the current maxReach and the selected coin.
+5. After processing all coins, check if maxReach is still less than the target:
+- If yes, add coins in a greedy manner to reach the target. Increment addedCoins accordingly.
+6. Return the final value of addedCoins.
+
+---
+
+
+# Complexity
+- Time complexity: O(nlogn)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity:O(1)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+# Please Upvote 🙏🏻
+
+---
+
+
+# Code
+
+```C++ []
+class Solution {
+public:
+    int minimumAddedCoins(vector<int>& coins, int target) {
+        sort(coins.begin(), coins.end());
+        long maxReach = 0;
+        int addedCoins = 0;
+        for (int coin : coins) {
+            while (coin > maxReach + 1) {
+                maxReach += maxReach + 1;
+                addedCoins++;
+            }
+            maxReach += coin;
+        }
+        while (maxReach < target) {
+            maxReach += maxReach + 1;
+            addedCoins++;
+        }
+        return addedCoins;
+    }
+};
+```
+```java []
+import java.util.Arrays;
+
+public class Solution {
+    public int minimumAddedCoins(int[] coins, int target) {
+        Arrays.sort(coins);
+        long maxReach = 0;
+        int addedCoins = 0;
+
+        for (int coin : coins) {
+            while (coin > maxReach + 1) {
+                maxReach += maxReach + 1;
+                addedCoins++;
+            }
+            maxReach += coin;
+        }
+
+        while (maxReach < target) {
+            maxReach += maxReach + 1;
+            addedCoins++;
+        }
+
+        return addedCoins;
+    }
+
+}
+
+```
+```python3 []
+class Solution:
+    def minimumAddedCoins(self, coins, target):
+        coins.sort()
+        max_reach = 0
+        added_coins = 0
+        
+        for coin in coins:
+            while coin > max_reach + 1:
+                max_reach += max_reach + 1
+                added_coins += 1
+            max_reach += coin
+        
+        while max_reach < target:
+            max_reach += max_reach + 1
+            added_coins += 1
+        
+        return added_coins
+
+
+
+``` 
+``` C# []
+using System;
+
+public class Solution {
+    public int MinimumAddedCoins(int[] coins, int target) {
+        Array.Sort(coins);
+        long maxReach = 0;
+        int addedCoins = 0;
+
+        foreach (int coin in coins) {
+            while (coin > maxReach + 1) {
+                maxReach += maxReach + 1;
+                addedCoins++;
+            }
+            maxReach += coin;
+        }
+
+        while (maxReach < target) {
+            maxReach += maxReach + 1;
+            addedCoins++;
+        }
+
+        return addedCoins;
+    }
+
+}
+
+``` 
+```javascript []
+/**
+ * @param {number[]} coins
+ * @param {number} target
+ * @return {number}
+ */
+var minimumAddedCoins = function(coins, target) {
+      coins.sort((a, b) => a - b);
+        let maxReach = 0;
+        let addedCoins = 0;
+
+        for (const coin of coins) {
+            while (coin > maxReach + 1) {
+                maxReach += maxReach + 1;
+                addedCoins++;
+            }
+            maxReach += coin;
+        }
+
+        while (maxReach < target) {
+            maxReach += maxReach + 1;
+            addedCoins++;
+        }
+
+        return addedCoins;
+};
+``` 
+``` Swift []
+class Solution {
+    func minimumAddedCoins(_ coins: [Int], _ target: Int) -> Int {
+        var coins = coins.sorted()
+        var maxReach: Int64 = 0
+        var addedCoins = 0
+
+        for coin in coins {
+            while coin > maxReach + 1 {
+                maxReach += maxReach + 1
+                addedCoins += 1
+            }
+            maxReach += Int64(coin)
+        }
+
+        while maxReach < Int64(target) {
+            maxReach += maxReach + 1
+            addedCoins += 1
+        }
+
+        return addedCoins
+    }
+}
+
+
+
+
+
+
