@@ -56,3 +56,39 @@ public:
 
 
 Java:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public boolean isNumber(String s) { // function to find the isNumber
+        int n=s.length(); // variable to store the size of the s
+        int i=0; // variable to store the i
+        while(i<n && s.charAt(i)==' ')i++; // while i is less than n and s.charAt(i) is equal to ' ' increment the i
+        if(i<n && (s.charAt(i)=='+' || s.charAt(i)=='-'))i++; // if i is less than n and (s.charAt(i) is equal to '+' or s.charAt(i) is equal to '-') increment the i
+        boolean isNumeric=false; // variable to store the isNumeric
+        while(i<n && Character.isDigit(s.charAt(i))){ // while i is less than n and Character.isDigit(s.charAt(i))
+            i++; // increment the i
+            isNumeric=true; // update the isNumeric
+        }
+        if(i<n && s.charAt(i)=='.'){ // if i is less than n and s.charAt(i) is equal to '.'
+            i++; // increment the i
+            while(i<n && Character.isDigit(s.charAt(i))){ // while i is less than n and Character.isDigit(s.charAt(i))
+                i++; // increment the i
+                isNumeric=true; // update the isNumeric
+            }
+        }
+        if(isNumeric && i<n && (s.charAt(i)=='e' || s.charAt(i)=='E')){ // if isNumeric and i is less than n and s.charAt(i) is equal to 'e' or s.charAt(i) is equal to 'E'
+            i++; // increment the i
+            isNumeric=false; // update the isNumeric
+            if(i<n && (s.charAt(i)=='+' || s.charAt(i)=='-'))i++; // if i is less than n and (s.charAt(i) is equal to '+' or s.charAt(i) is equal to '-') increment the i
+            if(i == n) return false; // if i is equal to n return false // Missing digits after 'e'
+            while(i<n && Character.isDigit(s.charAt(i))){ // while i is less than n and Character.isDigit(s.charAt(i))
+                i++; // increment the i
+                isNumeric=true; // update the isNumeric
+            }
+        }
+        while(i<n && s.charAt(i)==' ')i++; // while i is less than n and s.charAt(i) is equal to ' ' increment the i
+        return isNumeric && i==n; // return isNumeric and i is equal to n
+    }
+}
+
