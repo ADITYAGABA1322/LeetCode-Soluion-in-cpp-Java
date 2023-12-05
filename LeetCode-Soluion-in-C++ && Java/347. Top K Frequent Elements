@@ -10,3 +10,32 @@ Medium
 
 
 C++:
+
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        int n = nums.size();
+        unordered_map<int , int> freq;
+        vector<int> ans;
+        for(auto num : nums) freq[num]++;
+        vector<vector<int>> bucket(n + 1);
+        for(auto it : freq){
+            int n = it.second;
+            int m = it.first;
+            bucket[n].push_back(m);
+        }
+       
+        for (int i = n; i >= 0; i--) {
+            if (!bucket[i].empty()) {
+                for (int num : bucket[i]) {
+                    ans.push_back(num);
+                    if (ans.size() == k) {
+                        return ans;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
