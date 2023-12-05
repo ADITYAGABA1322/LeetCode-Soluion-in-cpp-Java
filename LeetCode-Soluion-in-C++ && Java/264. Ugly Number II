@@ -9,3 +9,24 @@ Medium
 
 
 C++:
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    int nthUglyNumber(int n) { // function to find the nthUglyNumber
+        vector<int>dp(n); // vector to store the dp
+        dp[0]=1; // update the dp[0]
+        int i2=0; // variable to store the i2
+        int i3=0; // variable to store the i3
+        int i5=0; // variable to store the i5
+        for(int i=1;i<n;i++){ // loop for i
+            dp[i]=min({dp[i2]*2,dp[i3]*3,dp[i5]*5}); // update the dp[i]
+            if(dp[i]==dp[i2]*2)i2++; // if dp[i] is equal to dp[i2]*2 increment the i2
+            if(dp[i]==dp[i3]*3)i3++; // if dp[i] is equal to dp[i3]*3 increment the i3
+            if(dp[i]==dp[i5]*5)i5++; // if dp[i] is equal to dp[i5]*5 increment the i5
+        }
+        return dp[n-1]; // return the dp[n-1]
+    }
+};
+
