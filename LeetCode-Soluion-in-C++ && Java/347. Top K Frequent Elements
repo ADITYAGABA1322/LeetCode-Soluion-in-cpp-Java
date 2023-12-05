@@ -39,3 +39,107 @@ public:
         return ans;
     }
 };
+
+
+1st Method using unordered_map
+
+// Time Complexity : O(nlogk) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) { // function to find the topKFrequent
+        int n=nums.size(); // variable to store the size of the nums
+        unordered_map<int,int>mp; // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp[nums[i]]++; // loop for i
+        vector<pair<int,int>>v; // vector to store the pair
+        for(auto x:mp)v.push_back({x.second,x.first}); // loop for x
+        sort(v.begin(),v.end()); // sort the v
+        vector<int>ans; // vector to store the ans
+        for(int i=v.size()-1;i>=0;i--){ // loop for i
+            ans.push_back(v[i].second); // push the v[i].second
+            if(ans.size()==k)break; // if ans.size() is equal to k break
+        }
+        return ans; // return the ans
+    }
+};
+
+//2nd Method using priority_queue
+
+// Time Complexity : O(nlogk) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) { // function to find the topKFrequent
+        int n=nums.size(); // variable to store the size of the nums
+        unordered_map<int,int>mp; // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp[nums[i]]++; // loop for i
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq; // priority_queue to store the pair
+        for(auto x:mp){ // loop for x
+            pq.push({x.second,x.first}); // push the pq
+            if(pq.size()>k)pq.pop(); // if pq.size() is greater than k pop the pq
+        }
+        vector<int>ans; // vector to store the ans
+        while(!pq.empty()){ // while pq is not empty
+            pair<int,int>temp=pq.top(); // variable to store the temp
+            pq.pop(); // pop the pq
+            ans.push_back(temp.second); // push the temp.second
+        }
+        return ans; // return the ans
+    }
+};
+
+// 3rd Method using bucket sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) { // function to find the topKFrequent
+        int n=nums.size(); // variable to store the size of the nums
+        unordered_map<int,int>mp; // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp[nums[i]]++; // loop for i
+        vector<vector<int>>bucket(n+1); // vector to store the bucket
+        for(auto x:mp){ // loop for x
+            int freq=x.second; // variable to store the freq
+            int num=x.first; // variable to store the num
+            bucket[freq].push_back(num); // push the bucket[freq]
+        }
+        vector<int>ans; // vector to store the ans
+        for(int i=n;i>=0;i--){ // loop for i
+            for(int j=0;j<bucket[i].size();j++){ // loop for j
+                ans.push_back(bucket[i][j]); // push the bucket[i][j]
+                if(ans.size()==k)return ans; // if ans.size() is equal to k return ans
+            }
+        }
+        return ans; // return the ans
+    }
+};
+
+// 4th Method using counting sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) { // function to find the topKFrequent
+        int n=nums.size(); // variable to store the size of the nums
+        unordered_map<int,int>mp; // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp[nums[i]]++; // loop for i
+        vector<int>freq; // vector to store the freq
+        for(auto x:mp)freq.push_back(x.second); // loop for x
+        sort(freq.begin(),freq.end()); // sort the freq
+        vector<int>ans; // vector to store the ans
+        for(int i=freq.size()-1;i>=0;i--){ // loop for i
+            for(auto x:mp){ // loop for x
+                if(x.second==freq[i]){ // if x.second is equal to freq[i]
+                    while(freq[i]--)ans.push_back(x.first); // while freq[i]-- push the x.first
+                    mp.erase(x.first); // erase the x.first
+                    break; // break
+                }
+            }
+            if(ans.size()==k)return ans; // if ans.size() is equal to k return ans
+        }
+        return ans; // return the ans
+    }
+};
+
