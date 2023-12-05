@@ -8,3 +8,34 @@ Medium
 
 
 C++:
+
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        int n = s.length();
+        unordered_map<char , int> freq;
+        string res;
+         for(auto c : s) freq[c]++;
+        auto compare = [&](pair<char , int>& a , pair<char , int>& b){
+             return a.second > b.second; 
+        };
+        vector<pair<char , int>> v;
+        for(auto it : freq) v.push_back(it);
+        sort(v.begin() , v.end() , compare);
+        for(auto it :v){
+            for(int i=1; i<=it.second; i++) res+=it.first;
+        }
+        // vector<string> bucket(s.size()+1 , "");
+        // for(auto it : freq){
+        //     int n = it.second;
+        //     char c = it.first;
+        //     bucket[n].append(n , c);
+        // }
+        // for(int i=s.size() ; i>=0; i--){
+        //     if(!bucket[i].empty()) res.append(bucket[i]);
+        // }
+        
+        return res;
+    }
+};
