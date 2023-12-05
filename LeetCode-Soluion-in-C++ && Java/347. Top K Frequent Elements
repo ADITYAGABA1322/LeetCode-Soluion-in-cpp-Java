@@ -146,3 +146,98 @@ public:
 
 Java:
 
+// Time Complexity : O(nlogk) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) { // function to find the topKFrequent
+        int n=nums.length; // variable to store the size of the nums
+        HashMap<Integer,Integer>mp=new HashMap<>(); // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp.put(nums[i],mp.getOrDefault(nums[i],0)+1); // loop for i
+        ArrayList<Pair<Integer,Integer>>v=new ArrayList<>(); // vector to store the pair
+        for(Map.Entry<Integer,Integer>entry:mp.entrySet())v.add(new Pair<>(entry.getValue(),entry.getKey())); // loop for entry
+        Collections.sort(v); // sort the v
+        ArrayList<Integer>ans=new ArrayList<>(); // vector to store the ans
+        for(int i=v.size()-1;i>=0;i--){ // loop for i
+            ans.add(v.get(i).getValue()); // push the v[i].second
+            if(ans.size()==k)break; // if ans.size() is equal to k break
+        }
+        return ans; // return the ans
+    }
+}
+
+//2nd Method using priority_queue
+
+// Time Complexity : O(nlogk) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) { // function to find the topKFrequent
+        int n=nums.length; // variable to store the size of the nums
+        HashMap<Integer,Integer>mp=new HashMap<>(); // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp.put(nums[i],mp.getOrDefault(nums[i],0)+1); // loop for i
+        PriorityQueue<Pair<Integer,Integer>>pq=new PriorityQueue<>(); // priority_queue to store the pair
+        for(Map.Entry<Integer,Integer>entry:mp.entrySet()){ // loop for entry
+            pq.add(new Pair<>(entry.getValue(),entry.getKey())); // push the pq
+            if(pq.size()>k)pq.poll(); // if pq.size() is greater than k pop the pq
+        }
+        ArrayList<Integer>ans=new ArrayList<>(); // vector to store the ans
+        while(!pq.isEmpty()){ // while pq is not empty
+            Pair<Integer,Integer>temp=pq.poll(); // variable to store the temp
+            ans.add(temp.getValue()); // push the temp.second
+        }
+        return ans; // return the ans
+    }
+};
+
+// 3rd Method using bucket sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) { // function to find the topKFrequent
+        int n=nums.length; // variable to store the size of the nums
+        HashMap<Integer,Integer>mp=new HashMap<>(); // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp.put(nums[i],mp.getOrDefault(nums[i],0)+1); // loop for i
+        String[]bucket=new String[n+1]; // vector to store the bucket
+        for(Map.Entry<Integer,Integer>entry:mp.entrySet()){ // loop for entry
+            int freq=entry.getValue(); // variable to store the freq
+            int num=entry.getKey(); // variable to store the num
+            bucket[freq]+=String.join("",Collections.nCopies(freq,String.valueOf(num))); // update the bucket[freq]
+        }
+        ArrayList<Integer>ans=new ArrayList<>(); // vector to store the ans
+        for(int i=n;i>=0;i--){ // loop for i
+            for(int j=0;j<bucket[i].length();j++){ // loop for j
+                ans.add(bucket[i].charAt(j)); // push the bucket[i][j]
+                if(ans.size()==k)return ans; // if ans.size() is equal to k return ans
+            }
+        }
+        return ans; // return the ans
+    }
+};
+
+// 4th Method using counting sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) { // function to find the topKFrequent
+        int n=nums.length; // variable to store the size of the nums
+        HashMap<Integer,Integer>mp=new HashMap<>(); // unordered_map to store the mp
+        for(int i=0;i<n;i++)mp.put(nums[i],mp.getOrDefault(nums[i],0)+1); // loop for i
+        ArrayList<Integer>freq=new ArrayList<>(); // vector to store the freq
+        for(Map.Entry<Integer,Integer>entry:mp.entrySet())freq.add(entry.getValue()); // loop for entry
+        Collections.sort(freq); // sort the freq
+        ArrayList<Integer>ans=new ArrayList<>(); // vector to store the ans
+        for(int i=freq.size()-1;i>=0;i--){ // loop for i
+            for(Map.Entry<Integer,Integer>entry:mp.entrySet()){ // loop for entry
+                if(entry.getValue()==freq.get(i)){ // if entry.getValue() is equal to freq[i]
+                    while(freq.get(i)-->0)ans.add(entry.getKey()); // while freq[i]-- push the entry.getKey()
+                    mp.remove(entry.getKey()); // erase the entry.getKey()
+                    break; // break
+                }
+            }
+            if(ans.size()==k)return ans; // if ans.size() is equal to k return ans
+        }
+        return ans; // return the ans
+    }
+};
+
