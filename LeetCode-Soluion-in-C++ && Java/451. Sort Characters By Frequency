@@ -39,3 +39,98 @@ public:
         return res;
     }
 };
+
+
+1st Method using unordered_map
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    string frequencySort(string s) { // function to find the frequencySort
+        int n=s.size(); // variable to store the size of the s
+        unordered_map<char,int>mp; // unordered_map to store the char
+        for(int i=0;i<n;i++)mp[s[i]]++; // loop for i
+        vector<pair<int,char>>v; // vector to store the pair
+        for(auto x:mp)v.push_back({x.second,x.first}); // loop for x
+        sort(v.begin(),v.end()); // sort the v
+        string ans=""; // variable to store the ans
+        for(int i=v.size()-1;i>=0;i--){ // loop for i
+            while(v[i].first--)ans+=v[i].second; // while v[i].first-- update the ans
+        }
+        return ans; // return the ans
+    }
+};
+
+// 2nd Method using priority_queue
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    string frequencySort(string s) { // function to find the frequencySort
+        int n=s.size(); // variable to store the size of the s
+        unordered_map<char,int>mp; // unordered_map to store the char
+        for(int i=0;i<n;i++)mp[s[i]]++; // loop for i
+        priority_queue<pair<int,char>>pq; // priority_queue to store the pair
+        for(auto x:mp)pq.push({x.second,x.first}); // loop for x
+        string ans=""; // variable to store the ans
+        while(!pq.empty()){ // while pq is not empty
+            pair<int,char>temp=pq.top(); // variable to store the temp
+            pq.pop(); // pop the pq
+            while(temp.first--)ans+=temp.second; // while temp.first-- update the ans
+        }
+        return ans; // return the ans
+    }
+};
+
+// 3rd Method using bucket sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    string frequencySort(string s) { // function to find the frequencySort
+        int n=s.size(); // variable to store the size of the s
+        unordered_map<char,int>mp; // unordered_map to store the char
+        for(int i=0;i<n;i++)mp[s[i]]++; // loop for i
+        vector<string>bucket(n+1,""); // vector to store the bucket
+        for(auto x:mp){ // loop for x
+            int freq=x.second; // variable to store the freq
+            char ch=x.first; // variable to store the ch
+            bucket[freq]+=string(freq,ch); // update the bucket[freq]
+        }
+        string ans=""; // variable to store the ans
+        for(int i=n;i>=0;i--){ // loop for i
+            if(bucket[i].size()>0)ans+=bucket[i]; // if bucket[i].size() is greater than 0 update the ans
+        }
+        return ans; // return the ans
+    }
+};
+
+// 4th Method using counting sort
+
+// Time Complexity : O(n) where n is the size of the vector nums and space complexity is O(1)
+
+class Solution {
+public:
+    string frequencySort(string s) { // function to find the frequencySort
+        int n=s.size(); // variable to store the size of the s
+        unordered_map<char,int>mp; // unordered_map to store the char
+        for(int i=0;i<n;i++)mp[s[i]]++; // loop for i
+        vector<int>freq; // vector to store the freq
+        for(auto x:mp)freq.push_back(x.second); // loop for x
+        sort(freq.begin(),freq.end()); // sort the freq
+        string ans=""; // variable to store the ans
+        for(int i=freq.size()-1;i>=0;i--){ // loop for i
+            for(auto x:mp){ // loop for x
+                if(x.second==freq[i]){ // if x.second is equal to freq[i]
+                    while(freq[i]--)ans+=x.first; // while freq[i]-- update the ans
+                    mp.erase(x.first); // erase the x.first
+                    break; // break
+                }
+            }
+        }
+        return ans; // return the ans
+    }
+};
