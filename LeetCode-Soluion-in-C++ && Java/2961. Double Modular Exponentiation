@@ -5,3 +5,97 @@
 
 
 Medium
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+
+The goal is to find the indices of variables that satisfy a specific formula based on given coefficients and a target value. The formula involves exponentiation and modulo operations.
+
+---
+
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+1. Iterate through each row of the variables vector.
+2. For each row, extract the coefficients ai, bi, ci, and mi.
+3. Compute the base value as base = (ai^bi) % 10.
+4. Compute the formula result as formula_result = (base^ci) % mi.
+5. If the formula_result is equal to the target value, add the current index to the result vector.
+6. Return the result vector containing the indices of variables that satisfy the formula.
+---
+
+
+# Complexity
+- Time complexity: O(n)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(1)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+
+
+# **Please Upvote 🙏🏻**
+
+---
+
+
+
+# Code
+```C++ []
+#include <vector>
+
+class Solution {
+public:
+    std::vector<int> getGoodIndices(std::vector<std::vector<int>>& variables, int target) {
+        std::vector<int> result;
+        for (int i = 0; i < variables.size(); ++i) {
+            int ai = variables[i][0];
+            int bi = variables[i][1];
+            int ci = variables[i][2];
+            int mi = variables[i][3];
+            int base = 1;
+            for (int j = 0; j < bi; ++j) {
+                base = (base * ai) % 10;
+            }
+            int formula_result = 1;
+            for (int j = 0; j < ci; ++j) {
+                formula_result = (formula_result * base) % mi;
+            }
+            if (formula_result == target) {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+};
+```
+```java []
+class Solution {
+    public List<Integer> getGoodIndices(int[][] variables, int target) {
+           List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < variables.length; ++i) {
+            int ai = variables[i][0];
+            int bi = variables[i][1];
+            int ci = variables[i][2];
+            int mi = variables[i][3];
+            int base = 1;
+            for (int j = 0; j < bi; ++j) {
+                base = (base * ai) % 10;
+            }
+            int formulaResult = 1;
+            for (int j = 0; j < ci; ++j) {
+                formulaResult = (formulaResult * base) % mi;
+            }
+            if (formulaResult == target) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+    
+}
+
+```
