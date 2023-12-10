@@ -5,3 +5,91 @@
 
 
 Medium
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+
+The goal is to find the maximum length of a subarray in the given vector nums such that the frequency of any element in the subarray is at most k. The approach uses a sliding window technique to efficiently find the maximum length.
+
+---
+
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+1. Create an unordered map (freq) to store the frequency of each element in the subarray.
+2. Initialize two pointers (left and right) at the beginning of the array.
+3. Move the right pointer to the right until the frequency of any element in the subarray becomes greater than k.
+4. Move the left pointer to the right until the frequency of any element in the subarray becomes less than or equal to k.
+5. Update the maximum length of the subarray (max_length) with the current length of the subarray (right - left + 1).
+6. Repeat steps 3-5 until the right pointer reaches the end of the array.
+7. Return the maximum length.
+
+---
+
+
+# Complexity
+- Time complexity: O(n)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(n)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+
+
+# **Please Upvote 🙏🏻**
+
+---
+
+
+
+# Code
+```C++ []
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    int maxSubarrayLength(std::vector<int>& nums, int k) {
+        std::unordered_map<int, int> freq;
+        int left = 0, right = 0, max_length = 0;
+        while (right < nums.size()) {
+            freq[nums[right]]++;
+            while (freq[nums[right]] > k) {
+                freq[nums[left]]--;
+                left++;
+            }
+            max_length = std::max(max_length, right - left + 1);
+            right++;
+        }
+        return max_length;
+    }
+};
+```
+```java []
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public int maxSubarrayLength(int[] nums, int k) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        int left = 0, right = 0, max_length = 0;
+
+        while (right < nums.length) {
+            freq.put(nums[right], freq.getOrDefault(nums[right], 0) + 1);
+
+            while (freq.get(nums[right]) > k) {
+                freq.put(nums[left], freq.get(nums[left]) - 1);
+                left++;
+            }
+
+            max_length = Math.max(max_length, right - left + 1);
+            right++;
+        }
+
+        return max_length;
+    }
+}
+
+```
