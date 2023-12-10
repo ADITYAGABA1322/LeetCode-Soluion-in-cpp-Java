@@ -4,4 +4,74 @@
 
 10 Dec 2023
 
+
+
 Medium
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+The goal is to remove almost-equal characters from the given word. Characters are considered almost equal if their absolute difference is at most 1 in terms of ASCII values. We want to count the number of removals needed to make the word free of almost-equal characters.
+
+---
+
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+Iterate through the characters of the word starting from the second character (i = 1). For each pair of adjacent characters (word[i] and word[i - 1]), check if their absolute difference in ASCII values is at most 1. If true, increment the count of removals (count) and modify the current character (word[i]) to either 'a' or 'z' based on the next character (word[i + 1]).
+
+---
+
+
+# Complexity
+- Time complexity: O(n)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(1)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+
+
+# **Please Upvote 🙏🏻**
+
+---
+
+
+
+# Code
+```C++ []
+class Solution {
+public:
+    int removeAlmostEqualCharacters(std::string word) {
+        int count = 0;
+        for (int i = 1; i < word.size(); i++) {
+            if (abs(word[i] - word[i - 1]) <= 1) {
+                count++;
+                word[i] = (word[i + 1] != 'a' && word[i + 1] != 'b') ? 'a' : 'z';
+            }
+        }
+        return count;
+    }
+};
+```
+```java []
+public class Solution {
+    public int removeAlmostEqualCharacters(String word) {
+        int count = 0;
+        char[] wordArray = word.toCharArray();
+
+        for (int i = 1; i < wordArray.length; i++) {
+            if (Math.abs(wordArray[i] - wordArray[i - 1]) <= 1) {
+                count++;
+                wordArray[i] = (i + 1 < wordArray.length && (wordArray[i + 1] != 'a' && wordArray[i + 1] != 'b')) ? 'a' : 'z';
+            }
+        }
+
+        return count;
+    }
+}
+
+
+```
