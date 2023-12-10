@@ -5,3 +5,86 @@
 
 
 Easy
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+
+The goal is to count the number of tested devices based on a given array batteryPercentages, where testing a device decreases the battery percentage of subsequent devices. The idea is to iterate through the array and, for each device that is tested (has a battery percentage greater than 0), decrease the battery percentage of subsequent devices.
+
+---
+
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+1. Iterate through each device in the array.
+2. If the battery percentage of the current device is greater than 0, increment the testedDevices counter.
+3. For each subsequent device (starting from the next one), decrease its battery percentage by 1.
+4. Repeat this process until the end of the array is reached.
+5. Return the total number of tested devices.
+
+---
+
+
+# Complexity
+- Time complexity: O(n^2)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(1)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+
+
+# **Please Upvote 🙏🏻**
+
+---
+
+
+
+# Code
+```C++ []
+#include <vector>
+
+class Solution {
+public:
+    int countTestedDevices(std::vector<int>& batteryPercentages) {
+        int n = batteryPercentages.size();
+        int testedDevices = 0;
+
+        for (int i = 0; i < n; ++i) {
+            if (batteryPercentages[i] > 0) {
+                ++testedDevices;
+
+                for (int j = i + 1; j < n; ++j) {
+                    batteryPercentages[j] = std::max(0, batteryPercentages[j] - 1);
+                }
+            }
+        }
+
+        return testedDevices;
+    }
+};
+
+```
+```java []
+public class Solution {
+    public int countTestedDevices(int[] batteryPercentages) {
+        int n = batteryPercentages.length;
+        int testedDevices = 0;
+
+        for (int i = 0; i < n; ++i) {
+            if (batteryPercentages[i] > 0) {
+                ++testedDevices;
+
+                for (int j = i + 1; j < n; ++j) {
+                    batteryPercentages[j] = Math.max(0, batteryPercentages[j] - 1);
+                }
+            }
+        }
+
+        return testedDevices;
+    }
+}
+```
