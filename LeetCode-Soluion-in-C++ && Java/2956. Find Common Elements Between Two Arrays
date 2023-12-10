@@ -5,3 +5,100 @@
 
 
 Easy
+
+
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+The goal is to find the count of common elements between two given arrays (nums1 and nums2). To achieve this, we can use sets to efficiently check for common elements.
+
+
+---
+
+
+# Approach
+<!-- Describe your approach to solving the problem. -->
+1. Create sets (set1 and set2) from the input arrays nums1 and nums2 to remove duplicates.
+2. Initialize counters (count1 and count2) to 0 to keep track of common elements.
+3. Iterate through each element of nums1 and check if it exists in set2. If it does, increment count1.
+4. Iterate through each element of nums2 and check if it exists in set1. If it does, increment count2.
+5. Return the counts of common elements in the form of a vector {count1, count2}.
+
+---
+
+
+# Complexity
+- Time complexity: O(n+m)
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+- Space complexity: O(n+m)
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+
+---
+
+
+# **Please Upvote 🙏🏻**
+
+---
+
+
+
+# Code
+```C++ []
+class Solution {
+public:
+    std::vector<int> findIntersectionValues(std::vector<int>& nums1, std::vector<int>& nums2) {
+        std::set<int> set1(nums1.begin(), nums1.end());
+        std::set<int> set2(nums2.begin(), nums2.end());
+
+        int count1 = 0;
+        for (int num : nums1) {
+            if (set2.count(num)) {
+                count1++;
+            }
+        }
+
+        int count2 = 0;
+        for (int num : nums2) {
+            if (set1.count(num)) {
+                count2++;
+            }
+        }
+
+        return {count1, count2};
+    }
+};
+```
+```java []
+public class Solution {
+    public int[] findIntersectionValues(int[] nums1, int[] nums2) {
+        Set<Integer> set1 = new HashSet<>();
+        Set<Integer> set2 = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+            set2.add(num);
+        }
+
+        int count1 = 0;
+        for (int num : nums1) {
+            if (set2.contains(num)) {
+                count1++;
+            }
+        }
+
+        int count2 = 0;
+        for (int num : nums2) {
+            if (set1.contains(num)) {
+                count2++;
+            }
+        }
+
+        return new int[]{count1, count2};
+    }
+}
+
+```
