@@ -11,3 +11,51 @@ Medium
 
 
 C++:
+
+
+class Solution {
+public:
+
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        // graph problem using dir 
+        // I think the problem shows that the water flow from pacific to atlantic and what is see the water level decreasing and when it got from pacific to atlantic and vice versa
+        // The island is partitioned into a grid of square cells. You are given an m x n integer matrix heights where heights[r][c] represents the height above sea level of the cell at coordinate (r, c).
+        // Return a 2D list of grid coordinates result where result[i] = [ri, ci] denotes that rain water can flow from cell (ri, ci) to both the Pacific and Atlantic ocean
+        // dfs or bfs we are using here
+        // lets think about how to solve this problem should i create a adj matrix and store vertices and edges in graph matrix and traverse it
+        // and level or flow i create an in and check the flow form if the neighboring cell's height is less than or equal to the current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.
+        int m = heights.size();
+        int n = heights[0].size();
+        vector<vector<int>> res;
+        vector<vector<bool>> canReachPacific(m , vector<bool>(n , false));
+        vector<vector<bool>> canReachAtlantic(m , vector<bool>(n , false));
+        for(int i=0; i<m; i++){
+            dfs(heights , canReachPacific , i , 0);
+            dfs(heights , canReachAtlantic , i  , n-1);
+        }
+        for(int j=0; j<n; j++){
+            dfs(heights , canReachPacific , 0 , j);
+            dfs(heights , canReachAtlantic , m-1  , j);
+        }
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(canReachPacific[i][j] && canReachAtlantic[i][j]) res.push_back({i , j});
+            }
+        }
+        return res;
+        
+    }
+
+    void dfs(vector<vector<int>>& heights , vector<vector<bool>>& canReach , int row , int col){
+    int m = heights.size();
+    int n = heights[0].size();
+    if(row < 0 || row >= m ||  col <0 || col >= n || canReach[row][col]) return;
+    canReach[row][col] = true;
+    int dirs[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    for(auto d : dirs){
+        int newRow = row + d[0] , newCol = col + d[1];
+        if(newRow >= 0 &&  newRow <m && newCol >= 0 && newCol <n && heights[newRow][newCol] >= heights[row][col]) dfs(heights , canReach , newRow , newCol);
+    } 
+    }
+};
+
